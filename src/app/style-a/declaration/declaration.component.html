@@ -1,0 +1,38 @@
+<md-card class="consent-content">
+    <md-card-title *ngIf="components.length !== 0">
+        <h1 class="consent-text">
+            <span *ngFor="let component of components" [style.color]="component.colour" [@changingState]="component.state" (mouseover)="componentEnter(component)" (mouseout)="componentLeave(component)">{{component.text}} </span>
+        </h1>
+    </md-card-title>
+    <md-card-content *ngIf="constraints.length !== 0">
+        <div fxLayout="column" fxLayoutAlign="start stretch">
+            <div fxFlex class="consent-options" fxLayout="row" fxLayoutAlign="space-around center">
+                <md-select fxFlex="24" class="consent-option" *ngFor="let constraint of constraints" placeholder="{{constraint.text}}" [(ngModel)]="constraint.value" [@highlightState]="constraint.state"  (mouseover)="constraintEnter(constraint)" (mouseout)="constraintLeave(constraint)" (change)="constraintChange(constraint)">
+                    <md-option *ngFor="let constraintOption of constraint.options" [value]="constraintOption.id">{{constraintOption.label}}</md-option>
+                </md-select>
+            </div>
+            <div fxFlex="auto" class="consent-outcome" fxLayout="row" fxLayoutAlign="space-around start">
+                <div fxFlex="50" class="consent-details">
+                    <h2 class="consent-details-title">Details</h2>
+                    <p>{{detailsText}}</p>
+                    <md-progress-bar *ngIf="detailsLoading" mode="indeterminate"></md-progress-bar>
+                </div>
+                <div fxFlex="50" class="consent-purposes">
+                    <h2 class="consent-purposes-title">Purposes</h2>
+                    <p>{{purposesText}}</p>
+                    <md-progress-bar *ngIf="purposesLoading" mode="indeterminate"></md-progress-bar>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+    <md-card-actions *ngIf="components.length !== 0">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
+            <button md-raised-button color="primary">
+                <h2><md-icon>add</md-icon> Create Consent</h2>
+            </button>
+            <button md-raised-button>
+                <h2><md-icon>clear</md-icon> Cancel</h2>
+            </button>
+        </div>
+    </md-card-actions>
+</md-card>

@@ -13,15 +13,36 @@ export class ClauseListsComponent implements OnInit
 {
     @Input()
     public clauseLists: ClauseListModel[];
-    public text: string;
 
     constructor()
     {
         this.clauseLists = [];
-        this.text        = 'test test';
+
+        this.load('');
     }
 
     ngOnInit(): void
     {
+    }
+
+    public load(username: string)
+    {
+        this.clauseLists = [];
+
+        const dataClauseList = new ClauseListModel();
+        dataClauseList.heading = 'Data';
+        dataClauseList.clauses = [];
+        const emsClause = new ClauseModel();
+        emsClause.title = 'School Information';
+        emsClause.description = 'Attendance and Exclustion Information';
+        dataClauseList.clauses.push(emsClause);
+        this.clauseLists.push(dataClauseList);
+
+        const clauseList1 = new ClauseListModel();
+        clauseList1.heading = 'Purpose';
+        const clauseList2 = new ClauseListModel();
+        clauseList2.heading = 'Organization';
+        this.clauseLists.push(clauseList1);
+        this.clauseLists.push(clauseList2);
     }
 }

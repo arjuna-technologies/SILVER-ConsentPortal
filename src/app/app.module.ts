@@ -22,14 +22,16 @@ import { MdDialogModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
+import { DeclarationComponent } from './style-a/declaration/declaration.component';
+
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
 import { ClauseComponent } from './style-b/clause/clause.component';
 
-import { ConsentDefLoaderService } from './datasource/consent-def-loader.service';
-import { ConsentRendererDefLoaderService } from './datasource/consent-renderer-def-loader.service';
-import { DetailsLoaderService } from './datasource/details-loader.service';
-import { PurposesLoaderService } from './datasource/purposes-loader.service';
+import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader.service';
+import { ConsentRendererDefLoaderService } from './style-a/datasource/consent-renderer-def-loader.service';
+import { DetailsLoaderService } from './style-a/datasource/details-loader.service';
+import { PurposesLoaderService } from './style-a/datasource/purposes-loader.service';
 
 @NgModule
 ({
@@ -37,6 +39,7 @@ import { PurposesLoaderService } from './datasource/purposes-loader.service';
     [
         AppComponent,
         LoginDialogComponent,
+        DeclarationComponent,
         ClauseListsComponent,
         ClauseListComponent,
         ClauseComponent
