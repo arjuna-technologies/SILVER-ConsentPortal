@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 
+import { ClauseListsModel } from '../model/clause-lists-model';
 import { ClauseListModel } from '../model/clause-list-model';
+import { ClauseModel } from '../model/clause-model';
 
 @Component
 ({
