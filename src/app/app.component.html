@@ -10,7 +10,6 @@
 <md-tab-group>
     <md-tab label="Style A">
 <md-card class="consent-content">
-    <h1>{{components.length}}</h1>
     <md-card-title *ngIf="components.length !== 0">
         <h1 class="consent-text">
             <span *ngFor="let component of components" [style.color]="component.colour" [@changingState]="component.state" (mouseover)="componentEnter(component)" (mouseout)="componentLeave(component)">{{component.text}} </span>
@@ -51,7 +50,7 @@
     </md-tab>
     <md-tab label="Style B">
         <md-card>
-            <md-card-title>Style B</md-card-title>
+            <app-clause-lists>Style B</app-clause-lists>
         </md-card>
     </md-tab>
     <md-tab label="Style C">

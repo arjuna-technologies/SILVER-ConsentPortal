@@ -20,9 +20,11 @@ import { MdProgressBarModule } from '@angular/material';
 import { MdDialogModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { ConsentComponent } from './consent/consent.component';
-import { SelectorComponent } from './selector/selector.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+
+import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
+import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
+import { ClauseComponent } from './style-b/clause/clause.component';
 
 import { ConsentDefLoaderService } from './datasource/consent-def-loader.service';
 import { ConsentRendererDefLoaderService } from './datasource/consent-renderer-def-loader.service';
@@ -34,9 +36,10 @@ import { PurposesLoaderService } from './datasource/purposes-loader.service';
     declarations:
     [
         AppComponent,
-        ConsentComponent,
-        SelectorComponent,
-        LoginDialogComponent
+        LoginDialogComponent,
+        ClauseListsComponent,
+        ClauseListComponent,
+        ClauseComponent
     ],
     imports:
     [
