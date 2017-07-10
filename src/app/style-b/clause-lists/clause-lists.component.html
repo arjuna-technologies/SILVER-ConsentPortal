@@ -1,0 +1,3 @@
+<div fxLayout="row" fxLayoutAlign="space-around start">
+    <app-clause-list fxFlex *ngFor="let clauseList of clauseLists" [heading]="clauseList.heading" [clauses]="clauseList.clauses"></app-clause-list>
+</div>
