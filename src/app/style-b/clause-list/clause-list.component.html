@@ -1,5 +1,5 @@
 <md-card>
-    <md-card-title><h2>{{heading}}</h2></md-card-title>
+    <md-card-title>{{heading}}</md-card-title>
     <md-card-content>
         <app-clause *ngFor="let clause of clauses" [title]="clause.title" [description]="clause.description"></app-clause>
     </md-card-content>
