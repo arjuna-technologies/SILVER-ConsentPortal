@@ -1,3 +1,10 @@
+<!--                                                                                                          -->
+<!-- Copyright (c) 2017, Arjuna Technologies Limited, Newcastle upon Tyne, England,                           -->
+<!--                     Open Lab, Newcastle University, Newcastle upon Tyne, England,                        -->
+<!--                     Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England. -->
+<!--                     All rights reserved.                                                                 -->
+<!--                                                                                                          -->
+
 <div fxLayout="column" fxLayoutAlign="space-around stretch" *ngIf="clauseLists.length !== 0">
     <div fxLayout="row" fxLayoutAlign="space-around start">
          <app-clause-list fxFlex *ngFor="let clauseList of clauseLists" [heading]="clauseList.heading" [clauses]="clauseList.clauses"></app-clause-list>

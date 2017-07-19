@@ -1,3 +1,10 @@
+//
+// Copyright (c) 2017, Arjuna Technologies Limited, Newcastle upon Tyne, England,
+//                     Open Lab, Newcastle University, Newcastle upon Tyne, England,
+//                     Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England.
+//                     All rights reserved.
+//
+
 import { ComponentRendererDef } from './component-renderer-def';
 import { DescriptionRendererDef } from './description-renderer-def';
 import { ValueConstraintComponentRendererDef } from './value-constraint-component-renderer-def';
