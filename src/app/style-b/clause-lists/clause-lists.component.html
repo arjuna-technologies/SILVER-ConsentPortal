@@ -7,7 +7,7 @@
 
 <div fxLayout="column" fxLayoutAlign="space-around stretch" *ngIf="clauseLists.length !== 0">
     <div fxLayout="row" fxLayoutAlign="space-around start">
-         <app-clause-list fxFlex *ngFor="let clauseList of clauseLists" [heading]="clauseList.heading" [clauses]="clauseList.clauses"></app-clause-list>
+         <silver-clause-list fxFlex *ngFor="let clauseList of clauseLists" [heading]="clauseList.heading" [clauses]="clauseList.clauses"></silver-clause-list>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center" class="actions">
         <button md-raised-button color="primary">

@@ -12,7 +12,7 @@ import { ClauseModel } from '../model/clause-model';
 
 @Component
 ({
-    selector:    'app-clause-list',
+    selector:    'silver-clause-list',
     templateUrl: './clause-list.component.html',
     styleUrls:   [ './clause-list.component.scss' ]
 })

@@ -40,7 +40,7 @@ export class AppComponent
     {
         if (this.username === '')
         {
-            let loginDialogRef = this.dialog.open(LoginDialogComponent);
+            const loginDialogRef = this.dialog.open(LoginDialogComponent);
             loginDialogRef.afterClosed().subscribe((result) => { this.username = result; this.styleA.load(this.username); this.styleB.load(this.username) });
         }
         else

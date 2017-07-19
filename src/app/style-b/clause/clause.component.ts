@@ -17,7 +17,7 @@ import { ClauseModel } from '../model/clause-model';
 
 @Component
 ({
-    selector: 'app-clause',
+    selector: 'silver-clause',
     templateUrl: './clause.component.html',
     styleUrls: ['./clause.component.scss'],
     animations:
