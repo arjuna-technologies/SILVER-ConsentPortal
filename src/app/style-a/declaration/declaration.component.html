@@ -1,10 +1,10 @@
-<md-card class="consent-content">
-    <md-card-title *ngIf="components.length !== 0">
+<md-card class="consent-content" *ngIf="components.length !== 0">
+    <md-card-title>
         <h1 class="consent-text">
             <span *ngFor="let component of components" [style.color]="component.colour" [@changingState]="component.state" (mouseover)="componentEnter(component)" (mouseout)="componentLeave(component)">{{component.text}} </span>
         </h1>
     </md-card-title>
-    <md-card-content *ngIf="constraints.length !== 0">
+    <md-card-content>
         <div fxLayout="column" fxLayoutAlign="start stretch">
             <div fxFlex class="consent-options" fxLayout="row" fxLayoutAlign="space-around center">
                 <md-select fxFlex="24" class="consent-option" *ngFor="let constraint of constraints" placeholder="{{constraint.text}}" [(ngModel)]="constraint.value" [@highlightState]="constraint.state"  (mouseover)="constraintEnter(constraint)" (mouseout)="constraintLeave(constraint)" (change)="constraintChange(constraint)">
@@ -25,7 +25,7 @@
             </div>
         </div>
     </md-card-content>
-    <md-card-actions *ngIf="components.length !== 0">
+    <md-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
             <button md-raised-button color="primary">
                 <h2><md-icon>add</md-icon> Create Consent</h2>

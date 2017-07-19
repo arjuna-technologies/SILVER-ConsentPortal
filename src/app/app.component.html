@@ -9,18 +9,15 @@
 
 <md-tab-group>
     <md-tab label="Style A">
-        <md-card>
-            <silver-declaration></silver-declaration>
-        </md-card>
+        <silver-declaration> #stylea</silver-declaration>
     </md-tab>
     <md-tab label="Style B">
-        <md-card>
-            <app-clause-lists></app-clause-lists>
-        </md-card>
+        <app-clause-lists #styleb></app-clause-lists>
     </md-tab>
     <md-tab label="Style C">
         <md-card>
-            <md-card-title>Style C</md-card-title>
+            <md-card-title #stylec>Style C</md-card-title>
+            <md-card-content>Will be based on 'Drag and Drop' of 'Data' items onto 'Purpose & Destination' areas.</md-card-content>
         </md-card>
     </md-tab>
 <md-tab-group>

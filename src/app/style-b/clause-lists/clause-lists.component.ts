@@ -13,38 +13,91 @@ import { ClauseModel } from '../model/clause-model';
 })
 export class ClauseListsComponent implements OnInit
 {
+    public username: string;
     @Input()
     public clauseLists: ClauseListModel[];
 
     constructor()
     {
+        this.username    = '';
         this.clauseLists = [];
-
-        this.load('');
     }
 
     ngOnInit(): void
     {
     }
 
-    public load(username: string)
+    public load(username: string): void
     {
+        this.username    = username;
         this.clauseLists = [];
 
-        const dataClauseList = new ClauseListModel();
-        dataClauseList.heading = 'Data';
-        dataClauseList.clauses = [];
-        const emsClause = new ClauseModel();
-        emsClause.title = 'School Information';
-        emsClause.description = 'Attendance and Exclustion Information';
-        dataClauseList.clauses.push(emsClause);
-        this.clauseLists.push(dataClauseList);
+        if (this.username !== '')
+        {
+            const dataClauseList = new ClauseListModel();
+            dataClauseList.heading = 'Data';
+            dataClauseList.clauses = [];
+            this.clauseLists.push(dataClauseList);
 
-        const clauseList1 = new ClauseListModel();
-        clauseList1.heading = 'Purpose';
-        const clauseList2 = new ClauseListModel();
-        clauseList2.heading = 'Organization';
-        this.clauseLists.push(clauseList1);
-        this.clauseLists.push(clauseList2);
+            const purposeClauseList = new ClauseListModel();
+            purposeClauseList.heading = 'Purpose';
+            purposeClauseList.clauses = [];
+            this.clauseLists.push(purposeClauseList);
+
+            const organizationClauseList = new ClauseListModel();
+            organizationClauseList.heading = 'Organization';
+            organizationClauseList.clauses = [];
+            this.clauseLists.push(organizationClauseList);
+
+            const emsClause = new ClauseModel();
+            emsClause.title = 'School Information';
+            emsClause.description = 'Attendance and Exclustion Information';
+            dataClauseList.clauses.push(emsClause);
+
+            const policeClause = new ClauseModel();
+            policeClause.title = 'Police Information';
+            policeClause.description = 'Arrest and Domestic Violance Information';
+            dataClauseList.clauses.push(policeClause);
+
+            const mentalHealthClause = new ClauseModel();
+            mentalHealthClause.title = 'Mental Health Information';
+            mentalHealthClause.description = 'Mental Health Information';
+            dataClauseList.clauses.push(mentalHealthClause);
+
+            const medicalResearchClause = new ClauseModel();
+            medicalResearchClause.title = 'Medical Research Information';
+            medicalResearchClause.description = 'Medical Research Information';
+            purposeClauseList.clauses.push(medicalResearchClause);
+
+            const processImprovementClause = new ClauseModel();
+            processImprovementClause.title = 'Process Improvement Information';
+            processImprovementClause.description = 'Process Improvement Information';
+            purposeClauseList.clauses.push(processImprovementClause);
+
+            const northTynesideCouncilClause = new ClauseModel();
+            northTynesideCouncilClause.title = 'North Tyneside Council';
+            northTynesideCouncilClause.description = 'North Tyneside Council';
+            organizationClauseList.clauses.push(northTynesideCouncilClause);
+
+            const sunderlandCityCouncilClause = new ClauseModel();
+            sunderlandCityCouncilClause.title = 'Sunderland City Council';
+            sunderlandCityCouncilClause.description = 'Sunderland City Council';
+            organizationClauseList.clauses.push(sunderlandCityCouncilClause);
+
+            const southTynesideCouncilClause = new ClauseModel();
+            southTynesideCouncilClause.title = 'South Tyneside Council';
+            southTynesideCouncilClause.description = 'South Tyneside Council';
+            organizationClauseList.clauses.push(southTynesideCouncilClause);
+
+            const newcastleCityCouncilClause = new ClauseModel();
+            newcastleCityCouncilClause.title = 'Newcastle City Council';
+            newcastleCityCouncilClause.description = 'Newcastle City Council';
+            organizationClauseList.clauses.push(newcastleCityCouncilClause);
+
+            const northumberlandCountyCouncilClause = new ClauseModel();
+            northumberlandCountyCouncilClause.title = 'Northumberland County Council';
+            northumberlandCountyCouncilClause.description = 'Northumberland County Council';
+            organizationClauseList.clauses.push(northumberlandCountyCouncilClause);
+        }
     }
 }
