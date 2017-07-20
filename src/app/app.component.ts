@@ -5,7 +5,7 @@
 //                     All rights reserved.
 //
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
@@ -20,7 +20,7 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
     templateUrl: './app.component.html',
     styleUrls:   ['./app.component.scss']
 })
-export class AppComponent
+export class AppComponent implements OnInit 
 {
     @ViewChild(ClauseListsComponent)
     public styleA: ClauseListsComponent;
@@ -34,6 +34,11 @@ export class AppComponent
     public constructor(private dialog: MdDialog)
     {
         this.username = '';
+    }
+
+    ngOnInit()
+    {
+        this.openLoginDialog();
     }
 
     public openLoginDialog(): void
