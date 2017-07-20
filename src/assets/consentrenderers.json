@@ -18,7 +18,7 @@
                 [
                     {
                         "selector": "lang=en-GB",
-                        "text": "I give consent for my medication information from"
+                        "text": "I give consent for my "
                     }
                 ]
             }
@@ -27,12 +27,72 @@
             "type": "constraint",
             "constraint":
             {
-                "id": "f731138b-056a-4231-bd14-a81937c98275",
+                "id": "f731138b-056a-4231-14bd-a81937c98275",
                 "descriptions":
                 [
                     {
                         "selector": "lang=en-GB",
-                        "text": "Medication Information Type"
+                        "text": "Information Type"
+                    }
+                ],
+                "values":
+                [
+                    {
+                        "id": "495e27e1-47d9-4317-db98-49c7255fc9a3",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "school"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-3bbb-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "police"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-6406-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "mental health"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "text":
+            {
+                "values":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": " information to be share with "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "constraint",
+            "constraint":
+            {
+                "id": "f731138b-0512-4231-bd14-a81937c98275",
+                "descriptions":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "Organization"
                     }
                 ],
                 "values":
@@ -43,7 +103,7 @@
                         [
                             {
                                 "selector": "lang=en-GB",
-                                "text": "hospital visits"
+                                "text": "North Tyneside Council"
                             }
                         ]
                     },
@@ -53,7 +113,37 @@
                         [
                             {
                                 "selector": "lang=en-GB",
-                                "text": "general practitioner visits"
+                                "text": "Sunderland City Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "South Tyneside Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "Newcastle City Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "Northumberland County Council"
                             }
                         ]
                     }
@@ -82,7 +172,7 @@
                 [
                     {
                         "selector": "lang=en-GB",
-                        "text": "Research Type"
+                        "text": "Purpose Type"
                     }
                 ],
                 "values":
@@ -93,7 +183,7 @@
                         [
                             {
                                 "selector": "lang=en-GB",
-                                "text": "care pathway"
+                                "text": "medical"
                             }
                         ]
                     },
@@ -103,7 +193,7 @@
                         [
                             {
                                 "selector": "lang=en-GB",
-                                "text": "prescription"
+                                "text": "process improvement"
                             }
                         ]
                     }

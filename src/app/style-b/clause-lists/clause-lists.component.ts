@@ -72,13 +72,13 @@ export class ClauseListsComponent implements OnInit
             dataClauseList.clauses.push(mentalHealthClause);
 
             const medicalResearchClause = new ClauseModel();
-            medicalResearchClause.title = 'Medical Research Information';
-            medicalResearchClause.description = 'Medical Research Information';
+            medicalResearchClause.title = 'Medical Research';
+            medicalResearchClause.description = 'Medical Research';
             purposeClauseList.clauses.push(medicalResearchClause);
 
             const processImprovementClause = new ClauseModel();
-            processImprovementClause.title = 'Process Improvement Information';
-            processImprovementClause.description = 'Process Improvement Information';
+            processImprovementClause.title = 'Process Improvement';
+            processImprovementClause.description = 'Process Improvement';
             purposeClauseList.clauses.push(processImprovementClause);
 
             const northTynesideCouncilClause = new ClauseModel();
