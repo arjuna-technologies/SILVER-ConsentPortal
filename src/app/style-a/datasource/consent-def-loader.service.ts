@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptionsArgs } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentDef } from './consent-def';
@@ -15,20 +15,18 @@ import { ConsentDef } from './consent-def';
 @Injectable()
 export class ConsentDefLoaderService
 {
-//    private listBaseURL = 'http://10.1.20.172:3000/api/consents';
-//    private loadBaseURL = 'http://10.1.20.172:3000/api/consent';
-//    private listBaseURL = 'http://10.1.20.172:8080/consentengine/ws/consentdef/consents';
-//    private loadBaseURL = 'http://10.1.20.172:8080/consentengine/ws/consentdef/consent';
-    private listBaseURL = 'assets/consents.json';
-    private loadBaseURL = 'assets/consent';
+    private listBaseURL = 'http://10.1.20.172:8080/consentengine/ws/consentdef/consents';
+    private loadBaseURL = 'http://10.1.20.172:8080/consentengine/ws/consentdef/consent';
+//    private listBaseURL = 'assets/consents.json';
+//    private loadBaseURL = 'assets/consent';
 
     constructor(private http: Http)
     {
     }
 
-    public getConsentDefs(): Promise<ConsentDef[]>
+    public getConsentDefs(userId: string): Promise<ConsentDef[]>
     {
-        return this.http.get(this.listBaseURL)
+        return this.http.get(this.listBaseURL + '?userid=' + userId)
                .toPromise()
                .then((response) => Promise.resolve(this.getConsentDefsSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getConsentDefsErrorHandler(response)));
@@ -36,7 +34,7 @@ export class ConsentDefLoaderService
 
     public getConsentDef(id: string): Promise<ConsentDef>
     {
-        return this.http.get(this.loadBaseURL + '/' + id + '.json')
+        return this.http.get(this.loadBaseURL + '/' + id)
                .toPromise()
                .then((response) => Promise.resolve(this.getConsentDefSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getConsentDefErrorHandler(response)));
