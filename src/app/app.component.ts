@@ -20,7 +20,7 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
     templateUrl: './app.component.html',
     styleUrls:   ['./app.component.scss']
 })
-export class AppComponent implements OnInit 
+export class AppComponent implements OnInit
 {
     @ViewChild(ClauseListsComponent)
     public styleA: ClauseListsComponent;

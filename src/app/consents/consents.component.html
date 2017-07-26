@@ -1,0 +1,17 @@
+<!--                                                                                                          -->
+<!-- Copyright (c) 2017, Arjuna Technologies Limited, Newcastle upon Tyne, England,                           -->
+<!--                     Open Lab, Newcastle University, Newcastle upon Tyne, England,                        -->
+<!--                     Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England. -->
+<!--                     All rights reserved.                                                                 -->
+<!--                                                                                                          -->
+
+<md-card>
+    <md-card-title>Consents</md-card-title>
+    <md-card-content>
+        <md-list>
+            <md-list-item *ngFor="let consentContext of consentContexts">
+                <span>{{consentContext.name}}</span>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>

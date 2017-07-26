@@ -34,8 +34,10 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
 import { ClauseComponent } from './style-b/clause/clause.component';
+import { ConsentsComponent } from './consents/consents.component';
 
 import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader.service';
+import { ConsentContextDefLoaderService } from './consents/datasource/consent-context-def-loader.service';
 import { ConsentRendererDefLoaderService } from './style-a/datasource/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './style-a/datasource/details-loader.service';
 import { PurposesLoaderService } from './style-a/datasource/purposes-loader.service';
@@ -49,7 +51,8 @@ import { PurposesLoaderService } from './style-a/datasource/purposes-loader.serv
         DeclarationComponent,
         ClauseListsComponent,
         ClauseListComponent,
-        ClauseComponent
+        ClauseComponent,
+        ConsentsComponent
     ],
     imports:
     [
@@ -78,6 +81,7 @@ import { PurposesLoaderService } from './style-a/datasource/purposes-loader.serv
     providers:
     [
         ConsentDefLoaderService,
+        ConsentContextDefLoaderService,
         ConsentRendererDefLoaderService,
         DetailsLoaderService,
         PurposesLoaderService

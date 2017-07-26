@@ -15,8 +15,6 @@ import { ConsentDef } from './consent-def';
 @Injectable()
 export class ConsentDefLoaderService
 {
-//    private listBaseURL = 'http://10.1.20.172:3000/api/consents';
-//    private loadBaseURL = 'http://10.1.20.172:3000/api/consent';
 //    private listBaseURL = 'http://10.1.20.172:8080/consentengine/ws/consentdef/consents';
 //    private loadBaseURL = 'http://10.1.20.172:8080/consentengine/ws/consentdef/consent';
     private listBaseURL = 'assets/consents.json';
