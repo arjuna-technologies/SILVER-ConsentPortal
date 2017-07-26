@@ -90,8 +90,8 @@ export class DeclarationComponent
     {
         if (username !== '')
         {
-            this.loadConsentDefs();
             this.loadConsentRendererDefs();
+            this.loadConsentDefs(username);
         }
         else
         {
@@ -108,9 +108,9 @@ export class DeclarationComponent
             .catch(() => { this.consentRendererDefs = []; this.updateModel() });
     }
 
-    private loadConsentDefs()
+    private loadConsentDefs(username: string)
     {
-        this.consentDefLoaderService.getConsentDefs()
+        this.consentDefLoaderService.getConsentDefs(username)
             .then((consentDefs) => { this.consentDefs = consentDefs; this.updateModel() })
             .catch(() => { this.consentDefs = []; this.updateModel() } );
     }
