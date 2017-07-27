@@ -27,17 +27,17 @@ export class ConsentDefLoaderService
     public getConsentDefs(userId: string): Promise<ConsentDef[]>
     {
         return this.http.get(this.listBaseURL + '?consenterid=' + userId)
-               .toPromise()
-               .then((response) => Promise.resolve(this.getConsentDefsSuccessHandler(response)))
-               .catch((response) => Promise.resolve(this.getConsentDefsErrorHandler(response)));
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.getConsentDefsSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.getConsentDefsErrorHandler(response)));
     }
 
     public getConsentDef(id: string): Promise<ConsentDef>
     {
         return this.http.get(this.loadBaseURL + '/' + id)
-               .toPromise()
-               .then((response) => Promise.resolve(this.getConsentDefSuccessHandler(response)))
-               .catch((response) => Promise.resolve(this.getConsentDefErrorHandler(response)));
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.getConsentDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.getConsentDefErrorHandler(response)));
     }
 
     private getConsentDefsSuccessHandler(response: Response): ConsentDef[]

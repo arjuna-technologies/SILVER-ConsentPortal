@@ -9,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { ConsentContextModel } from './model/consent-context-model';
 
+import { ConsentContextDef } from './datasource/consent-context-def';
+import { ConsentContextDefLoaderService } from './datasource/consent-context-def-loader.service';
+
 @Component
 ({
     selector:    'silver-consents',
@@ -17,23 +20,56 @@ import { ConsentContextModel } from './model/consent-context-model';
 })
 export class ConsentsComponent implements OnInit
 {
-    private consentContexts: ConsentContextModel[];
+    public consentContexts: ConsentContextModel[];
 
-    constructor()
+    public consentContextDefs: ConsentContextDef[];
+
+    constructor(private consentContextDefLoaderService: ConsentContextDefLoaderService)
     {
-        this.consentContexts = [];
+        this.consentContextDefs = [];
 
-        this.consentContexts.push(new ConsentContextModel());
-        this.consentContexts.push(new ConsentContextModel());
-        this.consentContexts.push(new ConsentContextModel());
-        this.consentContexts.push(new ConsentContextModel());
-        this.consentContexts[0].name = 'Test Contest 0';
-        this.consentContexts[1].name = 'Test Contest 1';
-        this.consentContexts[2].name = 'Test Contest 2';
-        this.consentContexts[3].name = 'Test Contest 3';
+        this.consentContexts = [];
     }
 
     ngOnInit()
     {
+    }
+
+    public load(username: string): void
+    {
+        if (username !== '')
+            this.loadConsentContextDefs(username);
+        else
+        {
+            this.consentContextDefs = [];
+            this.updateModel();
+        }
+    }
+
+    private loadConsentContextDefs(username: string)
+    {
+        this.consentContextDefLoaderService.getConsentContextDefs(username)
+            .then((consentContextDefs) => { this.consentContextDefs = consentContextDefs; this.updateModel() })
+            .catch(() => { this.consentContextDefs = []; this.updateModel() } );
+    }
+
+    private updateModel(): void
+    {
+        console.log('updateModel ' + this.consentContexts.length);
+        this.consentContexts = [];
+
+        for (const consentContextDef of this.consentContextDefs)
+        {
+            const consentContext: ConsentContextModel = new ConsentContextModel();
+
+            consentContext.id               = consentContextDef.id;
+            consentContext.consentId        = consentContextDef.consentId;
+            consentContext.consenterId      = consentContextDef.consenterId;
+            consentContext.name             = consentContextDef.name;
+            consentContext.createdDate      = consentContextDef.createdDate;
+            consentContext.lastModifiedDate = consentContextDef.lastModifiedDate;
+
+            this.consentContexts.push(consentContext);
+        }
     }
 }

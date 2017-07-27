@@ -11,6 +11,7 @@ import { MdDialog } from '@angular/material';
 
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
+import { ConsentsComponent } from './consents/consents.component';
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { DeclarationComponent } from './style-a/declaration/declaration.component';
 
@@ -22,6 +23,8 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
 })
 export class AppComponent implements OnInit
 {
+    @ViewChild(ConsentsComponent)
+    public consents: ConsentsComponent;
     @ViewChild(ClauseListsComponent)
     public styleA: ClauseListsComponent;
     @ViewChild(DeclarationComponent)
@@ -46,11 +49,12 @@ export class AppComponent implements OnInit
         if (this.username === '')
         {
             const loginDialogRef = this.dialog.open(LoginDialogComponent);
-            loginDialogRef.afterClosed().subscribe((result) => { this.username = result; this.styleA.load(this.username); this.styleB.load(this.username) });
+            loginDialogRef.afterClosed().subscribe((result) => { this.username = result; this.consents.load(this.username); this.styleA.load(this.username); this.styleB.load(this.username) });
         }
         else
         {
             this.username = '';
+            this.consents.load(this.username);
             this.styleA.load(this.username);
             this.styleB.load(this.username);
         }

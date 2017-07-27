@@ -15,16 +15,17 @@ import { ConsentContextDef } from './consent-context-def';
 @Injectable()
 export class ConsentContextDefLoaderService
 {
-    private listBaseURL = 'http://10.1.20.248:8080/api/consentcontexts';
-    private loadBaseURL = 'http://10.1.20.248:8080/api/consentcontext';
+    private listBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontexts';
+    private loadBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontext';
 
     constructor(private http: Http)
     {
     }
 
-    public getConsentContextDefs(): Promise<ConsentContextDef[]>
+    public getConsentContextDefs(consenterId: string): Promise<ConsentContextDef[]>
     {
-        return this.http.get(this.listBaseURL)
+        console.log('getConsentContextDefs ' + consenterId);
+        return this.http.get(this.listBaseURL + "?consenterid=" + consenterId)
                    .toPromise()
                    .then((response) => Promise.resolve(this.getConsentContextDefsSuccessHandler(response)))
                    .catch((response) => Promise.resolve(this.getConsentContextDefsErrorHandler(response)));
