@@ -6,6 +6,7 @@
 //
 
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { state } from '@angular/animations';
 import { style } from '@angular/animations';
@@ -54,8 +55,6 @@ import { PurposesLoaderService } from '../datasource/purposes-loader.service';
 })
 export class DeclarationComponent
 {
-    public consents:         ConsentModel[];
-    public consentRenderers: ConsentRendererModel[];
     public components:       ComponentModel[];
     public constraints:      ConstraintModel[];
     public detailsLoading:   boolean;
@@ -63,16 +62,10 @@ export class DeclarationComponent
     public purposesLoading:  boolean;
     public purposesText:     string;
 
-    private consentDef:          ConsentDef;
-    private consentDefs:         ConsentDef[];
-    private consentRendererDef:  ConsentRendererDef;
-    private consentRendererDefs: ConsentRendererDef[];
-
-    public constructor(private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
+    public constructor(private route: ActivatedRoute,
+                       private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
                        private detailsLoaderService: DetailsLoaderService, private purposesLoaderService: PurposesLoaderService)
     {
-        this.consents         = [];
-        this.consentRenderers = [];
         this.components       = [];
         this.constraints      = [];
         this.detailsLoading   = false;
@@ -80,81 +73,32 @@ export class DeclarationComponent
         this.purposesLoading  = false;
         this.purposesText     = '';
 
-        this.consentDef          = null;
-        this.consentDefs         = [];
-        this.consentRendererDef  = null;
-        this.consentRendererDefs = [];
+        this.loadConsentDefs(route.snapshot.params.consentid);
     }
 
-    public load(username: string): void
+    private loadConsentDefs(consentId: string)
     {
-        if (username !== '')
-        {
-            this.loadConsentRendererDefs();
-            this.loadConsentDefs(username);
-        }
-        else
-        {
-            this.consentDefs         = [];
-            this.consentRendererDefs = [];
-            this.updateModel();
-        }
+        console.log('loadConsentDefs');
+        this.consentDefLoaderService.getConsentDef(consentId)
+            .then((consentDef) => { this.loadConsentRendererDefs(consentDef) })
+            .catch(() => { this.updateModel(null, null) } );
     }
 
-    private loadConsentRendererDefs()
+    private loadConsentRendererDefs(consentDef: ConsentDef)
     {
-        this.consentRendererDefLoaderService.getConsentRendererDefs()
-            .then((consentRendererDefs) => { this.consentRendererDefs = consentRendererDefs; this.updateModel() })
-            .catch(() => { this.consentRendererDefs = []; this.updateModel() });
+        console.log('loadConsentRendererDefs');
+        this.consentRendererDefLoaderService.getConsentRendererDef(consentDef.typeId)
+            .then((consentRendererDef) => { this.updateModel(consentDef, consentRendererDef) })
+            .catch(() => { this.updateModel(consentDef, null) });
     }
 
-    private loadConsentDefs(username: string)
+    private updateModel(consentDef: ConsentDef, consentRendererDef: ConsentRendererDef): void
     {
-        this.consentDefLoaderService.getConsentDefs(username)
-            .then((consentDefs) => { this.consentDefs = consentDefs; this.updateModel() })
-            .catch(() => { this.consentDefs = []; this.updateModel() } );
-    }
-
-    private updateModel(): void
-    {
-        // Temp Code
-        if (this.consentDefs.length !== 0)
-            this.consentDef = this.consentDefs[0];
-        if (this.consentRendererDefs.length !== 0)
-            this.consentRendererDef = this.consentRendererDefs[0];
-        //
-
-        if (this.consentDef == null)
-            this.consentRendererDef = null;
-        else if ((this.consentRendererDef !== null) && (this.consentDef.typeId !== this.consentRendererDef.id))
-            this.consentRendererDef = null;
-
-        if (this.consentRendererDefs.length === 0)
-            this.consentRendererDef = null;
-        if (this.consentRendererDefs.length === 1)
-            this.consentRendererDef = this.consentRendererDefs[0];
-
-        this.consents = [];
-        for (const consentDef of this.consentDefs)
-        {
-            const consent = new ConsentModel(consentDef.id, consentDef.id);
-
-            this.consents.push(consent);
-        }
-
-        this.consentRenderers = [];
-        for (const consentRendererDef of this.consentRendererDefs)
-        {
-            const consentRenderer = new ConsentRendererModel(consentRendererDef.id, consentRendererDef.id);
-
-            this.consentRenderers.push(consentRenderer);
-        }
-
         this.components  = [];
         this.constraints = [];
-        if ((this.consentDef != null) && (this.consentRendererDef != null))
+        if ((consentDef != null) && (consentRendererDef != null))
         {
-            for (const componentRendererDef of this.consentRendererDef.componentRendererDefs)
+            for (const componentRendererDef of consentRendererDef.componentRendererDefs)
             {
                 const component = new ComponentModel();
 
@@ -181,7 +125,7 @@ export class DeclarationComponent
                     constraint.id      = constraintComponentRendererDef.id;
                     constraint.text    = constraintComponentRendererDef.descriptionRendererDefs[0].text;
 
-                    for (const constraintDef of this.consentDef.constraintDefs)
+                    for (const constraintDef of consentDef.constraintDefs)
                         if (component.id === constraintDef.id)
                             constraint.value = constraintDef.value;
 
@@ -224,21 +168,6 @@ export class DeclarationComponent
         this.purposesLoaderService.getPurposesText()
             .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
             .catch(() => { this.purposesLoading = false } );
-    }
-
-    public doSelectConsent(consent: ConsentModel): void
-    {
-        this.consentDef = null;
-        for (const consentDef of this.consentDefs)
-            if (consent.id === consentDef.id)
-                this.consentDef = consentDef;
-
-        this.consentRendererDef = null;
-        for (const consentRendererDef of this.consentRendererDefs)
-            if (this.consentDef.typeId === consentRendererDef.id)
-                this.consentRendererDef = consentRendererDef;
-
-        this.updateModel();
     }
 
     public componentEnter(component: ComponentModel)

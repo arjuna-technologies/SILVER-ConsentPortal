@@ -14,20 +14,4 @@
     </button>
 </md-toolbar>
 
-<md-tab-group>
-    <md-tab label="Consents">
-        <silver-consents> #consents</silver-consents>
-    </md-tab>
-    <md-tab label="Style A">
-        <silver-declaration> #stylea</silver-declaration>
-    </md-tab>
-    <md-tab label="Style B">
-        <silver-clause-lists #styleb></silver-clause-lists>
-    </md-tab>
-    <md-tab label="Style C">
-        <md-card>
-            <md-card-title #stylec>Style C</md-card-title>
-            <md-card-content>Will be based on 'Drag and Drop' of 'Data' items onto 'Purpose & Destination' areas.</md-card-content>
-        </md-card>
-    </md-tab>
-<md-tab-group>
+<router-outlet></router-outlet>

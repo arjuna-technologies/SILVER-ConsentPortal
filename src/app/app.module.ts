@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,18 +29,29 @@ import { MdDialogModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
+import { ConsentsComponent } from './consents/consents.component';
 import { DeclarationComponent } from './style-a/declaration/declaration.component';
-
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
 import { ClauseComponent } from './style-b/clause/clause.component';
-import { ConsentsComponent } from './consents/consents.component';
 
-import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader.service';
+import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
+
 import { ConsentContextDefLoaderService } from './consents/datasource/consent-context-def-loader.service';
+import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader.service';
 import { ConsentRendererDefLoaderService } from './style-a/datasource/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './style-a/datasource/details-loader.service';
 import { PurposesLoaderService } from './style-a/datasource/purposes-loader.service';
+import { WelcomeComponent } from './welcome/welcome.component';
+
+const appRoutes: Routes =
+[
+    { path: '',                   component: WelcomeComponent },
+    { path: 'consents/:username', component: ConsentsComponent },
+    { path: 'stylea/:consentid',  component: DeclarationComponent },
+    { path: 'styleb/:consentid',  component: ClauseListsComponent },
+    { path: '**',                 component: PageNotFoundComponent }
+];
 
 @NgModule
 ({
@@ -52,7 +63,9 @@ import { PurposesLoaderService } from './style-a/datasource/purposes-loader.serv
         ClauseListsComponent,
         ClauseListComponent,
         ClauseComponent,
-        ConsentsComponent
+        ConsentsComponent,
+        PageNotFoundComponent,
+        WelcomeComponent
     ],
     imports:
     [
@@ -61,6 +74,7 @@ import { PurposesLoaderService } from './style-a/datasource/purposes-loader.serv
         HttpModule,
         FlexLayoutModule,
         BrowserAnimationsModule,
+        RouterModule.forRoot(appRoutes),
         MdToolbarModule,
         MdTabsModule,
         MdCardModule,

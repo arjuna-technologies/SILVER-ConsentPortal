@@ -7,6 +7,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
@@ -23,25 +24,15 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
 })
 export class AppComponent implements OnInit
 {
-    @ViewChild(ConsentsComponent)
-    public consents: ConsentsComponent;
-    @ViewChild(ClauseListsComponent)
-    public styleA: ClauseListsComponent;
-    @ViewChild(DeclarationComponent)
-    public styleB: DeclarationComponent;
-    @ViewChild('stylec')
-    public styleC: ElementRef;
-
     public username: string;
 
-    public constructor(private dialog: MdDialog)
+    public constructor(private dialog: MdDialog, private router: Router)
     {
         this.username = '';
     }
 
     ngOnInit()
     {
-        this.openLoginDialog();
     }
 
     public openLoginDialog(): void
@@ -49,14 +40,9 @@ export class AppComponent implements OnInit
         if (this.username === '')
         {
             const loginDialogRef = this.dialog.open(LoginDialogComponent);
-            loginDialogRef.afterClosed().subscribe((result) => { this.username = result; this.consents.load(this.username); this.styleA.load(this.username); this.styleB.load(this.username) });
+            loginDialogRef.afterClosed().subscribe((username) => { this.username = username; this.router.navigate(['/consents', username ]) });
         }
         else
-        {
             this.username = '';
-            this.consents.load(this.username);
-            this.styleA.load(this.username);
-            this.styleB.load(this.username);
-        }
     }
 }

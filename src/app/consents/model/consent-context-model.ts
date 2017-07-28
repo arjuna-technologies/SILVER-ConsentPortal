@@ -20,7 +20,7 @@ export class ConsentContextModel
         this.consentId        = '';
         this.consenterId      = '';
         this.name             = '';
-        this.createdDate      = new Date();
-        this.lastModifiedDate = new Date();
+        this.createdDate      = null;
+        this.lastModifiedDate = null;
     }
 }

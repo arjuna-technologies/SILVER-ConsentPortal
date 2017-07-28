@@ -15,10 +15,10 @@ import { ConsentRendererDef } from './consent-renderer-def';
 @Injectable()
 export class ConsentRendererDefLoaderService
 {
-//    private listBaseURL = 'http://10.1.20.172:3000/api/consentrenderers';
-//    private loadBaseURL = 'http://10.1.20.172:3000/api/consentrenderer';
-    private listBaseURL = 'assets/consentrenderers.json';
-    private loadBaseURL = 'assets/consentrenderer';
+    private listBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderers';
+    private loadBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderer';
+//    private listBaseURL = 'assets/consentrenderers.json';
+//    private loadBaseURL = 'assets/consentrenderer';
 
     constructor(private http: Http)
     {
@@ -34,7 +34,7 @@ export class ConsentRendererDefLoaderService
 
     public getConsentRendererDef(id: string): Promise<ConsentRendererDef>
     {
-        return this.http.get(this.loadBaseURL + '/' + id + '.json')
+        return this.http.get(this.loadBaseURL + '/' + id)
                .toPromise()
                .then((response) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));

@@ -6,6 +6,7 @@
 //
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ConsentContextModel } from './model/consent-context-model';
 
@@ -22,43 +23,37 @@ export class ConsentsComponent implements OnInit
 {
     public consentContexts: ConsentContextModel[];
 
-    public consentContextDefs: ConsentContextDef[];
-
-    constructor(private consentContextDefLoaderService: ConsentContextDefLoaderService)
+    constructor(private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService)
     {
-        this.consentContextDefs = [];
-
         this.consentContexts = [];
+
+        this.load(route.snapshot.params.username);
     }
 
     ngOnInit()
     {
     }
 
-    public load(username: string): void
+    private load(username: string): void
     {
         if (username !== '')
             this.loadConsentContextDefs(username);
         else
-        {
-            this.consentContextDefs = [];
-            this.updateModel();
-        }
+            this.updateModel([]);
     }
 
     private loadConsentContextDefs(username: string)
     {
         this.consentContextDefLoaderService.getConsentContextDefs(username)
-            .then((consentContextDefs) => { this.consentContextDefs = consentContextDefs; this.updateModel() })
-            .catch(() => { this.consentContextDefs = []; this.updateModel() } );
+            .then((consentContextDefs) => { this.updateModel(consentContextDefs) })
+            .catch(() => { this.updateModel([]) } );
     }
 
-    private updateModel(): void
+    private updateModel(consentContextDefs: ConsentContextDef[]): void
     {
-        console.log('updateModel ' + this.consentContexts.length);
         this.consentContexts = [];
 
-        for (const consentContextDef of this.consentContextDefs)
+        for (const consentContextDef of consentContextDefs)
         {
             const consentContext: ConsentContextModel = new ConsentContextModel();
 
