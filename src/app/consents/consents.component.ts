@@ -5,7 +5,7 @@
 //                     All rights reserved.
 //
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ConsentContextModel } from './model/consent-context-model';
@@ -19,7 +19,7 @@ import { ConsentContextDefLoaderService } from './datasource/consent-context-def
     templateUrl: './consents.component.html',
     styleUrls:   ['./consents.component.scss']
 })
-export class ConsentsComponent implements OnInit
+export class ConsentsComponent
 {
     public consentContexts: ConsentContextModel[];
 
@@ -28,10 +28,6 @@ export class ConsentsComponent implements OnInit
         this.consentContexts = [];
 
         this.load(route.snapshot.params.username);
-    }
-
-    ngOnInit()
-    {
     }
 
     private load(username: string): void

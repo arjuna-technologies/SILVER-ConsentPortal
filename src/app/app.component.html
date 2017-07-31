@@ -6,6 +6,12 @@
 <!--                                                                                                          -->
 
 <md-toolbar color="primary">
+    <button *ngIf="username" md-button routerLink="/consents/{{username}}">
+        <md-icon>menu</md-icon>
+    </button>
+    <button *ngIf="! username" md-button routerLink="/">
+        <md-icon>menu</md-icon>
+    </button>
     <span> SILVER Consent Portal </span>
     <span class="toolbar-spacer"></span>
     <button md-button (click)="openLoginDialog()">

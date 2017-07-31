@@ -11,7 +11,10 @@
         <md-list>
             <md-list-item *ngFor="let consentContext of consentContexts">
                 <span>{{consentContext.name}}</span>
-                <a [routerLink]="['/stylea', consentContext.consentId]">{{consentContext.consentId}}</a>
+                <span> - </span>
+                <a [routerLink]="['/stylea', consentContext.consentId]">Style A</a>
+                <span> - </span>
+                <a [routerLink]="['/styleb', consentContext.consentId]">Style B</a>
             </md-list-item>
         </md-list>
     </md-card-content>

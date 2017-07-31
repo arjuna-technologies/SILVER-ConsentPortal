@@ -5,8 +5,9 @@
 //                     All rights reserved.
 //
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ClauseListsModel } from '../model/clause-lists-model';
 import { ClauseListModel } from '../model/clause-list-model';
@@ -18,33 +19,26 @@ import { ClauseModel } from '../model/clause-model';
     templateUrl: './clause-lists.component.html',
     styleUrls:   [ './clause-lists.component.scss' ]
 })
-export class ClauseListsComponent implements OnInit
+export class ClauseListsComponent
 {
-    public username: string;
     @Input()
     public clauseLists: ClauseListModel[];
 
-    constructor()
+    constructor(private route: ActivatedRoute)
     {
-        this.username    = '';
-        this.clauseLists = [];
-    }
-
-    ngOnInit(): void
-    {
-    }
-
-    public load(username: string): void
-    {
-        this.username    = username;
         this.clauseLists = [];
 
-        if (this.username !== '')
-        {
-            const dataClauseList = new ClauseListModel();
-            dataClauseList.heading = 'Data';
-            dataClauseList.clauses = [];
-            this.clauseLists.push(dataClauseList);
+        this.setup(route.snapshot.params.consentid);
+    }
+
+    public setup(consentid: string): void
+    {
+        this.clauseLists = [];
+
+        const dataClauseList = new ClauseListModel();
+        dataClauseList.heading = 'Data';
+        dataClauseList.clauses = [];
+        this.clauseLists.push(dataClauseList);
 
             const purposeClauseList = new ClauseListModel();
             purposeClauseList.heading = 'Purpose';
@@ -105,6 +99,5 @@ export class ClauseListsComponent implements OnInit
             northumberlandCountyCouncilClause.title = 'Northumberland County Council';
             northumberlandCountyCouncilClause.description = 'Northumberland County Council';
             organizationClauseList.clauses.push(northumberlandCountyCouncilClause);
-        }
     }
 }

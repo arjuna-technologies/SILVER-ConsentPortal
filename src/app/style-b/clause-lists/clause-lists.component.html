@@ -10,10 +10,10 @@
          <silver-clause-list fxFlex *ngFor="let clauseList of clauseLists" [heading]="clauseList.heading" [clauses]="clauseList.clauses"></silver-clause-list>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center" class="actions">
-        <button md-raised-button color="primary">
+        <button md-raised-button color="primary" routerLink="/">
             <h2><md-icon>add</md-icon> Create Consent</h2>
         </button>
-        <button md-raised-button>
+        <button md-raised-button routerLink="/">
             <h2><md-icon>clear</md-icon> Cancel</h2>
         </button>
     </div>

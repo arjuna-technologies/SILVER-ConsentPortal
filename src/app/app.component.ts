@@ -43,6 +43,9 @@ export class AppComponent implements OnInit
             loginDialogRef.afterClosed().subscribe((username) => { this.username = username; this.router.navigate(['/consents', username ]) });
         }
         else
+        {
             this.username = '';
+            this.router.navigate(['/']);
+        }
     }
 }
