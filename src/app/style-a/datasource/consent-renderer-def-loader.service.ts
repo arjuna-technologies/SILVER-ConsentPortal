@@ -11,6 +11,7 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentRendererDef } from './consent-renderer-def';
+import { DatasourcesConfigService } from '../../config/datasources-config.service';
 
 @Injectable()
 export class ConsentRendererDefLoaderService
@@ -20,13 +21,13 @@ export class ConsentRendererDefLoaderService
 //    private listBaseURL = 'assets/consentrenderers.json';
 //    private loadBaseURL = 'assets/consentrenderer';
 
-    constructor(private http: Http)
+    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getConsentRendererDefs(): Promise<ConsentRendererDef[]>
     {
-        return this.http.get(this.listBaseURL)
+        return this.http.get(this.datasourcesConfigService.listConsentRendererDefLoaderBaseURL)
                .toPromise()
                .then((response) => Promise.resolve(this.getConsentRendererDefsSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getConsentRendererDefsErrorHandler(response)));
@@ -34,7 +35,7 @@ export class ConsentRendererDefLoaderService
 
     public getConsentRendererDef(id: string): Promise<ConsentRendererDef>
     {
-        return this.http.get(this.loadBaseURL + '/' + id)
+        return this.http.get(this.datasourcesConfigService.getConsentRendererDefLoaderBaseURL + '/' + id)
                .toPromise()
                .then((response) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));

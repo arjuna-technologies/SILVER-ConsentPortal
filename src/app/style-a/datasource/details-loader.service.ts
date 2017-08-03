@@ -10,19 +10,18 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+import { DatasourcesConfigService } from '../../config/datasources-config.service';
+
 @Injectable()
 export class DetailsLoaderService
 {
-//    private loadBaseURL = 'http://10.1.20.172:3000/api/details';
-    private loadBaseURL = 'assets/details.json';
-
-    constructor(private http: Http)
+    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getDetailsText(): Promise<string>
     {
-        return this.http.get(this.loadBaseURL)
+        return this.http.get(this.datasourcesConfigService.loadDetailsBaseURL)
                .toPromise()
                .then((response) => Promise.resolve(this.getDetailsTextSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getDetailsTextErrorHandler(response)));

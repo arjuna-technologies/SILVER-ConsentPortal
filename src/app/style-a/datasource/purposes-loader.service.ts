@@ -10,19 +10,18 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+import { DatasourcesConfigService } from '../../config/datasources-config.service';
+
 @Injectable()
 export class PurposesLoaderService
 {
-//    private loadBaseURL = 'http://10.1.20.172:3000/api/purposes';
-    private loadBaseURL = 'assets/purposes.json';
-
-    constructor(private http: Http)
+    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getPurposesText(): Promise<string>
     {
-        return this.http.get(this.loadBaseURL)
+        return this.http.get(this.datasourcesConfigService.loadPurposesBaseURL)
                .toPromise()
                .then((response) => Promise.resolve(this.getPurposesTextSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getPurposesTextErrorHandler(response)));

@@ -11,32 +11,37 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentContextDef } from './consent-context-def';
+import { DatasourcesConfigService } from '../../config/datasources-config.service';
 
 @Injectable()
 export class ConsentContextDefLoaderService
 {
-    private listBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontexts';
-    private loadBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontext';
-
-    constructor(private http: Http)
+    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getConsentContextDefs(consenterId: string): Promise<ConsentContextDef[]>
     {
-        console.log('getConsentContextDefs ' + consenterId);
-        return this.http.get(this.listBaseURL + "?consenterid=" + consenterId)
+        return this.http.get(this.datasourcesConfigService.listConsentContextDefLoaderBaseURL + '?consenterid=' + consenterId)
                    .toPromise()
                    .then((response) => Promise.resolve(this.getConsentContextDefsSuccessHandler(response)))
                    .catch((response) => Promise.resolve(this.getConsentContextDefsErrorHandler(response)));
     }
 
-    public getConsentDef(id: string): Promise<ConsentContextDef>
+    public getConsentContextDef(id: string): Promise<ConsentContextDef>
     {
-        return this.http.get(this.loadBaseURL + '/' + id)
+        return this.http.get(this.datasourcesConfigService.getConsentContextDefLoaderBaseURL + '/' + id)
                    .toPromise()
                    .then((response) => Promise.resolve(this.getConsentContextDefSuccessHandler(response)))
                    .catch((response) => Promise.resolve(this.getConsentContextDefErrorHandler(response)));
+    }
+
+    public setConsentContextDef(id: string, consentContextDef: ConsentContextDef): Promise<boolean>
+    {
+        return this.http.post(this.datasourcesConfigService.getConsentContextDefLoaderBaseURL + '/' + id, consentContextDef.toObject())
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.setConsentContextDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.setConsentContextDefErrorHandler(response)));
     }
 
     private getConsentContextDefsSuccessHandler(response: Response): ConsentContextDef[]
@@ -75,5 +80,17 @@ export class ConsentContextDefLoaderService
         console.log('Error while loading Consent Context: ' + (error.message || error));
 
         return null;
+    }
+
+    private setConsentContextDefSuccessHandler(response: Response): boolean
+    {
+        return true;
+    }
+
+    private setConsentContextDefErrorHandler(error: Response | any): boolean
+    {
+        console.log('Error while saving Consent Context: ' + (error.message || error));
+
+        return false;
     }
 }

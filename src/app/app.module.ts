@@ -29,6 +29,7 @@ import { MdDialogModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
+import { WelcomeComponent } from './welcome/welcome.component';
 import { ConsentsComponent } from './consents/consents.component';
 import { DeclarationComponent } from './style-a/declaration/declaration.component';
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
@@ -42,7 +43,7 @@ import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader
 import { ConsentRendererDefLoaderService } from './style-a/datasource/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './style-a/datasource/details-loader.service';
 import { PurposesLoaderService } from './style-a/datasource/purposes-loader.service';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { DatasourcesConfigService } from './config/datasources-config.service';
 
 const appRoutes: Routes =
 [
@@ -98,7 +99,8 @@ const appRoutes: Routes =
         ConsentContextDefLoaderService,
         ConsentRendererDefLoaderService,
         DetailsLoaderService,
-        PurposesLoaderService
+        PurposesLoaderService,
+        DatasourcesConfigService
     ],
     bootstrap:
     [
