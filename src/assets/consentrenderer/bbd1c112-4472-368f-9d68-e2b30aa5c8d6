@@ -1,0 +1,216 @@
+{
+    "id": "bbd1c112-4472-368f-9d68-e2b30aa5c8d6",
+    "descriptions":
+    [
+        {
+            "selector": "lang=en-GB",
+            "text": "Sharing of Medication Information for Research"
+        }
+    ],
+    "components":
+    [
+        {
+            "type": "text",
+            "text":
+            {
+                "values":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "I give consent for my "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "constraint",
+            "constraint":
+            {
+                "id": "f731138b-056a-4231-14bd-a81937c98275",
+                "descriptions":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "Information Type"
+                    }
+                ],
+                "values":
+                [
+                    {
+                        "id": "495e27e1-47d9-4317-db98-49c7255fc9a3",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "school"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-3bbb-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "police"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-6406-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "mental health"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "text":
+            {
+                "values":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": " information to be share with "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "constraint",
+            "constraint":
+            {
+                "id": "f731138b-0512-4231-bd14-a81937c98275",
+                "descriptions":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "Organization"
+                    }
+                ],
+                "values":
+                [
+                    {
+                        "id": "495e27e1-47d9-4317-98db-49c7255fc9a3",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "North Tyneside Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "Sunderland City Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "South Tyneside Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "Newcastle City Council"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "e9ba3bf4-2c03-4069-bd3b-62e3b6146605",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "Northumberland County Council"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "text":
+            {
+                "values":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "to be used for"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "constraint",
+            "constraint":
+            {
+                "id": "0a6042fc-952e-4be8-9701-96a9807ebc55",
+                "descriptions":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "Purpose Type"
+                    }
+                ],
+                "values":
+                [
+                    {
+                        "id": "0d5bd413-64f5-4d3a-8aff-9c2c813fd726",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "medical"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "083b380e-adfa-49a1-9f2d-51838a778661",
+                        "descriptions":
+                        [
+                            {
+                                "selector": "lang=en-GB",
+                                "text": "process improvement"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "text",
+            "text":
+            {
+                "values":
+                [
+                    {
+                        "selector": "lang=en-GB",
+                        "text": "research."
+                    }
+                ]
+            }
+        }
+    ]
+}
