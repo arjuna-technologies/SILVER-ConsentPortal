@@ -6,5 +6,13 @@
         "name": "NHS Research Use Consent",
         "created_date": 0,
         "last_modified_date": 0
+    },
+    {
+        "id": "eaab654c-2bd8-4b29-ae49-ac9657b46dc1",
+        "consent_id": "9ca895ab-8959-434a-83eb-adf2397e956e",
+        "consenter_id": "Stuart",
+        "name": "Local Authority Use Consent",
+        "created_date": 0,
+        "last_modified_date": 0
     }
 ]
