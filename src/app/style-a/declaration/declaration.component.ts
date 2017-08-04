@@ -6,7 +6,7 @@
 //
 
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { state } from '@angular/animations';
 import { style } from '@angular/animations';
@@ -67,7 +67,7 @@ export class DeclarationComponent
     public purposesLoading:  boolean;
     public purposesText:     string;
 
-    public constructor(private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService,
+    public constructor(private router: Router, private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService,
                        private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
                        private detailsLoaderService: DetailsLoaderService, private purposesLoaderService: PurposesLoaderService)
     {
@@ -110,6 +110,8 @@ export class DeclarationComponent
 
         this.consentDefLoaderService.setConsentDef(consentDef.id, consentDef);
         this.consentContextDefLoaderService.setConsentContextDef(consentContextDef.id, consentContextDef);
+
+        this.router.navigate(['/']);
     }
 
     private loadConsentDef(consentId: string)

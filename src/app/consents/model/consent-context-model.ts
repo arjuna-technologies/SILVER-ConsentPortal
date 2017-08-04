@@ -13,6 +13,8 @@ export class ConsentContextModel
     public name:             string;
     public createdDate:      Date;
     public lastModifiedDate: Date;
+    public isAStyleable:     boolean;
+    public isBStyleable:     boolean;
 
     public constructor()
     {
@@ -22,5 +24,7 @@ export class ConsentContextModel
         this.name             = '';
         this.createdDate      = null;
         this.lastModifiedDate = null;
+        this.isAStyleable     = false;
+        this.isBStyleable     = false;
     }
 }

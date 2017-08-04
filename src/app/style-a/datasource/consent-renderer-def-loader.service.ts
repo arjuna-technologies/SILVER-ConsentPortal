@@ -16,11 +16,6 @@ import { DatasourcesConfigService } from '../../config/datasources-config.servic
 @Injectable()
 export class ConsentRendererDefLoaderService
 {
-    private listBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderers';
-    private loadBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderer';
-//    private listBaseURL = 'assets/consentrenderers.json';
-//    private loadBaseURL = 'assets/consentrenderer';
-
     constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
