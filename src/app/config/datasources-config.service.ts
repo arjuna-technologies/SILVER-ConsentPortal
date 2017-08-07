@@ -56,9 +56,11 @@ export class DatasourcesConfigService
             this.getConsentRendererDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderer';
             this.setConsentRendererDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderer';
 
-            this.loadDetailsBaseURL = 'http://10.1.20.248:8080/api/details';
+//            this.loadDetailsBaseURL = 'http://10.1.20.248:8080/api/details';
+            this.loadDetailsBaseURL = 'assets/details.json';
 
-            this.loadPurposesBaseURL = 'http://10.1.20.248:8080/api/purposes';
+//            this.loadPurposesBaseURL = 'http://10.1.20.248:8080/api/purposes';
+            this.loadPurposesBaseURL = 'assets/purposes.json';
         }
     }
 }
