@@ -44,22 +44,22 @@ export class DatasourcesConfigService
         }
         else
         {
-            this.listConsentContextDefLoaderBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontexts';
-            this.getConsentContextDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontext';
-            this.setConsentContextDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentcontextdef/consentcontext';
+            this.listConsentContextDefLoaderBaseURL = 'http://localhost:8080/consentengine/ws/consentcontextdef/consentcontexts';
+            this.getConsentContextDefLoaderBaseURL  = 'http://localhost:8080/consentengine/ws/consentcontextdef/consentcontext';
+            this.setConsentContextDefLoaderBaseURL  = 'http://localhost:8080/consentengine/ws/consentcontextdef/consentcontext';
 
-            this.listConsentDefLoaderBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentdef/consents';
-            this.getConsentDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentdef/consent';
-            this.setConsentDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentdef/consent';
+            this.listConsentDefLoaderBaseURL = 'http://localhost:8080/consentengine/ws/consentdef/consents';
+            this.getConsentDefLoaderBaseURL  = 'http://localhost:8080/consentengine/ws/consentdef/consent';
+            this.setConsentDefLoaderBaseURL  = 'http://localhost:8080/consentengine/ws/consentdef/consent';
 
-            this.listConsentRendererDefLoaderBaseURL = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderers';
-            this.getConsentRendererDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderer';
-            this.setConsentRendererDefLoaderBaseURL  = 'http://10.1.20.248:8080/consentengine/ws/consentrendererdef/consentrenderer';
+            this.listConsentRendererDefLoaderBaseURL = 'http://localhost:8080/consentengine/ws/consentrendererdef/consentrenderers';
+            this.getConsentRendererDefLoaderBaseURL  = 'http://localhost:8080/consentengine/ws/consentrendererdef/consentrenderer';
+            this.setConsentRendererDefLoaderBaseURL  = 'http://localhost:8080/consentengine/ws/consentrendererdef/consentrenderer';
 
-//            this.loadDetailsBaseURL = 'http://10.1.20.248:8080/api/details';
+//            this.loadDetailsBaseURL = 'http://localhost:8080/api/details';
             this.loadDetailsBaseURL = 'assets/details.json';
 
-//            this.loadPurposesBaseURL = 'http://10.1.20.248:8080/api/purposes';
+//            this.loadPurposesBaseURL = 'http://localhost:8080/api/purposes';
             this.loadPurposesBaseURL = 'assets/purposes.json';
         }
     }
