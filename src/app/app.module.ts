@@ -38,12 +38,12 @@ import { ClauseComponent } from './style-b/clause/clause.component';
 
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
+import { DatasourcesConfigService } from './config/datasources-config.service';
 import { ConsentContextDefLoaderService } from './consents/datasource/consent-context-def-loader.service';
 import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader.service';
 import { ConsentRendererDefLoaderService } from './style-a/datasource/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './style-a/datasource/details-loader.service';
 import { PurposesLoaderService } from './style-a/datasource/purposes-loader.service';
-import { DatasourcesConfigService } from './config/datasources-config.service';
 
 const appRoutes: Routes =
 [
@@ -95,12 +95,12 @@ const appRoutes: Routes =
     ],
     providers:
     [
+        DatasourcesConfigService,
         ConsentDefLoaderService,
         ConsentContextDefLoaderService,
         ConsentRendererDefLoaderService,
         DetailsLoaderService,
-        PurposesLoaderService,
-        DatasourcesConfigService
+        PurposesLoaderService
     ],
     bootstrap:
     [
