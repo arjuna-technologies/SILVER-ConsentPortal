@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment'
 @Injectable()
 export class DatasourcesConfigService
 {
-    private dataServiceHostPort: string;
+    private consentServiceHostPort: string;
 
     public listConsentContextDefLoaderBaseURL: string;
     public getConsentContextDefLoaderBaseURL: string;
@@ -27,7 +27,7 @@ export class DatasourcesConfigService
     {
         if (environment.standalone)
         {
-            this.dataServiceHostPort = 'dataservice.silver.arjuna.com';
+            this.consentServiceHostPort = 'consentservice.silver.arjuna.com';
 
             this.listConsentContextDefLoaderBaseURL = 'assets/consentcontexts';
             this.getConsentContextDefLoaderBaseURL  = 'assets/consentcontext';
@@ -47,22 +47,22 @@ export class DatasourcesConfigService
         }
         else
         {
-            this.listConsentContextDefLoaderBaseURL = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontexts';
-            this.getConsentContextDefLoaderBaseURL  = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
-            this.setConsentContextDefLoaderBaseURL  = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
+            this.listConsentContextDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontexts';
+            this.getConsentContextDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
+            this.setConsentContextDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
 
-            this.listConsentDefLoaderBaseURL = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentdef/consents';
-            this.getConsentDefLoaderBaseURL  = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentdef/consent';
-            this.setConsentDefLoaderBaseURL  = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentdef/consent';
+            this.listConsentDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consents';
+            this.getConsentDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
+            this.setConsentDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
 
-            this.listConsentRendererDefLoaderBaseURL = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderers';
-            this.getConsentRendererDefLoaderBaseURL  = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
-            this.setConsentRendererDefLoaderBaseURL  = 'http://' + this.dataServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
+            this.listConsentRendererDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderers';
+            this.getConsentRendererDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
+            this.setConsentRendererDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
 
-//            this.loadDetailsBaseURL = 'http://' + this.dataServiceHostPort + '/api/details';
+//            this.loadDetailsBaseURL = 'http://' + this.consentServiceHostPort + '/api/details';
             this.loadDetailsBaseURL = 'assets/details.json';
 
-//            this.loadPurposesBaseURL = 'http://' + this.dataServiceHostPort + '/api/purposes';
+//            this.loadPurposesBaseURL = 'http://' + this.consentServiceHostPort + '/api/purposes';
             this.loadPurposesBaseURL = 'assets/purposes.json';
         }
     }
