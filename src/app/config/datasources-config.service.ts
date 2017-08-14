@@ -25,9 +25,10 @@ export class DatasourcesConfigService
 
     constructor()
     {
+        this.consentServiceHostPort = 'consentservice.silver.arjuna.com';
+
         if (environment.standalone)
         {
-            this.consentServiceHostPort = 'consentservice.silver.arjuna.com';
 
             this.listConsentContextDefLoaderBaseURL = 'assets/consentcontexts';
             this.getConsentContextDefLoaderBaseURL  = 'assets/consentcontext';
@@ -47,8 +48,6 @@ export class DatasourcesConfigService
         }
         else
         {
-            this.consentServiceHostPort = 'consentservice.silver.arjuna.com';
-
             this.listConsentContextDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontexts';
             this.getConsentContextDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
             this.setConsentContextDefLoaderBaseURL  = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
