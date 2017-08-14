@@ -60,7 +60,7 @@ export class ConsentsComponent
             consentContext.createdDate      = consentContextDef.createdDate;
             consentContext.lastModifiedDate = consentContextDef.lastModifiedDate;
             consentContext.isAStyleable     = true;
-            consentContext.isBStyleable     = (consentContextDef.consentId === '9ca895ab-8959-434a-83eb-adf2397e956e');
+            consentContext.isBStyleable     = (consentContextDef.consentId === '9001');
 
             this.consentContexts.push(consentContext);
         }
