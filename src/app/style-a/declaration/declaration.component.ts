@@ -80,10 +80,10 @@ export class DeclarationComponent
         this.purposesLoading  = false;
         this.purposesText     = '';
 
-        this.loadConsentDef(route.snapshot.params.consentid);
+        this.loadConsentDef(route.snapshot.params.consentcontext);
     }
 
-    public saveConsent()
+    public createConsent()
     {
         const consentDef: ConsentDef = new ConsentDef();
 
@@ -95,16 +95,47 @@ export class DeclarationComponent
             const constraintDef: ConstraintDef = new ConstraintDef();
 
             constraintDef.id    = constraint.id;
-            constraintDef.value = 'new constraint value';
+            constraintDef.value = constraint.value;
 
             consentDef.constraintDefs.push(constraintDef);
         }
 
         const consentContextDef: ConsentContextDef = new ConsentContextDef();
-        consentContextDef.id               = 'new consent context';
+        consentContextDef.id               = (1000000000 *  Math.random()).toString(16);;
         consentContextDef.consentId        = consentDef.id;
         consentContextDef.consenterId      = 'Stuart';
-        consentContextDef.name             = 'Stuart\'s New Consent';
+        consentContextDef.name             = 'Consent ' + consentContextDef.id;
+        consentContextDef.createdDate      = new Date();
+        consentContextDef.lastModifiedDate = consentContextDef.createdDate;
+
+        this.consentDefLoaderService.setConsentDef(consentDef.id, consentDef);
+        this.consentContextDefLoaderService.setConsentContextDef(consentContextDef.id, consentContextDef);
+
+        this.router.navigate(['/']);
+    }
+
+    public updateConsent()
+    {
+        const consentDef: ConsentDef = new ConsentDef();
+
+        consentDef.id             = this.consentId;
+        consentDef.typeId         = this.consentTypeId;
+        consentDef.constraintDefs = [];
+        for (const constraint of this.constraints)
+        {
+            const constraintDef: ConstraintDef = new ConstraintDef();
+
+            constraintDef.id    = constraint.id;
+            constraintDef.value = constraint.value;
+
+            consentDef.constraintDefs.push(constraintDef);
+        }
+
+        const consentContextDef: ConsentContextDef = new ConsentContextDef();
+        consentContextDef.id               = (1000000000 *  Math.random()).toString(16);
+        consentContextDef.consentId        = consentDef.id;
+        consentContextDef.consenterId      = 'Stuart';
+        consentContextDef.name             = 'Consent ' + consentContextDef.id;
         consentContextDef.createdDate      = new Date();
         consentContextDef.lastModifiedDate = consentContextDef.createdDate;
 

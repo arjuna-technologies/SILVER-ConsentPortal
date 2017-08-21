@@ -12,9 +12,9 @@
             <md-list-item *ngFor="let consentContext of consentContexts">
                 <span fxFlex="25">{{consentContext.name}}</span>
                 <span *ngIf="consentContext.isAStyleable" fxFlex="5"></span>
-                <button *ngIf="consentContext.isAStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/stylea', consentContext.consentId]"><md-icon>menu</md-icon> View Consent as Statement</button>
+                <button *ngIf="consentContext.isAStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/stylea', consentContext]"><md-icon>menu</md-icon> View Consent as Statement</button>
                 <span *ngIf="consentContext.isBStyleable" fxFlex="5"></span>
-                <button *ngIf="consentContext.isBStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/styleb', consentContext.consentId]"><md-icon>apps</md-icon> View Consent as Selection</button>
+                <button *ngIf="consentContext.isBStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/styleb', consentContext]"><md-icon>apps</md-icon> View Consent as Selection</button>
             </md-list-item>
         </md-list>
     </md-card-content>

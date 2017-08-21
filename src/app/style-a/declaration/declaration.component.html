@@ -34,8 +34,11 @@
     </md-card-content>
     <md-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
-            <button md-raised-button color="primary" (click)="saveConsent()">
+            <button md-raised-button color="primary" (click)="createConsent()">
                 <h2><md-icon>add</md-icon> Create Consent</h2>
+            </button>
+            <button md-raised-button color="primary" (click)="updateConsent()">
+                <h2><md-icon>add</md-icon> Update Consent</h2>
             </button>
             <button md-raised-button routerLink="/">
                 <h2><md-icon>clear</md-icon> Cancel</h2>
