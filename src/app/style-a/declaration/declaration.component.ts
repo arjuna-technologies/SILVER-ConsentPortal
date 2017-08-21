@@ -141,7 +141,7 @@ export class DeclarationComponent
 
     private createConsentContextDef(): void
     {
-        
+
     }
 
     private loadConsentContextDef(consentContextId: string): void
@@ -160,7 +160,7 @@ export class DeclarationComponent
 
     private processConsentRendererDef(consentDef: ConsentDef): void
     {
-        this.consentRendererDefLoaderService.getConsentRendererDef(consentDef.typeId)
+        this.consentRendererDefLoaderService.getConsentRendererDefByType(consentDef.typeId, 'StyleA')
             .then((consentRendererDef) => { this.updateModel(consentDef, consentRendererDef) })
             .catch(() => { this.updateModel(consentDef, null) });
     }
