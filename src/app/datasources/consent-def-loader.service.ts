@@ -11,7 +11,7 @@ import { Headers, Http, Response, RequestOptionsArgs } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentDef } from './consent-def';
-import { DatasourcesConfigService } from '../../config/datasources-config.service';
+import { DatasourcesConfigService } from '../config/datasources-config.service';
 
 @Injectable()
 export class ConsentDefLoaderService

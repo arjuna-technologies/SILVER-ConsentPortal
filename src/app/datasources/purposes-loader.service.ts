@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { DatasourcesConfigService } from '../../config/datasources-config.service';
+import { DatasourcesConfigService } from '../config/datasources-config.service';
 
 @Injectable()
 export class PurposesLoaderService

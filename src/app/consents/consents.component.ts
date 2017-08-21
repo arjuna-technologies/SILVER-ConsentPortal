@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ConsentContextModel } from './model/consent-context-model';
 
-import { ConsentContextDef } from './datasource/consent-context-def';
-import { ConsentContextDefLoaderService } from './datasource/consent-context-def-loader.service';
+import { ConsentContextDef } from '../datasources/consent-context-def';
+import { ConsentContextDefLoaderService } from '../datasources/consent-context-def-loader.service';
 
 @Component
 ({

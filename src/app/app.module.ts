@@ -39,19 +39,19 @@ import { ClauseComponent } from './style-b/clause/clause.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 import { DatasourcesConfigService } from './config/datasources-config.service';
-import { ConsentContextDefLoaderService } from './consents/datasource/consent-context-def-loader.service';
-import { ConsentDefLoaderService } from './style-a/datasource/consent-def-loader.service';
-import { ConsentRendererDefLoaderService } from './style-a/datasource/consent-renderer-def-loader.service';
-import { DetailsLoaderService } from './style-a/datasource/details-loader.service';
-import { PurposesLoaderService } from './style-a/datasource/purposes-loader.service';
+import { ConsentContextDefLoaderService } from './datasources/consent-context-def-loader.service';
+import { ConsentDefLoaderService } from './datasources/consent-def-loader.service';
+import { ConsentRendererDefLoaderService } from './datasources/consent-renderer-def-loader.service';
+import { DetailsLoaderService } from './datasources/details-loader.service';
+import { PurposesLoaderService } from './datasources/purposes-loader.service';
 
 const appRoutes: Routes =
 [
-    { path: '',                       component: WelcomeComponent },
-    { path: 'consents/:username',     component: ConsentsComponent },
-    { path: 'stylea/:consentcontext', component: DeclarationComponent },
-    { path: 'styleb/:consentcontext', component: ClauseListsComponent },
-    { path: '**',                     component: PageNotFoundComponent }
+    { path: '',                         component: WelcomeComponent },
+    { path: 'consents/:username',       component: ConsentsComponent },
+    { path: 'stylea/:consentcontextid', component: DeclarationComponent },
+    { path: 'styleb/:consentcontextid', component: ClauseListsComponent },
+    { path: '**',                       component: PageNotFoundComponent }
 ];
 
 @NgModule

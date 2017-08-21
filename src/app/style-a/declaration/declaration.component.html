@@ -34,10 +34,10 @@
     </md-card-content>
     <md-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
-            <button md-raised-button color="primary" (click)="createConsent()">
+            <button md-raised-button *ngIf="! consentId" color="primary" (click)="doCreateConsent()">
                 <h2><md-icon>add</md-icon> Create Consent</h2>
             </button>
-            <button md-raised-button color="primary" (click)="updateConsent()">
+            <button md-raised-button *ngIf="consentId" color="primary" (click)="doUpdateConsent()">
                 <h2><md-icon>add</md-icon> Update Consent</h2>
             </button>
             <button md-raised-button routerLink="/">

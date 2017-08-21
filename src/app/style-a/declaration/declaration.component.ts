@@ -19,19 +19,19 @@ import { ComponentModel } from '../model/component-model';
 import { ConstraintModel } from '../model/constraint-model';
 import { ConstraintOptionModel } from '../model/constraint-option-model';
 
-import { ConsentDef } from '../datasource/consent-def';
-import { ConsentContextDef } from '../../consents/datasource/consent-context-def';
-import { ConstraintDef } from '../datasource/constraint-def';
-import { ConsentRendererDef } from '../datasource/consent-renderer-def';
-import { ComponentRendererDef } from '../datasource/component-renderer-def';
-import { TextComponentRendererDef } from '../datasource/text-component-renderer-def';
-import { ConstraintComponentRendererDef } from '../datasource/constraint-component-renderer-def';
+import { ConsentDef } from '../../datasources/consent-def';
+import { ConsentContextDef } from '../../datasources/consent-context-def';
+import { ConstraintDef } from '../../datasources/constraint-def';
+import { ConsentRendererDef } from '../../datasources/consent-renderer-def';
+import { ComponentRendererDef } from '../../datasources/component-renderer-def';
+import { TextComponentRendererDef } from '../../datasources/text-component-renderer-def';
+import { ConstraintComponentRendererDef } from '../../datasources/constraint-component-renderer-def';
 
-import { ConsentDefLoaderService } from '../datasource/consent-def-loader.service';
-import { ConsentContextDefLoaderService } from '../../consents/datasource/consent-context-def-loader.service';
-import { ConsentRendererDefLoaderService } from '../datasource/consent-renderer-def-loader.service';
-import { DetailsLoaderService } from '../datasource/details-loader.service';
-import { PurposesLoaderService } from '../datasource/purposes-loader.service';
+import { ConsentDefLoaderService } from '../../datasources/consent-def-loader.service';
+import { ConsentContextDefLoaderService } from '../../datasources/consent-context-def-loader.service';
+import { ConsentRendererDefLoaderService } from '../../datasources/consent-renderer-def-loader.service';
+import { DetailsLoaderService } from '../../datasources/details-loader.service';
+import { PurposesLoaderService } from '../../datasources/purposes-loader.service';
 
 @Component
 ({
@@ -80,41 +80,13 @@ export class DeclarationComponent
         this.purposesLoading  = false;
         this.purposesText     = '';
 
-        this.loadConsentDef(route.snapshot.params.consentcontext);
+        if (route.snapshot.params.consentcontextid)
+            this.loadConsentContextDef(route.snapshot.params.consentcontextid);
+        else
+            this.createConsentContextDef();
     }
 
-    public createConsent()
-    {
-        const consentDef: ConsentDef = new ConsentDef();
-
-        consentDef.id             = this.consentId;
-        consentDef.typeId         = this.consentTypeId;
-        consentDef.constraintDefs = [];
-        for (const constraint of this.constraints)
-        {
-            const constraintDef: ConstraintDef = new ConstraintDef();
-
-            constraintDef.id    = constraint.id;
-            constraintDef.value = constraint.value;
-
-            consentDef.constraintDefs.push(constraintDef);
-        }
-
-        const consentContextDef: ConsentContextDef = new ConsentContextDef();
-        consentContextDef.id               = (1000000000 *  Math.random()).toString(16);;
-        consentContextDef.consentId        = consentDef.id;
-        consentContextDef.consenterId      = 'Stuart';
-        consentContextDef.name             = 'Consent ' + consentContextDef.id;
-        consentContextDef.createdDate      = new Date();
-        consentContextDef.lastModifiedDate = consentContextDef.createdDate;
-
-        this.consentDefLoaderService.setConsentDef(consentDef.id, consentDef);
-        this.consentContextDefLoaderService.setConsentContextDef(consentContextDef.id, consentContextDef);
-
-        this.router.navigate(['/']);
-    }
-
-    public updateConsent()
+    public doCreateConsent(): void
     {
         const consentDef: ConsentDef = new ConsentDef();
 
@@ -145,14 +117,48 @@ export class DeclarationComponent
         this.router.navigate(['/']);
     }
 
-    private loadConsentDef(consentId: string)
+    public doUpdateConsent(): void
     {
-        this.consentDefLoaderService.getConsentDef(consentId)
-            .then((consentDef) => { this.loadConsentRendererDef(consentDef) })
+        const consentDef: ConsentDef = new ConsentDef();
+
+        consentDef.id             = this.consentId;
+        consentDef.typeId         = this.consentTypeId;
+        consentDef.constraintDefs = [];
+        for (const constraint of this.constraints)
+        {
+            const constraintDef: ConstraintDef = new ConstraintDef();
+
+            constraintDef.id    = constraint.id;
+            constraintDef.value = constraint.value;
+
+            consentDef.constraintDefs.push(constraintDef);
+        }
+
+        this.consentDefLoaderService.setConsentDef(consentDef.id, consentDef);
+
+        this.router.navigate(['/']);
+    }
+
+    private createConsentContextDef(): void
+    {
+        
+    }
+
+    private loadConsentContextDef(consentContextId: string): void
+    {
+        this.consentContextDefLoaderService.getConsentContextDef(consentContextId)
+            .then((consentContextDef) => { this.processConsentContextDef(consentContextDef) })
             .catch(() => { this.updateModel(null, null) } );
     }
 
-    private loadConsentRendererDef(consentDef: ConsentDef)
+    private processConsentContextDef(consentContextDef: ConsentContextDef): void
+    {
+        this.consentDefLoaderService.getConsentDef(consentContextDef.consentId)
+            .then((consentDef) => { this.processConsentRendererDef(consentDef) })
+            .catch(() => { this.updateModel(null, null) } );
+    }
+
+    private processConsentRendererDef(consentDef: ConsentDef): void
     {
         this.consentRendererDefLoaderService.getConsentRendererDef(consentDef.typeId)
             .then((consentRendererDef) => { this.updateModel(consentDef, consentRendererDef) })
@@ -239,35 +245,35 @@ export class DeclarationComponent
             .catch(() => { this.purposesLoading = false } );
     }
 
-    public componentEnter(component: ComponentModel)
+    public componentEnter(component: ComponentModel): void
     {
         for (const constraint of this.constraints)
             if (component.id === constraint.id)
                 constraint.state = 'highlight';
     }
 
-    public componentLeave(component: ComponentModel)
+    public componentLeave(component: ComponentModel): void
     {
         for (const constraint of this.constraints)
             if (component.id === constraint.id)
                 constraint.state = 'none';
     }
 
-    public constraintEnter(constraint: ConstraintModel)
+    public constraintEnter(constraint: ConstraintModel): void
     {
         for (const component of this.components)
             if (constraint.id === component.id)
                 component.state = 'underway';
     }
 
-    public constraintLeave(constraint: ConstraintModel)
+    public constraintLeave(constraint: ConstraintModel): void
     {
         for (const component of this.components)
             if (constraint.id === component.id)
                 component.state = 'none';
     }
 
-    public constraintChange(constraint: ConstraintModel)
+    public constraintChange(constraint: ConstraintModel): void
     {
         for (const component of this.components)
             if (constraint.id === component.id)
