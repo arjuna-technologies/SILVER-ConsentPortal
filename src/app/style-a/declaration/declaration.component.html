@@ -40,6 +40,9 @@
             <button md-raised-button *ngIf="consentId" color="primary" (click)="doUpdateConsent()">
                 <h2><md-icon>add</md-icon> Update Consent</h2>
             </button>
+            <button md-raised-button *ngIf="consentId" color="primary" (click)="doRemoveConsent()">
+                <h2><md-icon>remove</md-icon> Remove Consent</h2>
+            </button>
             <button md-raised-button routerLink="/">
                 <h2><md-icon>clear</md-icon> Cancel</h2>
             </button>

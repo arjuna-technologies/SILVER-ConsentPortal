@@ -144,6 +144,13 @@ export class DeclarationComponent
 
     }
 
+    public doRemoveConsent(): void
+    {
+        this.consentDefLoaderService.removeConsentDef(this.consentId);
+
+        this.router.navigate(['/']);
+    }
+
     private loadConsentContextDef(consentContextId: string): void
     {
         this.consentContextDefLoaderService.getConsentContextDef(consentContextId)

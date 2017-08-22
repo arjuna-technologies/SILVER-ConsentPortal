@@ -6,7 +6,7 @@
 <!--                                                                                                          -->
 
 <md-card>
-    <md-card-title>Consents</md-card-title>
+    <md-card-title>Existing Consents</md-card-title>
     <md-card-content>
         <md-list>
             <md-list-item *ngFor="let consentContext of consentContexts">
@@ -17,5 +17,24 @@
                 <button *ngIf="consentContext.isBStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/styleb', consentContext.id]"><md-icon>apps</md-icon> View Consent as Selection</button>
             </md-list-item>
         </md-list>
+    </md-card-content>
+</md-card>
+
+<md-card>
+    <md-card-title>Create a Consent</md-card-title>
+    <md-card-content>
+        <md-input-container fxFlex="25">
+             <input mdInput placeholder="Consent Name" [(ngModel)]="newConsentName" value="">
+        </md-input-container>
+        <span fxFlex="5"></span>
+        <md-select placeholder="Consent Type" [(ngModel)]="newConsentTypeId" fxFlex="15">
+            <md-option *ngFor="let consentTemplate of consentTemplates" [value]="consentTemplate.consentTypeId">
+                {{consentTemplate.name}}
+            </md-option>
+        </md-select>
+        <span fxFlex="5"></span>
+        <div fxFlex="15">
+            <button md-raised-button color="primary" [disabled]="(newConsentName === '') || (newConsentTypeId === '')" [routerLink]="['/stylea', newConsentName, newConsentTypeId]"><md-icon>create</md-icon> Create</button>
+        </div>
     </md-card-content>
 </md-card>

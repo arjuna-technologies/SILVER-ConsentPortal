@@ -44,6 +44,14 @@ export class ConsentDefLoaderService
                    .catch((response) => Promise.resolve(this.setConsentDefErrorHandler(response)));
     }
 
+    public removeConsentDef(id: string): Promise<boolean>
+    {
+        return this.http.delete(this.datasourcesConfigService.deleteConsentDefLoaderBaseURL + '/' + id)
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.deleteConsentDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.deleteConsentDefErrorHandler(response)));
+    }
+
     private getConsentDefsSuccessHandler(response: Response): ConsentDef[]
     {
         const consentDefs: ConsentDef[] = [];
@@ -90,6 +98,18 @@ export class ConsentDefLoaderService
     private setConsentDefErrorHandler(error: Response | any): boolean
     {
         console.log('Error while saveing Consent: ' + (error.message || error));
+
+        return false;
+    }
+
+    private deleteConsentDefSuccessHandler(response: Response): boolean
+    {
+        return true;
+    }
+
+    private deleteConsentDefErrorHandler(error: Response | any): boolean
+    {
+        console.log('Error while deleteing Consent: ' + (error.message || error));
 
         return false;
     }

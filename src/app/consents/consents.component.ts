@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ConsentContextModel } from './model/consent-context-model';
+import { ConsentTemplateModel } from './model/consent-template-model';
 
 import { ConsentContextDef } from '../datasources/consent-context-def';
 import { ConsentContextDefLoaderService } from '../datasources/consent-context-def-loader.service';
@@ -21,16 +22,27 @@ import { ConsentContextDefLoaderService } from '../datasources/consent-context-d
 })
 export class ConsentsComponent
 {
-    public consentContexts: ConsentContextModel[];
+    public consentContexts:   ConsentContextModel[];
+    public newConsentName: string;
+    public newConsentTypeId: string;
+    public consentTemplates:  ConsentTemplateModel[];
 
     constructor(private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService)
     {
-        this.consentContexts = [];
+        this.consentContexts  = [];
+        this.newConsentName   = '';
+        this.newConsentTypeId = '';
+        this.consentTemplates = [];
 
-        this.load(route.snapshot.params.username);
+        const t0 = new ConsentTemplateModel();
+        t0.name = "Foo Bar";
+        t0.consentTypeId = "Foo Bar";
+        this.consentTemplates.push(t0)
+
+        this.loadExistingConsents(route.snapshot.params.username);
     }
 
-    private load(username: string): void
+    private loadExistingConsents(username: string): void
     {
         if (username !== '')
             this.loadConsentContextDefs(username);
