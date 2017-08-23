@@ -41,17 +41,19 @@ import { PageNotFoundComponent } from './error/page-not-found/page-not-found.com
 import { DatasourcesConfigService } from './config/datasources-config.service';
 import { ConsentContextDefLoaderService } from './datasources/consent-context-def-loader.service';
 import { ConsentDefLoaderService } from './datasources/consent-def-loader.service';
+import { ConsentTypeDefLoaderService } from './datasources/consent-type-def-loader.service';
 import { ConsentRendererDefLoaderService } from './datasources/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './datasources/details-loader.service';
 import { PurposesLoaderService } from './datasources/purposes-loader.service';
 
 const appRoutes: Routes =
 [
-    { path: '',                         component: WelcomeComponent },
-    { path: 'consents/:username',       component: ConsentsComponent },
-    { path: 'stylea/:consentcontextid', component: DeclarationComponent },
-    { path: 'styleb/:consentcontextid', component: ClauseListsComponent },
-    { path: '**',                       component: PageNotFoundComponent }
+    { path: '',                                                              component: WelcomeComponent },
+    { path: 'consents/:username',                                            component: ConsentsComponent },
+    { path: 'stylea/:consentcontextid',                                      component: DeclarationComponent },
+    { path: 'stylea_create/:newconsentname/:newconsenter/:newconsenttypeid', component: DeclarationComponent },
+    { path: 'styleb/:consentcontextid',                                      component: ClauseListsComponent },
+    { path: '**',                                                            component: PageNotFoundComponent }
 ];
 
 @NgModule
@@ -97,6 +99,7 @@ const appRoutes: Routes =
     [
         DatasourcesConfigService,
         ConsentDefLoaderService,
+        ConsentTypeDefLoaderService,
         ConsentContextDefLoaderService,
         ConsentRendererDefLoaderService,
         DetailsLoaderService,

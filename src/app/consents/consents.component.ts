@@ -13,6 +13,7 @@ import { ConsentTemplateModel } from './model/consent-template-model';
 
 import { ConsentContextDef } from '../datasources/consent-context-def';
 import { ConsentContextDefLoaderService } from '../datasources/consent-context-def-loader.service';
+import { ConsentTypeDefLoaderService } from '../datasources/consent-type-def-loader.service';
 
 @Component
 ({
@@ -22,24 +23,26 @@ import { ConsentContextDefLoaderService } from '../datasources/consent-context-d
 })
 export class ConsentsComponent
 {
-    public consentContexts:   ConsentContextModel[];
-    public newConsentName: string;
+    public consentContexts:  ConsentContextModel[];
+    public newConsentName:   string;
+    public newConsenterName: string;
     public newConsentTypeId: string;
-    public consentTemplates:  ConsentTemplateModel[];
+    public consentTemplates: ConsentTemplateModel[];
 
-    constructor(private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService)
+    constructor(private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService, private consentTypeDefLoaderService: ConsentTypeDefLoaderService)
     {
         this.consentContexts  = [];
         this.newConsentName   = '';
+        if (route.snapshot.params.username)
+            this.newConsenterName = route.snapshot.params.username;
+        else
+            this.newConsenterName = '';
         this.newConsentTypeId = '';
         this.consentTemplates = [];
 
-        const t0 = new ConsentTemplateModel();
-        t0.name = "Foo Bar";
-        t0.consentTypeId = "Foo Bar";
-        this.consentTemplates.push(t0)
-
-        this.loadExistingConsents(route.snapshot.params.username);
+        if (this.newConsenterName !== '')
+            this.loadExistingConsents(this.newConsenterName);
+        this.loadConsentTemplates();
     }
 
     private loadExistingConsents(username: string): void
@@ -50,11 +53,33 @@ export class ConsentsComponent
             this.updateModel([]);
     }
 
-    private loadConsentContextDefs(username: string)
+    private loadConsentContextDefs(username: string): void
     {
         this.consentContextDefLoaderService.getConsentContextDefs(username)
             .then((consentContextDefs) => { this.updateModel(consentContextDefs) })
             .catch(() => { this.updateModel([]) } );
+    }
+
+    private loadConsentTemplates(): void
+    {
+        this.consentTypeDefLoaderService.getConsentTypeDefs()
+            .then
+            (
+                (consentTypeDefs) =>
+                {
+                    this.consentTemplates = [];
+                    for (const consentTypeDef of consentTypeDefs)
+                    {
+                        const consentTemplates: ConsentTemplateModel = new ConsentTemplateModel();
+
+                        consentTemplates.name          = consentTypeDef.name;
+                        consentTemplates.consentTypeId = consentTypeDef.id;
+
+                        this.consentTemplates.push(consentTemplates);
+                    }
+                }
+            )
+            .catch(() => { this.consentTemplates = [] } );
     }
 
     private updateModel(consentContextDefs: ConsentContextDef[]): void
