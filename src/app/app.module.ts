@@ -48,12 +48,12 @@ import { PurposesLoaderService } from './datasources/purposes-loader.service';
 
 const appRoutes: Routes =
 [
-    { path: '',                                                              component: WelcomeComponent },
-    { path: 'consents/:username',                                            component: ConsentsComponent },
-    { path: 'stylea/:consentcontextid',                                      component: DeclarationComponent },
-    { path: 'stylea_create/:newconsentname/:newconsenter/:newconsenttypeid', component: DeclarationComponent },
-    { path: 'styleb/:consentcontextid',                                      component: ClauseListsComponent },
-    { path: '**',                                                            component: PageNotFoundComponent }
+    { path: '',                                                                  component: WelcomeComponent },
+    { path: 'consents/:username',                                                component: ConsentsComponent },
+    { path: 'stylea/:consentcontextid',                                          component: DeclarationComponent },
+    { path: 'stylea_create/:newconsentname/:newconsentername/:newconsenttypeid', component: DeclarationComponent },
+    { path: 'styleb/:consentcontextid',                                          component: ClauseListsComponent },
+    { path: '**',                                                                component: PageNotFoundComponent }
 ];
 
 @NgModule

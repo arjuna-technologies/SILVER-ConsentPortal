@@ -83,14 +83,14 @@ export class DeclarationComponent
             this.newConsentName = route.snapshot.params.newconsentname;
         else
             this.newConsentName = '';
-        if (route.snapshot.params.newconsentername)
-            this.newConsenterName = route.snapshot.params.newconsentername;
-        else
-            this.newConsenterName = ''
         if (route.snapshot.params.newconsenttypeid)
             this.newConsentTypeId = route.snapshot.params.newconsenttypeid;
         else
             this.newConsentTypeId = '';
+        if (route.snapshot.params.newconsentername)
+            this.newConsenterName = route.snapshot.params.newconsentername;
+        else
+            this.newConsenterName = '';
         this.components      = [];
         this.constraints     = [];
         this.detailsLoading  = false;
@@ -174,7 +174,6 @@ export class DeclarationComponent
 
     private loadConsentTypeNewConsentDef(consentTypeId: string): void
     {
-        console.log(JSON.stringify('# ' + consentTypeId));
         this.consentRendererDefLoaderService.getConsentRendererDefByType(consentTypeId, 'StyleA')
             .then
             (
