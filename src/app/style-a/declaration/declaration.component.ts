@@ -58,6 +58,7 @@ import { PurposesLoaderService } from '../../datasources/purposes-loader.service
 })
 export class DeclarationComponent
 {
+    public consentContextId: string;
     public consentId:        string;
     public consentTypeId:    string;
     public newConsentName:   string;
@@ -74,6 +75,10 @@ export class DeclarationComponent
                        private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
                        private detailsLoaderService: DetailsLoaderService, private purposesLoaderService: PurposesLoaderService)
     {
+        if (route.snapshot.params.consentcontextid)
+            this.consentContextId = route.snapshot.params.consentcontextid;
+        else
+            this.consentContextId = '';
         this.consentId = '';
         if (route.snapshot.params.consenttypeid)
             this.consentTypeId = route.snapshot.params.consenttypeid;
@@ -98,8 +103,8 @@ export class DeclarationComponent
         this.purposesLoading = false;
         this.purposesText    = '';
 
-        if (route.snapshot.params.consentcontextid)
-            this.loadConsentContextDef(route.snapshot.params.consentcontextid);
+        if (this.consentContextId !== '')
+            this.loadConsentContextDef(this.consentContextId);
         else
             this.loadConsentTypeNewConsentDef(this.newConsentTypeId);
     }
@@ -161,6 +166,7 @@ export class DeclarationComponent
     public doRemoveConsent(): void
     {
         this.consentDefLoaderService.removeConsentDef(this.consentId);
+        this.consentContextDefLoaderService.removeConsentContextDef(this.consentContextId);
 
         this.router.navigate(['/']);
     }
