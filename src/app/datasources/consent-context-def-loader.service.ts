@@ -44,6 +44,14 @@ export class ConsentContextDefLoaderService
                    .catch((response) => Promise.resolve(this.setConsentContextDefErrorHandler(response)));
     }
 
+    public removeConsentContextDef(id: string): Promise<boolean>
+    {
+        return this.http.delete(this.datasourcesConfigService.deleteConsentContextDefLoaderBaseURL + '/' + id)
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.deleteConsentContextDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.deleteConsentContextDefErrorHandler(response)));
+    }
+
     private getConsentContextDefsSuccessHandler(response: Response): ConsentContextDef[]
     {
         const consentContextDefs: ConsentContextDef[] = [];
@@ -90,6 +98,18 @@ export class ConsentContextDefLoaderService
     private setConsentContextDefErrorHandler(error: Response | any): boolean
     {
         console.log('Error while saving Consent Context: ' + (error.message || error));
+
+        return false;
+    }
+
+    private deleteConsentContextDefSuccessHandler(response: Response): boolean
+    {
+        return true;
+    }
+
+    private deleteConsentContextDefErrorHandler(error: Response | any): boolean
+    {
+        console.log('Error while deleting Consent Context: ' + (error.message || error));
 
         return false;
     }
