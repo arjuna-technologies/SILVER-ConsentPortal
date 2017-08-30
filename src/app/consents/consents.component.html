@@ -23,9 +23,9 @@
 <md-card>
     <md-card-title>Create a Consent</md-card-title>
     <md-card-content>
-        <md-input-container fxFlex="25">
+        <md-form-field fxFlex="25">
              <input mdInput placeholder="Consent Name" [(ngModel)]="newConsentName" value="">
-        </md-input-container>
+        </md-form-field>
         <span fxFlex="5"></span>
         <md-select placeholder="Consent Type" [(ngModel)]="newConsentTypeId" fxFlex="15">
             <md-option *ngFor="let consentTemplate of consentTemplates" [value]="consentTemplate.consentTypeId">
