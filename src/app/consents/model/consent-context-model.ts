@@ -15,6 +15,7 @@ export class ConsentContextModel
     public lastModifiedDate: Date;
     public isAStyleable:     boolean;
     public isBStyleable:     boolean;
+    public isCStyleable:     boolean;
 
     public constructor()
     {
@@ -26,5 +27,6 @@ export class ConsentContextModel
         this.lastModifiedDate = null;
         this.isAStyleable     = false;
         this.isBStyleable     = false;
+        this.isCStyleable     = false;
     }
 }

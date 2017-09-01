@@ -1,0 +1,67 @@
+<!--                                                                                                          -->
+<!-- Copyright (c) 2017, Arjuna Technologies Limited, Newcastle upon Tyne, England,                           -->
+<!--                     Open Lab, Newcastle University, Newcastle upon Tyne, England,                        -->
+<!--                     Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England. -->
+<!--                     All rights reserved.                                                                 -->
+<!--                                                                                                          -->
+
+<md-card>
+    <md-card-content>
+        <md-tab-group>
+            <md-tab label="Information">
+                <md-card>
+                    <md-card-title>What type of information would you like to share?</md-card-title>
+                    <md-card-content>
+                        <md-radio-group fxLayout="column" fxLayoutAlign="space-around start" [(ngModel)]="informationType">
+                            <md-radio-button [value]="school">School Information</md-radio-button>
+                            <md-radio-button [value]="police">Police Information</md-radio-button>
+                            <md-radio-button [value]="mental_health">Mental Health Information</md-radio-button>
+                        </md-radio-group>
+                    </md-card-content>
+                </md-card>
+            </md-tab>
+            <md-tab label="Organiastion">
+                <md-card>
+                    <md-card-title>Which organiastion would to like to have to the information?</md-card-title>
+                    <md-card-content>
+                        <md-radio-group fxLayout="column" fxLayoutAlign="space-around start" [(ngModel)]="organization">
+                            <md-radio-button [value]="ntc">North Tyneside Council</md-radio-button>
+                            <md-radio-button [value]="scc">Sunderland City Council</md-radio-button>
+                            <md-radio-button [value]="stc">South Tynesice Council</md-radio-button>
+                            <md-radio-button [value]="newcc">Newcastle City Council</md-radio-button>
+                            <md-radio-button [value]="northcc">Northumberland County Council</md-radio-button>
+                        </md-radio-group>
+                    </md-card-content>
+                </md-card>
+            </md-tab>
+            <md-tab label="Purpose">
+                <md-card>
+                    <md-card-title>What purpose would you like the permit?</md-card-title>
+                    <md-card-content>
+                        <md-radio-group fxLayout="column" fxLayoutAlign="space-around start" [(ngModel)]="purposeType">
+                            <md-radio-button [value]="medicalResearch">Medical Research</md-radio-button>
+                            <md-radio-button [value]="processImprovement">Process Improvement Research</md-radio-button>
+                        </md-radio-group>
+                    </md-card-content>
+                </md-card>
+            </md-tab>
+        </md-tab-group>
+    </md-card-content>
+
+    <md-card-actions>
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
+            <button md-raised-button *ngIf="newConsent" [disabled]="! completeConsent" color="primary">
+                <h2><md-icon>add</md-icon> Create Consent</h2>
+            </button>
+            <button md-raised-button *ngIf="! newConsent" [disabled]="! completeConsent" color="primary">
+                <h2><md-icon>add</md-icon> Update Consent</h2>
+            </button>
+            <button md-raised-button *ngIf="! newConsent" [disabled]="! completeConsent" color="primary">
+                <h2><md-icon>remove</md-icon> Remove Consent</h2>
+            </button>
+            <button md-raised-button routerLink="/">
+                <h2><md-icon>clear</md-icon> Cancel</h2>
+            </button>
+        </div>
+    </md-card-actions>
+</md-card>

@@ -25,6 +25,7 @@ import { MdCheckboxModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdProgressBarModule } from '@angular/material';
 import { MdDialogModule } from '@angular/material';
+import { MdRadioModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
@@ -35,6 +36,7 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
 import { ClauseComponent } from './style-b/clause/clause.component';
+import { ConsentPagesComponent } from './style-c/consent-pages/consent-pages.component';
 
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
@@ -53,6 +55,7 @@ const appRoutes: Routes =
     { path: 'stylea/:consentcontextid',                                          component: DeclarationComponent },
     { path: 'stylea_create/:newconsentname/:newconsentername/:newconsenttypeid', component: DeclarationComponent },
     { path: 'styleb/:consentcontextid',                                          component: ClauseListsComponent },
+    { path: 'stylec/:consentcontextid',                                          component: ConsentPagesComponent },
     { path: '**',                                                                component: PageNotFoundComponent }
 ];
 
@@ -66,6 +69,7 @@ const appRoutes: Routes =
         ClauseListsComponent,
         ClauseListComponent,
         ClauseComponent,
+        ConsentPagesComponent,
         ConsentsComponent,
         PageNotFoundComponent,
         WelcomeComponent
@@ -86,6 +90,7 @@ const appRoutes: Routes =
         MdSelectModule,
         MdButtonModule,
         MdIconModule,
+        MdRadioModule,
         MdCheckboxModule,
         MdSidenavModule,
         MdProgressBarModule,
