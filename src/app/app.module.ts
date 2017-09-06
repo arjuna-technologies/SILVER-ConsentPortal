@@ -47,6 +47,7 @@ import { ConsentTypeDefLoaderService } from './datasources/consent-type-def-load
 import { ConsentRendererDefLoaderService } from './datasources/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './datasources/details-loader.service';
 import { PurposesLoaderService } from './datasources/purposes-loader.service';
+import { ConsentRendererUploadComponent } from './admin/consent-renderer-upload/consent-renderer-upload.component';
 
 const appRoutes: Routes =
 [
@@ -56,6 +57,7 @@ const appRoutes: Routes =
     { path: 'stylea_create/:newconsentname/:newconsentername/:newconsenttypeid', component: DeclarationComponent },
     { path: 'styleb/:consentcontextid',                                          component: ClauseListsComponent },
     { path: 'stylec/:consentcontextid',                                          component: ConsentPagesComponent },
+    { path: 'admin',                                                             component: ConsentRendererUploadComponent },
     { path: '**',                                                                component: PageNotFoundComponent }
 ];
 
@@ -72,7 +74,8 @@ const appRoutes: Routes =
         ConsentPagesComponent,
         ConsentsComponent,
         PageNotFoundComponent,
-        WelcomeComponent
+        WelcomeComponent,
+        ConsentRendererUploadComponent
     ],
     imports:
     [
