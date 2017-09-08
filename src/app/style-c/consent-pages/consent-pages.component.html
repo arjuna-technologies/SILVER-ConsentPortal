@@ -7,7 +7,7 @@
 
 <md-card>
     <md-card-content>
-        <md-tab-group>
+        <md-tab-group [(selectedIndex)]="selectedIndex">
             <md-tab label="Information">
                 <md-card>
                     <md-card-title>What type of information would you like to share?</md-card-title>
@@ -46,6 +46,13 @@
                 </md-card>
             </md-tab>
         </md-tab-group>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+            <button md-button fxFlex="20" color="primary" (click)="doPrevious()"><md-icon>navigate_before</md-icon> Previous</button>
+            <span fxFlex="20"></span>
+            <button md-button fxFlex="20" color="primary" (click)="doClear()"><md-icon>clear</md-icon> Clear</button>
+            <span fxFlex="20"></span>
+            <button md-button fxFlex="20" color="primary" (click)="doNext()">Next <md-icon>navigate_next</md-icon></button>
+        </div>
     </md-card-content>
 
     <md-card-actions>

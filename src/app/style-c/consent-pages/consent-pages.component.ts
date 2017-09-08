@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsentPagesComponent implements OnInit
 {
+    public selectedIndex:   number;
+
     public informationType: string;
     public organization:    string;
     public purposeType:     string;
@@ -16,6 +18,8 @@ export class ConsentPagesComponent implements OnInit
 
     constructor()
     {
+        this.selectedIndex   = 0;
+
         this.informationType = '';
         this.organization    = '';
         this.purposeType     = '';
@@ -25,6 +29,23 @@ export class ConsentPagesComponent implements OnInit
 
     ngOnInit()
     {
+    }
+
+    public doNext(): void
+    {
+        this.selectedIndex = (this.selectedIndex + 1) % 3;
+    }
+
+    public doPrevious(): void
+    {
+        this.selectedIndex = (this.selectedIndex + 2) % 3;
+    }
+
+    public doClear(): void
+    {
+        this.informationType = '';
+        this.organization    = '';
+        this.purposeType     = '';
     }
 
     public get completeConsent(): boolean
