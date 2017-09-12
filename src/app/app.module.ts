@@ -58,7 +58,7 @@ const appRoutes: Routes =
     { path: 'stylea_create/:newconsentname/:newconsentername/:newconsenttypeid', component: DeclarationComponent },
     { path: 'styleb/:consentcontextid',                                          component: ClauseListsComponent },
     { path: 'stylec/:consentcontextid',                                          component: ConsentPagesComponent },
-    { path: 'history/:consentcontextid',                                        component: ConsentHistoryComponent },
+    { path: 'history/:consentid',                                                component: ConsentHistoryComponent },
     { path: '**',                                                                component: PageNotFoundComponent }
 ];
 

@@ -19,26 +19,29 @@ import { ConsentHistoryDefLoaderService } from '../datasources/consent-history-d
 })
 export class ConsentHistoryComponent implements OnInit
 {
-    public consentContextId: string;
+    public consentId: string;
+    public events: any[];
 
     constructor(private router: Router, private route: ActivatedRoute, private consentHistoryDefLoaderService: ConsentHistoryDefLoaderService)
     {
-        if (route.snapshot.params.consentcontextid)
-            this.consentContextId = route.snapshot.params.consentcontextid;
+        if (route.snapshot.params.consentid)
+            this.consentId = route.snapshot.params.consentid;
         else
-            this.consentContextId = '';
+            this.consentId = '';
 
-        if (this.consentContextId !== '')
-            this.loadConsentHistoryDef(this.consentContextId);
+        this.events = [];
+
+        if (this.consentId !== '')
+            this.loadConsentHistoryDef(this.consentId);
     }
 
     ngOnInit()
     {
     }
 
-    private loadConsentHistoryDef(consentContextId: string): void
+    private loadConsentHistoryDef(consentId: string): void
     {
-        this.consentHistoryDefLoaderService.getConsentHistoryDef(consentContextId)
+        this.consentHistoryDefLoaderService.getConsentHistoryDef(consentId)
             .then((consentContextDef) => { this.processConsentHistoryDef(consentContextDef) })
             .catch(() => { this.processConsentHistoryDef(null) } );
     }
@@ -46,5 +49,7 @@ export class ConsentHistoryComponent implements OnInit
     private processConsentHistoryDef(consentHistoryDef: ConsentHistoryDef): void
     {
         console.log(JSON.stringify(consentHistoryDef));
+
+        this.events = consentHistoryDef.events;
     }
 }
