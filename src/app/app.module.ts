@@ -36,6 +36,7 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
 import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
 import { ClauseComponent } from './style-b/clause/clause.component';
+import { ConsentHistoryComponent } from './consent-history/consent-history.component';
 import { ConsentPagesComponent } from './style-c/consent-pages/consent-pages.component';
 
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
@@ -44,6 +45,7 @@ import { DatasourcesConfigService } from './config/datasources-config.service';
 import { ConsentContextDefLoaderService } from './datasources/consent-context-def-loader.service';
 import { ConsentDefLoaderService } from './datasources/consent-def-loader.service';
 import { ConsentTypeDefLoaderService } from './datasources/consent-type-def-loader.service';
+import { ConsentHistoryDefLoaderService } from './datasources/consent-history-def-loader.service';
 import { ConsentRendererDefLoaderService } from './datasources/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './datasources/details-loader.service';
 import { PurposesLoaderService } from './datasources/purposes-loader.service';
@@ -56,6 +58,7 @@ const appRoutes: Routes =
     { path: 'stylea_create/:newconsentname/:newconsentername/:newconsenttypeid', component: DeclarationComponent },
     { path: 'styleb/:consentcontextid',                                          component: ClauseListsComponent },
     { path: 'stylec/:consentcontextid',                                          component: ConsentPagesComponent },
+    { path: 'history/:consentcontextid',                                        component: ConsentHistoryComponent },
     { path: '**',                                                                component: PageNotFoundComponent }
 ];
 
@@ -72,7 +75,8 @@ const appRoutes: Routes =
         ConsentPagesComponent,
         ConsentsComponent,
         PageNotFoundComponent,
-        WelcomeComponent
+        WelcomeComponent,
+        ConsentHistoryComponent
     ],
     imports:
     [
@@ -105,6 +109,7 @@ const appRoutes: Routes =
         DatasourcesConfigService,
         ConsentDefLoaderService,
         ConsentTypeDefLoaderService,
+        ConsentHistoryDefLoaderService,
         ConsentContextDefLoaderService,
         ConsentRendererDefLoaderService,
         DetailsLoaderService,
