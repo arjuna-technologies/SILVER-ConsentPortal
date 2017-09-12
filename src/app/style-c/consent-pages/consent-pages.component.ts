@@ -50,6 +50,6 @@ export class ConsentPagesComponent implements OnInit
 
     public get completeConsent(): boolean
     {
-        return (this.informationType != '') && (this.organization != '') && (this.purposeType != '');
+        return (this.informationType !== '') && (this.organization !== '') && (this.purposeType !== '');
     }
 }
