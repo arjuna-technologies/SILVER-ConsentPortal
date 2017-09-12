@@ -135,7 +135,7 @@ export class DeclarationComponent
         consentContextDef.createdDate      = new Date();
         consentContextDef.lastModifiedDate = consentContextDef.createdDate;
 
-        this.consentDefLoaderService.setConsentDef(consentDef.id, consentDef);
+        this.consentDefLoaderService.postConsentDef(consentDef.id, consentDef);
         this.consentContextDefLoaderService.setConsentContextDef(consentContextDef.id, consentContextDef);
 
         this.router.navigate(['/']);
@@ -158,14 +158,14 @@ export class DeclarationComponent
             consentDef.constraintDefs.push(constraintDef);
         }
 
-        this.consentDefLoaderService.setConsentDef(consentDef.id, consentDef);
+        this.consentDefLoaderService.putConsentDef(consentDef.id, consentDef);
 
         this.router.navigate(['/']);
     }
 
     public doRemoveConsent(): void
     {
-        this.consentDefLoaderService.removeConsentDef(this.consentId);
+        this.consentDefLoaderService.deleteConsentDef(this.consentId);
         this.consentContextDefLoaderService.removeConsentContextDef(this.consentContextId);
 
         this.router.navigate(['/']);

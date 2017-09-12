@@ -28,6 +28,14 @@ export class ConsentDefLoaderService
                    .catch((response) => Promise.resolve(this.getConsentDefsErrorHandler(response)));
     }
 
+    public postConsentDef(id: string, consentDef: ConsentDef): Promise<boolean>
+    {
+        return this.http.post(this.datasourcesConfigService.postConsentDefLoaderBaseURL + '/' + id, consentDef.toObject())
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.postConsentDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.postConsentDefErrorHandler(response)));
+    }
+
     public getConsentDef(id: string): Promise<ConsentDef>
     {
         return this.http.get(this.datasourcesConfigService.getConsentDefLoaderBaseURL + '/' + id)
@@ -36,15 +44,15 @@ export class ConsentDefLoaderService
                    .catch((response) => Promise.resolve(this.getConsentDefErrorHandler(response)));
     }
 
-    public setConsentDef(id: string, consentDef: ConsentDef): Promise<boolean>
+    public putConsentDef(id: string, consentDef: ConsentDef): Promise<boolean>
     {
-        return this.http.post(this.datasourcesConfigService.setConsentDefLoaderBaseURL + '/' + id, consentDef.toObject())
+        return this.http.put(this.datasourcesConfigService.putConsentDefLoaderBaseURL + '/' + id, consentDef.toObject())
                    .toPromise()
-                   .then((response) => Promise.resolve(this.setConsentDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.setConsentDefErrorHandler(response)));
+                   .then((response) => Promise.resolve(this.putConsentDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.putConsentDefErrorHandler(response)));
     }
 
-    public removeConsentDef(id: string): Promise<boolean>
+    public deleteConsentDef(id: string): Promise<boolean>
     {
         return this.http.delete(this.datasourcesConfigService.deleteConsentDefLoaderBaseURL + '/' + id)
                    .toPromise()
@@ -74,6 +82,18 @@ export class ConsentDefLoaderService
         return [];
     }
 
+    private postConsentDefSuccessHandler(response: Response): boolean
+    {
+        return true;
+    }
+
+    private postConsentDefErrorHandler(error: Response | any): boolean
+    {
+        console.log('Error while saveing Consent: ' + (error.message || error));
+
+        return false;
+    }
+
     private getConsentDefSuccessHandler(response: Response): ConsentDef
     {
         const consentDef = new ConsentDef();
@@ -90,12 +110,12 @@ export class ConsentDefLoaderService
         return null;
     }
 
-    private setConsentDefSuccessHandler(response: Response): boolean
+    private putConsentDefSuccessHandler(response: Response): boolean
     {
         return true;
     }
 
-    private setConsentDefErrorHandler(error: Response | any): boolean
+    private putConsentDefErrorHandler(error: Response | any): boolean
     {
         console.log('Error while saveing Consent: ' + (error.message || error));
 

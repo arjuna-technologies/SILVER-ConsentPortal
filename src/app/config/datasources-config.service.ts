@@ -13,8 +13,9 @@ export class DatasourcesConfigService
     public deleteConsentContextDefLoaderBaseURL: string;
 
     public listConsentDefLoaderBaseURL: string;
+    public postConsentDefLoaderBaseURL: string;
     public getConsentDefLoaderBaseURL: string;
-    public setConsentDefLoaderBaseURL: string;
+    public putConsentDefLoaderBaseURL: string;
     public deleteConsentDefLoaderBaseURL: string;
 
     public listConsentTypeDefLoaderBaseURL: string;
@@ -43,8 +44,9 @@ export class DatasourcesConfigService
             this.deleteConsentContextDefLoaderBaseURL = 'assets/consentcontext';
 
             this.listConsentDefLoaderBaseURL   = 'assets/consents';
+            this.postConsentDefLoaderBaseURL   = 'assets/consent';
             this.getConsentDefLoaderBaseURL    = 'assets/consent';
-            this.setConsentDefLoaderBaseURL    = 'assets/consent';
+            this.putConsentDefLoaderBaseURL    = 'assets/consent';
             this.deleteConsentDefLoaderBaseURL = 'assets/consent';
 
             this.listConsentTypeDefLoaderBaseURL = 'assets/consenttypes';
@@ -68,8 +70,9 @@ export class DatasourcesConfigService
             this.deleteConsentContextDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentcontextdef/consentcontext';
 
             this.listConsentDefLoaderBaseURL   = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consents';
+            this.postConsentDefLoaderBaseURL   = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
             this.getConsentDefLoaderBaseURL    = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
-            this.setConsentDefLoaderBaseURL    = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
+            this.putConsentDefLoaderBaseURL    = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
             this.deleteConsentDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consentdef/consent';
 
             this.listConsentTypeDefLoaderBaseURL = 'http://' + this.consentServiceHostPort + '/consentengine/ws/consenttypedef/consenttypes';
