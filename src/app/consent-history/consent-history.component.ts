@@ -48,8 +48,12 @@ export class ConsentHistoryComponent implements OnInit
 
     private processConsentHistoryDef(consentHistoryDef: ConsentHistoryDef): void
     {
-        console.log(JSON.stringify(consentHistoryDef));
-
         this.events = consentHistoryDef.events;
+        for (const event of this.events)
+        {
+            event.properties = [];
+            for (const key in event.info)
+                event.properties.push({ 'name': key, 'value': event.info[key] });
+        }
     }
 }

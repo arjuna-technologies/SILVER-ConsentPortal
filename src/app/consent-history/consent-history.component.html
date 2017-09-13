@@ -10,19 +10,13 @@
     <md-card-content>
         <md-list>
             <md-list-item *ngFor="let event of events">
-                <md-card mdLine>
-                    <md-card-header>
-                        <md-icon md-card-avatar *ngIf="event.eventtype == 'create'">create</md-icon>
-                        <md-icon md-card-avatar *ngIf="event.eventtype == 'update'">border_color</md-icon>
-                        <md-icon md-card-avatar *ngIf="event.eventtype == 'use'">security</md-icon>
-                        <md-icon md-card-avatar *ngIf="event.eventtype == 'remove'">remove</md-icon>
-                        <md-card-title>{{event.eventtype}}</md-card-title>
-                        <md-card-subtitle>{{event.timestamp}}</md-card-subtitle>
-                    </md-card-header>
-                    <md-card-content>
-                        Test
-                    </md-card-content>
-                </md-card>
+                <md-icon md-list-icon color="primary" *ngIf="event.eventtype == 'create'">create</md-icon>
+                <md-icon md-list-icon color="primary" *ngIf="event.eventtype == 'update'">border_color</md-icon>
+                <md-icon md-list-icon color="primary" *ngIf="event.eventtype == 'use'">security</md-icon>
+                <md-icon md-list-icon color="primary" *ngIf="event.eventtype == 'remove'">remove</md-icon>
+                <h4 md-line>{{event.eventtype}}</h4>
+                <p md-line> {{event.timestamp}} </p>
+                <p md-line *ngFor="let prop of event.properties"><b>{{prop.name}}</b> <span>{{prop.value}}</span></p>
             </md-list-item>
         </md-list>
     </md-card-content>
