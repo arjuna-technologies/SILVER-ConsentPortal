@@ -190,6 +190,18 @@ export class DeclarationComponent
                     consentDef.typeId         = this.newConsentTypeId;
                     consentDef.constraintDefs = [];
 
+                    for (const componentRendererDef of consentRendererDef.componentRendererDefs)
+                        if (componentRendererDef instanceof ConstraintComponentRendererDef)
+                        {
+                            const constraintComponentRendererDef = componentRendererDef as ConstraintComponentRendererDef;
+                            const constraintDef = new ConstraintDef();
+
+                            constraintDef.id    = constraintComponentRendererDef.id;
+                            constraintDef.value = constraintComponentRendererDef.valueConstraintComponentRendererDefs[0].id;
+
+                            consentDef.constraintDefs.push(constraintDef);
+                        }
+
                     this.updateModel(consentDef, consentRendererDef)
                 }
             )
