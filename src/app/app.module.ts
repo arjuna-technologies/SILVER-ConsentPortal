@@ -49,6 +49,7 @@ import { ConsentHistoryDefLoaderService } from './datasources/consent-history-de
 import { ConsentRendererDefLoaderService } from './datasources/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './datasources/details-loader.service';
 import { PurposesLoaderService } from './datasources/purposes-loader.service';
+import { EditorComponent } from './style-a-edit/editor/editor.component';
 
 const appRoutes: Routes =
 [
@@ -76,7 +77,8 @@ const appRoutes: Routes =
         ConsentsComponent,
         PageNotFoundComponent,
         WelcomeComponent,
-        ConsentHistoryComponent
+        ConsentHistoryComponent,
+        EditorComponent
     ],
     imports:
     [
