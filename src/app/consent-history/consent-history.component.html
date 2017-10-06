@@ -5,26 +5,26 @@
 <!--                     All rights reserved.                                                                 -->
 <!--                                                                                                          -->
 
-<md-card>
-    <md-card-title>Consent History</md-card-title>
-    <md-card-content>
-        <md-list>
-            <md-list-item *ngFor="let event of events">
-                <md-icon mdListIcon color="primary" *ngIf="event.eventtype == 'create'">create</md-icon>
-                <md-icon mdListIcon color="primary" *ngIf="event.eventtype == 'update'">border_color</md-icon>
-                <md-icon mdListIcon color="primary" *ngIf="event.eventtype == 'use'">security</md-icon>
-                <md-icon mdListIcon color="primary" *ngIf="event.eventtype == 'remove'">remove</md-icon>
-                <p mdLine><b>{{event.eventtype}}</b></p>
-                <p mdLine> {{event.timestamp}} </p>
-                <p mdLine [style.margin-left.em]="6" *ngFor="let prop of event.properties"><b>{{prop.name}}:</b> <span>{{prop.value}}</span></p>
-            </md-list-item>
-        </md-list>
-    </md-card-content>
-    <md-card-actions>
+<mat-card>
+    <mat-card-title>Consent History</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let event of events">
+                <mat-icon matListIcon color="primary" *ngIf="event.eventtype == 'create'">create</mat-icon>
+                <mat-icon matListIcon color="primary" *ngIf="event.eventtype == 'update'">border_color</mat-icon>
+                <mat-icon matListIcon color="primary" *ngIf="event.eventtype == 'use'">security</mat-icon>
+                <mat-icon matListIcon color="primary" *ngIf="event.eventtype == 'remove'">remove</mat-icon>
+                <p matLine><b>{{event.eventtype}}</b></p>
+                <p matLine> {{event.timestamp}} </p>
+                <p matLine [style.margin-left.em]="6" *ngFor="let prop of event.properties"><b>{{prop.name}}:</b> <span>{{prop.value}}</span></p>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap>
-            <button md-raised-button color="primary" routerLink="/">
-                <h2><md-icon>clear</md-icon> Done</h2>
+            <button mat-raised-button color="primary" routerLink="/">
+                <h2><mat-icon>clear</mat-icon> Done</h2>
             </button>
         </div>
-    </md-card-actions>
-</md-card>
+    </mat-card-actions>
+</mat-card>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 
@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit
 {
     public username: string;
 
-    constructor(private dialog: MdDialog, private router: Router)
+    constructor(private dialog: MatDialog, private router: Router)
     {
     }
 

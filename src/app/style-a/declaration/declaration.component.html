@@ -5,47 +5,49 @@
 <!--                     All rights reserved.                                                                 -->
 <!--                                                                                                          -->
 
-<md-card class="consent-content" *ngIf="components.length !== 0">
-    <md-card-title>
+<mat-card class="consent-content" *ngIf="components.length !== 0">
+    <mat-card-title>
         <h1 class="consent-text">
             <span *ngFor="let component of components" [style.color]="component.colour" [@changingState]="component.state" (mouseover)="componentEnter(component)" (mouseout)="componentLeave(component)">{{component.text}} </span>
         </h1>
-    </md-card-title>
-    <md-card-content>
+    </mat-card-title>
+    <mat-card-content>
         <div fxLayout="column" fxLayoutAlign="start stretch">
             <div fxFlex class="consent-options" fxLayout="row" fxLayoutAlign="space-around center">
-                <md-select fxFlex="24" class="consent-option" *ngFor="let constraint of constraints" placeholder="{{constraint.text}}" [(ngModel)]="constraint.value" [@highlightState]="constraint.state"  (mouseover)="constraintEnter(constraint)" (mouseout)="constraintLeave(constraint)" (change)="constraintChange(constraint)">
-                    <md-option *ngFor="let constraintOption of constraint.options" [value]="constraintOption.id">{{constraintOption.label}}</md-option>
-                </md-select>
+                <mat-form-field fxFlex="24" class="consent-option" *ngFor="let constraint of constraints">
+                    <mat-select placeholder="{{constraint.text}}" [(ngModel)]="constraint.value" [@highlightState]="constraint.state"  (mouseover)="constraintEnter(constraint)" (mouseout)="constraintLeave(constraint)" (change)="constraintChange(constraint)">
+                        <mat-option *ngFor="let constraintOption of constraint.options" [value]="constraintOption.id">{{constraintOption.label}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div fxFlex="auto" class="consent-outcome" fxLayout="row" fxLayoutAlign="space-around start">
                 <div fxFlex="50" class="consent-details">
                     <h2 class="consent-details-title">Details</h2>
                     <p>{{detailsText}}</p>
-                    <md-progress-bar *ngIf="detailsLoading" mode="indeterminate"></md-progress-bar>
+                    <mat-progress-bar *ngIf="detailsLoading" mode="indeterminate"></mat-progress-bar>
                 </div>
                 <div fxFlex="50" class="consent-purposes">
                     <h2 class="consent-purposes-title">Purposes</h2>
                     <p>{{purposesText}}</p>
-                    <md-progress-bar *ngIf="purposesLoading" mode="indeterminate"></md-progress-bar>
+                    <mat-progress-bar *ngIf="purposesLoading" mode="indeterminate"></mat-progress-bar>
                 </div>
             </div>
         </div>
-    </md-card-content>
-    <md-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
-            <button md-raised-button *ngIf="! consentId" color="primary" (click)="doCreateConsent()">
-                <h2><md-icon>add</md-icon> Create Consent</h2>
+            <button mat-raised-button *ngIf="! consentId" color="primary" (click)="doCreateConsent()">
+                <h2><mat-icon>add</mat-icon> Create Consent</h2>
             </button>
-            <button md-raised-button *ngIf="consentId" color="primary" (click)="doUpdateConsent()">
-                <h2><md-icon>add</md-icon> Update Consent</h2>
+            <button mat-raised-button *ngIf="consentId" color="primary" (click)="doUpdateConsent()">
+                <h2><mat-icon>add</mat-icon> Update Consent</h2>
             </button>
-            <button md-raised-button *ngIf="consentId" color="primary" (click)="doRemoveConsent()">
-                <h2><md-icon>remove</md-icon> Remove Consent</h2>
+            <button mat-raised-button *ngIf="consentId" color="primary" (click)="doRemoveConsent()">
+                <h2><mat-icon>remove</mat-icon> Remove Consent</h2>
             </button>
-            <button md-raised-button routerLink="/">
-                <h2><md-icon>clear</md-icon> Cancel</h2>
+            <button mat-raised-button routerLink="/">
+                <h2><mat-icon>clear</mat-icon> Cancel</h2>
             </button>
         </div>
-    </md-card-actions>
-</md-card>
+    </mat-card-actions>
+</mat-card>

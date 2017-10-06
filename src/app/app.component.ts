@@ -8,7 +8,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit
 {
     public username: string;
 
-    public constructor(private dialog: MdDialog, private router: Router)
+    public constructor(private dialog: MatDialog, private router: Router)
     {
         this.username = '';
     }

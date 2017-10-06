@@ -5,29 +5,29 @@
 //                     All rights reserved.
 //
 
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import 'hammerjs';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule } from '@angular/material';
-import { MdTabsModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
-import { MdListModule } from '@angular/material';
-import { MdInputModule } from '@angular/material';
-import { MdSelectModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
-import { MdCheckboxModule } from '@angular/material';
-import { MdSidenavModule } from '@angular/material';
-import { MdProgressBarModule } from '@angular/material';
-import { MdDialogModule } from '@angular/material';
-import { MdRadioModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material';
+import { MatCardModule } from '@angular/material';
+import { MatListModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import { MatSidenavModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
@@ -83,24 +83,24 @@ const appRoutes: Routes =
     imports:
     [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        FlexLayoutModule,
-        BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes),
-        MdToolbarModule,
-        MdTabsModule,
-        MdCardModule,
-        MdListModule,
-        MdInputModule,
-        MdSelectModule,
-        MdButtonModule,
-        MdIconModule,
-        MdRadioModule,
-        MdCheckboxModule,
-        MdSidenavModule,
-        MdProgressBarModule,
-        MdDialogModule
+        FlexLayoutModule,
+        MatToolbarModule,
+        MatTabsModule,
+        MatCardModule,
+        MatListModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatIconModule,
+        MatRadioModule,
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatProgressBarModule,
+        MatDialogModule
     ],
     entryComponents:
     [

@@ -5,40 +5,42 @@
 <!--                     All rights reserved.                                                                 -->
 <!--                                                                                                          -->
 
-<md-card>
-    <md-card-title>Existing Consents</md-card-title>
-    <md-card-content>
-        <md-list>
-            <md-list-item *ngFor="let consentContext of consentContexts">
+<mat-card>
+    <mat-card-title>Existing Consents</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let consentContext of consentContexts">
                 <span fxFlex="20">{{consentContext.name}}</span>
                 <span *ngIf="consentContext.isAStyleable" fxFlex="5"></span>
-                <button md-raised-button fxFlex="8" [routerLink]="['/history', consentContext.consentId]"><md-icon>note</md-icon> History</button>
+                <button mat-raised-button fxFlex="8" [routerLink]="['/history', consentContext.consentId]"><mat-icon>note</mat-icon> History</button>
                 <span *ngIf="consentContext.isAStyleable" fxFlex="5"></span>
-                <button *ngIf="consentContext.isAStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/stylea', consentContext.id]"><md-icon>filter_list</md-icon> View Consent as Statement</button>
+                <button *ngIf="consentContext.isAStyleable" mat-raised-button fxFlex="15" color="primary" [routerLink]="['/stylea', consentContext.id]"><mat-icon>filter_list</mat-icon> View Consent as Statement</button>
                 <span *ngIf="consentContext.isBStyleable" fxFlex="5"></span>
-                <button *ngIf="consentContext.isBStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/styleb', consentContext.id]"><md-icon>apps</md-icon> View Consent as Selection</button>
+                <button *ngIf="consentContext.isBStyleable" mat-raised-button fxFlex="15" color="primary" [routerLink]="['/styleb', consentContext.id]"><mat-icon>apps</mat-icon> View Consent as Selection</button>
                 <span *ngIf="consentContext.isCStyleable" fxFlex="5"></span>
-                <button *ngIf="consentContext.isCStyleable" md-raised-button fxFlex="15" color="primary" [routerLink]="['/stylec', consentContext.id]"><md-icon>format_list_bulleted</md-icon> View Consent as Form</button>
-            </md-list-item>
-        </md-list>
-    </md-card-content>
-</md-card>
+                <button *ngIf="consentContext.isCStyleable" mat-raised-button fxFlex="15" color="primary" [routerLink]="['/stylec', consentContext.id]"><mat-icon>format_list_bulleted</mat-icon> View Consent as Form</button>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
 
-<md-card>
-    <md-card-title>Create a Consent</md-card-title>
-    <md-card-content>
-        <md-form-field fxFlex="25">
-             <input mdInput placeholder="Consent Name" [(ngModel)]="newConsentName" value="">
-        </md-form-field>
+<mat-card>
+    <mat-card-title>Create a Consent</mat-card-title>
+    <mat-card-content>
+        <mat-form-field fxFlex="25">
+             <input matInput placeholder="Consent Name" [(ngModel)]="newConsentName" value="">
+        </mat-form-field>
         <span fxFlex="5"></span>
-        <md-select placeholder="Consent Type" [(ngModel)]="newConsentTypeId" fxFlex="15">
-            <md-option *ngFor="let consentTemplate of consentTemplates" [value]="consentTemplate.consentTypeId">
-                {{consentTemplate.name}}
-            </md-option>
-        </md-select>
+        <mat-form-field fxFlex="25">
+            <mat-select placeholder="Consent Type" [(ngModel)]="newConsentTypeId">
+                <mat-option *ngFor="let consentTemplate of consentTemplates" [value]="consentTemplate.consentTypeId">
+                    {{consentTemplate.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <span fxFlex="5"></span>
         <div fxFlex="15">
-            <button md-raised-button color="primary" [disabled]="(newConsentName === '') || (newConsentTypeId === '')" [routerLink]="['/stylea_create', newConsentName, newConsenterName, newConsentTypeId]"><md-icon>create</md-icon> Create</button>
+            <button mat-raised-button color="primary" [disabled]="(newConsentName === '') || (newConsentTypeId === '')" [routerLink]="['/stylea_create', newConsentName, newConsenterName, newConsentTypeId]"><mat-icon>create</mat-icon> Create</button>
         </div>
-    </md-card-content>
-</md-card>
+    </mat-card-content>
+</mat-card>
