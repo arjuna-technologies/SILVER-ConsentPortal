@@ -27,7 +27,7 @@ export class WelcomeComponent implements OnInit
         if (this.username === '')
         {
             const loginDialogRef = this.dialog.open(LoginDialogComponent);
-            loginDialogRef.afterClosed().subscribe((username) => { this.username = username; this.router.navigate([], [{ consents: { popup: null }}]) });
+            loginDialogRef.afterClosed().subscribe((username) => { this.username = username; this.router.navigate([]) });
         }
         else
             this.username = '';
