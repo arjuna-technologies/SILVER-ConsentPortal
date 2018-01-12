@@ -8,6 +8,7 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { ClauseListsModel } from '../model/clause-lists-model';
 import { ClauseListModel } from '../model/clause-list-model';
@@ -24,7 +25,7 @@ export class ClauseListsComponent
     @Input()
     public clauseLists: ClauseListModel[];
 
-    constructor(private route: ActivatedRoute)
+    constructor(private route: ActivatedRoute, private location: Location)
     {
         this.clauseLists = [];
 
@@ -99,5 +100,15 @@ export class ClauseListsComponent
             northumberlandCountyCouncilClause.title = 'Northumberland County Council';
             northumberlandCountyCouncilClause.description = 'Northumberland County Council';
             organizationClauseList.clauses.push(northumberlandCountyCouncilClause);
+    }
+
+    public doCreateConsent(): void
+    {
+        this.location.back();
+    }
+
+    public doCancel(): void
+    {
+        this.location.back();
     }
 }

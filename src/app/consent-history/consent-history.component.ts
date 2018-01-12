@@ -7,6 +7,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { ConsentHistoryDef } from '../datasources/consent-history-def';
 import { ConsentHistoryDefLoaderService } from '../datasources/consent-history-def-loader.service';
@@ -22,7 +23,7 @@ export class ConsentHistoryComponent implements OnInit
     public consentId: string;
     public events: any[];
 
-    constructor(private router: Router, private route: ActivatedRoute, private consentHistoryDefLoaderService: ConsentHistoryDefLoaderService)
+    constructor(private router: Router, private route: ActivatedRoute, private location: Location, private consentHistoryDefLoaderService: ConsentHistoryDefLoaderService)
     {
         if (route.snapshot.params.consentid)
             this.consentId = route.snapshot.params.consentid;
@@ -37,6 +38,11 @@ export class ConsentHistoryComponent implements OnInit
 
     ngOnInit()
     {
+    }
+
+    public doDone(): void
+    {
+        this.location.back();
     }
 
     private loadConsentHistoryDef(consentId: string): void

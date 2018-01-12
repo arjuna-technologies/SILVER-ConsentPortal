@@ -1,9 +1,9 @@
-<!--                                                                                                          -->
-<!-- Copyright (c) 2017, Arjuna Technologies Limited, Newcastle upon Tyne, England,                           -->
-<!--                     Open Lab, Newcastle University, Newcastle upon Tyne, England,                        -->
-<!--                     Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England. -->
-<!--                     All rights reserved.                                                                 -->
-<!--                                                                                                          -->
+<!--                                                                                                               -->
+<!-- Copyright (c) 2017-2018, Arjuna Technologies Limited, Newcastle upon Tyne, England,                           -->
+<!--                          Open Lab, Newcastle University, Newcastle upon Tyne, England,                        -->
+<!--                          Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England. -->
+<!--                          All rights reserved.                                                                 -->
+<!--                                                                                                               -->
 
 <mat-card>
     <mat-card-title>Existing Consents</mat-card-title>
@@ -12,13 +12,16 @@
             <mat-list-item *ngFor="let consentContext of consentContexts">
                 <span fxFlex="20">{{consentContext.name}}</span>
                 <span *ngIf="consentContext.isAStyleable" fxFlex="5"></span>
-                <button mat-raised-button fxFlex="8" [routerLink]="['/history', consentContext.consentId]"><mat-icon>note</mat-icon> History</button>
-                <span *ngIf="consentContext.isAStyleable" fxFlex="5"></span>
                 <button *ngIf="consentContext.isAStyleable" mat-raised-button fxFlex="15" color="primary" [routerLink]="['/stylea', consentContext.id]"><mat-icon>filter_list</mat-icon> View Consent as Statement</button>
                 <span *ngIf="consentContext.isBStyleable" fxFlex="5"></span>
                 <button *ngIf="consentContext.isBStyleable" mat-raised-button fxFlex="15" color="primary" [routerLink]="['/styleb', consentContext.id]"><mat-icon>apps</mat-icon> View Consent as Selection</button>
                 <span *ngIf="consentContext.isCStyleable" fxFlex="5"></span>
                 <button *ngIf="consentContext.isCStyleable" mat-raised-button fxFlex="15" color="primary" [routerLink]="['/stylec', consentContext.id]"><mat-icon>format_list_bulleted</mat-icon> View Consent as Form</button>
+                <span *ngIf="! consentContext.isAStyleable" fxFlex="20"></span>
+                <span *ngIf="! consentContext.isBStyleable" fxFlex="20"></span>
+                <span *ngIf="! consentContext.isCStyleable" fxFlex="20"></span>
+                <span fxFlex="5"></span>
+                <button mat-raised-button fxFlex="8" [routerLink]="['/history', consentContext.consentId]"><mat-icon>note</mat-icon> History</button>
             </mat-list-item>
         </mat-list>
     </mat-card-content>

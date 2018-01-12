@@ -45,7 +45,7 @@
             <button mat-raised-button *ngIf="consentId" color="primary" (click)="doRemoveConsent()">
                 <h2><mat-icon>remove</mat-icon> Remove Consent</h2>
             </button>
-            <button mat-raised-button routerLink="/">
+            <button mat-raised-button (click)="doCancelConsent()">
                 <h2><mat-icon>clear</mat-icon> Cancel</h2>
             </button>
         </div>

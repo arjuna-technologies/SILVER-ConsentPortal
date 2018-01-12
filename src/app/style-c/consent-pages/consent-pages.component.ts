@@ -1,4 +1,12 @@
+//
+// Copyright (c) 2017-2018, Arjuna Technologies Limited, Newcastle upon Tyne, England,
+//                          Open Lab, Newcastle University, Newcastle upon Tyne, England,
+//                          Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England.
+//                          All rights reserved.
+//
+
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component
 ({
@@ -16,7 +24,7 @@ export class ConsentPagesComponent implements OnInit
 
     public newConsent:      boolean;
 
-    constructor()
+    constructor(private location: Location)
     {
         this.selectedIndex   = 0;
 
@@ -51,5 +59,25 @@ export class ConsentPagesComponent implements OnInit
     public get completeConsent(): boolean
     {
         return (this.informationType !== '') && (this.organization !== '') && (this.purposeType !== '');
+    }
+
+    public doCreateConsent(): void
+    {
+        this.location.back();
+    }
+
+    public doUpdateConsent(): void
+    {
+        this.location.back();
+    }
+
+    public doRemoveConsent(): void
+    {
+        this.location.back();
+    }
+
+    public doCancel(): void
+    {
+        this.location.back();
     }
 }

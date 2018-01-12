@@ -57,16 +57,16 @@
 
     <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
-            <button mat-raised-button *ngIf="newConsent" [disabled]="! completeConsent" color="primary">
+            <button mat-raised-button *ngIf="newConsent" [disabled]="! completeConsent" color="primary" (click)="doCreateConsent()">
                 <h2><mat-icon>add</mat-icon> Create Consent</h2>
             </button>
-            <button mat-raised-button *ngIf="! newConsent" [disabled]="! completeConsent" color="primary">
+            <button mat-raised-button *ngIf="! newConsent" [disabled]="! completeConsent" color="primary" (click)="doUpdateConsent()">
                 <h2><mat-icon>add</mat-icon> Update Consent</h2>
             </button>
-            <button mat-raised-button *ngIf="! newConsent" [disabled]="! completeConsent" color="primary">
+            <button mat-raised-button *ngIf="! newConsent" [disabled]="! completeConsent" color="primary" (click)="doRemoveConsent()">
                 <h2><mat-icon>remove</mat-icon> Remove Consent</h2>
             </button>
-            <button mat-raised-button routerLink="/">
+            <button mat-raised-button (click)="doCancel()">
                 <h2><mat-icon>clear</mat-icon> Cancel</h2>
             </button>
         </div>

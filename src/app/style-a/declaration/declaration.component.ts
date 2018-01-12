@@ -1,12 +1,13 @@
 //
-// Copyright (c) 2017, Arjuna Technologies Limited, Newcastle upon Tyne, England,
-//                     Open Lab, Newcastle University, Newcastle upon Tyne, England,
-//                     Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England.
-//                     All rights reserved.
+// Copyright (c) 2017-2018, Arjuna Technologies Limited, Newcastle upon Tyne, England,
+//                          Open Lab, Newcastle University, Newcastle upon Tyne, England,
+//                          Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England.
+//                          All rights reserved.
 //
 
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { trigger } from '@angular/animations';
 import { state } from '@angular/animations';
 import { style } from '@angular/animations';
@@ -71,7 +72,7 @@ export class DeclarationComponent
     public purposesLoading:  boolean;
     public purposesText:     string;
 
-    public constructor(private router: Router, private route: ActivatedRoute, private consentContextDefLoaderService: ConsentContextDefLoaderService,
+    public constructor(private router: Router, private route: ActivatedRoute, private location: Location, private consentContextDefLoaderService: ConsentContextDefLoaderService,
                        private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
                        private detailsLoaderService: DetailsLoaderService, private purposesLoaderService: PurposesLoaderService)
     {
@@ -138,7 +139,7 @@ export class DeclarationComponent
         this.consentDefLoaderService.postConsentDef(consentDef.id, consentDef);
         this.consentContextDefLoaderService.setConsentContextDef(consentContextDef.id, consentContextDef);
 
-        this.router.navigate(['/']);
+        this.location.back();
     }
 
     public doUpdateConsent(): void
@@ -160,7 +161,7 @@ export class DeclarationComponent
 
         this.consentDefLoaderService.putConsentDef(consentDef.id, consentDef);
 
-        this.router.navigate(['/']);
+        this.location.back();
     }
 
     public doRemoveConsent(): void
@@ -168,7 +169,12 @@ export class DeclarationComponent
         this.consentDefLoaderService.deleteConsentDef(this.consentId);
         this.consentContextDefLoaderService.removeConsentContextDef(this.consentContextId);
 
-        this.router.navigate(['/']);
+        this.location.back();
+    }
+
+    public doCancelConsent(): void
+    {
+        this.location.back();
     }
 
     private loadConsentContextDef(consentContextId: string): void
