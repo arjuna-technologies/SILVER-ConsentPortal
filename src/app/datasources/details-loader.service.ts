@@ -31,12 +31,8 @@ export class DetailsLoaderService
     {
         const detailsTexts = response.json();
 
-        if (detailsTexts && (detailsTexts.length > 0))
-        {
-            const index = Math.floor(Math.random() * detailsTexts.length);
-
-            return detailsTexts[index];
-        }
+        if (detailsTexts && detailsTexts.detailsJSON)
+            return detailsTexts.detailsJSON;
         else
             return '';
     }

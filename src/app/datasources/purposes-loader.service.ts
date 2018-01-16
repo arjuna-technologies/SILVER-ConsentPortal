@@ -31,12 +31,8 @@ export class PurposesLoaderService
     {
         const purposesTexts = response.json();
 
-        if (purposesTexts && (purposesTexts.length > 0))
-        {
-            const index = Math.floor(Math.random() * purposesTexts.length);
-
-            return purposesTexts[index];
-        }
+        if (purposesTexts && purposesTexts.purposesJSON)
+            return purposesTexts.purposesJSON;
         else
             return '';
     }
