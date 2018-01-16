@@ -19,9 +19,9 @@ export class PurposesLoaderService
     {
     }
 
-    public getPurposesText(): Promise<string>
+    public getPurposesText(consentTypeId: string): Promise<string>
     {
-        return this.http.get(this.datasourcesConfigService.loadPurposesBaseURL)
+        return this.http.get(this.datasourcesConfigService.loadPurposesBaseURL + consentTypeId)
                .toPromise()
                .then((response) => Promise.resolve(this.getPurposesTextSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getPurposesTextErrorHandler(response)));

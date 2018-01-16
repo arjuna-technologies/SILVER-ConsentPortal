@@ -297,13 +297,13 @@ export class DeclarationComponent
 
         this.detailsLoading = true;
         this.detailsText = '';
-        this.detailsLoaderService.getDetailsText()
+        this.detailsLoaderService.getDetailsText(this.consentContextId)
             .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
             .catch(() => { this.detailsLoading = false } );
 
         this.purposesLoading = true;
         this.purposesText = '';
-        this.purposesLoaderService.getPurposesText()
+        this.purposesLoaderService.getPurposesText(this.consentContextId)
             .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
             .catch(() => { this.purposesLoading = false } );
     }
@@ -346,13 +346,13 @@ export class DeclarationComponent
 
         this.detailsLoading = true;
         this.detailsText = '';
-        this.detailsLoaderService.getDetailsText()
+        this.detailsLoaderService.getDetailsText(this.consentContextId)
             .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
             .catch(() => { this.detailsLoading = false } );
 
         this.purposesLoading = true;
         this.purposesText = '';
-        this.purposesLoaderService.getPurposesText()
+        this.purposesLoaderService.getPurposesText(this.consentContextId)
             .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
             .catch(() => { this.purposesLoading = false } );
     }

@@ -19,9 +19,9 @@ export class DetailsLoaderService
     {
     }
 
-    public getDetailsText(): Promise<string>
+    public getDetailsText(consentTypeId: string): Promise<string>
     {
-        return this.http.get(this.datasourcesConfigService.loadDetailsBaseURL)
+        return this.http.get(this.datasourcesConfigService.loadDetailsBaseURL + consentTypeId)
                .toPromise()
                .then((response) => Promise.resolve(this.getDetailsTextSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getDetailsTextErrorHandler(response)));

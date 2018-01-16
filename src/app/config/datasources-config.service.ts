@@ -93,10 +93,11 @@ export class DatasourcesConfigService
             this.setConsentRendererDefLoaderBaseURL        = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
             this.getConsentRendererDefByTypesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
 
-            this.loadDetailsBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentdetailsdef/';
+//            this.consentServiceHostPort = '192.168.1.67:8080';
+            this.loadDetailsBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypedetailsdef/';
 //            this.loadDetailsBaseURL = 'assets/details.json';
 
-            this.loadPurposesBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentpurposesdef/';
+            this.loadPurposesBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypepurposesdef/';
 //            this.loadPurposesBaseURL = 'assets/purposes.json';
         }
     }
