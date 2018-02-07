@@ -40,7 +40,21 @@ export class AppComponent implements OnInit
         if (this.username === '')
         {
             const loginDialogRef = this.dialog.open(LoginDialogComponent);
-            loginDialogRef.afterClosed().subscribe((username) => { this.username = username; this.router.navigate(['/consents', username ]) });
+            loginDialogRef.afterClosed().subscribe((username) => this.processAfterClose(username));
+        }
+        else
+        {
+            this.username = '';
+            this.router.navigate(['/']);
+        }
+    }
+
+    private processAfterClose(username: string): void
+    {
+        if (username && (username !== ''))
+        {
+            this.username = username;
+            this.router.navigate(['/consents', username ]);
         }
         else
         {
