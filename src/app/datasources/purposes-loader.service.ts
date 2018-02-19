@@ -19,9 +19,9 @@ export class PurposesLoaderService
     {
     }
 
-    public getPurposesText(): Promise<string>
+    public getPurposesText(consentTypeId: string): Promise<string>
     {
-        return this.http.get(this.datasourcesConfigService.loadPurposesBaseURL)
+        return this.http.get(this.datasourcesConfigService.getConsentTypePurposesLoaderBaseURL + '/' + consentTypeId)
                .toPromise()
                .then((response) => Promise.resolve(this.getPurposesTextSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getPurposesTextErrorHandler(response)));
@@ -29,14 +29,10 @@ export class PurposesLoaderService
 
     private getPurposesTextSuccessHandler(response: Response): string
     {
-        const purposesTexts = response.json();
+        const purposes = response.json();
 
-        if (purposesTexts && (purposesTexts.length > 0))
-        {
-            const index = Math.floor(Math.random() * purposesTexts.length);
-
-            return purposesTexts[index];
-        }
+        if (purposes && purposes.purposesJSON)
+            return purposes.purposesJSON.text;
         else
             return '';
     }

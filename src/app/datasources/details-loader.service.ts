@@ -19,9 +19,9 @@ export class DetailsLoaderService
     {
     }
 
-    public getDetailsText(): Promise<string>
+    public getDetailsText(consentTypeId: string): Promise<string>
     {
-        return this.http.get(this.datasourcesConfigService.loadDetailsBaseURL)
+        return this.http.get(this.datasourcesConfigService.getConsentTypeDetailsLoaderBaseURL + '/' + consentTypeId)
                .toPromise()
                .then((response) => Promise.resolve(this.getDetailsTextSuccessHandler(response)))
                .catch((response) => Promise.resolve(this.getDetailsTextErrorHandler(response)));
@@ -29,14 +29,10 @@ export class DetailsLoaderService
 
     private getDetailsTextSuccessHandler(response: Response): string
     {
-        const detailsTexts = response.json();
+        const details = response.json();
 
-        if (detailsTexts && (detailsTexts.length > 0))
-        {
-            const index = Math.floor(Math.random() * detailsTexts.length);
-
-            return detailsTexts[index];
-        }
+        if (details && details.detailsJSON)
+            return details.detailsJSON.text;
         else
             return '';
     }
