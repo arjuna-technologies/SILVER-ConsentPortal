@@ -297,13 +297,13 @@ export class DeclarationComponent
 
         this.detailsLoading = true;
         this.detailsText = '';
-        this.detailsLoaderService.getDetailsText(this.consentContextId)
+        this.detailsLoaderService.getDetailsText(this.consentTypeId)
             .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
             .catch(() => { this.detailsLoading = false } );
 
         this.purposesLoading = true;
         this.purposesText = '';
-        this.purposesLoaderService.getPurposesText(this.consentContextId)
+        this.purposesLoaderService.getPurposesText(this.consentTypeId)
             .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
             .catch(() => { this.purposesLoading = false } );
     }
@@ -343,17 +343,5 @@ export class DeclarationComponent
                 for (const constraintOption of constraint.options)
                     if (constraint.value === constraintOption.id)
                         component.text = constraintOption.label;
-
-        this.detailsLoading = true;
-        this.detailsText = '';
-        this.detailsLoaderService.getDetailsText(this.consentContextId)
-            .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
-            .catch(() => { this.detailsLoading = false } );
-
-        this.purposesLoading = true;
-        this.purposesText = '';
-        this.purposesLoaderService.getPurposesText(this.consentContextId)
-            .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
-            .catch(() => { this.purposesLoading = false } );
     }
 }

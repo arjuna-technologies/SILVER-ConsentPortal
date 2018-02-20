@@ -30,9 +30,10 @@ export class DatasourcesConfigService
     public setConsentRendererDefLoaderBaseURL: string;
     public getConsentRendererDefByTypesLoaderBaseURL: string;
 
-    public loadDetailsBaseURL: string;
-
-    public loadPurposesBaseURL: string;
+    public getConsentTypeDetailsLoaderBaseURL: string;
+    public setConsentTypeDetailsLoaderBaseURL: string;
+    public getConsentTypePurposesLoaderBaseURL: string;
+    public setConsentTypePurposesLoaderBaseURL: string;
 
     constructor()
     {
@@ -65,9 +66,10 @@ export class DatasourcesConfigService
             this.setConsentRendererDefLoaderBaseURL        = 'assets/consentrenderer';
             this.getConsentRendererDefByTypesLoaderBaseURL = 'assets/consentrenderer';
 
-            this.loadDetailsBaseURL = 'assets/details.json';
-
-            this.loadPurposesBaseURL = 'assets/purposes.json';
+            this.getConsentTypeDetailsLoaderBaseURL  = 'assets/consenttypedetails';
+            this.setConsentTypeDetailsLoaderBaseURL  = 'assets/consenttypedetails';
+            this.getConsentTypePurposesLoaderBaseURL = 'assets/consenttypepurposes';
+            this.setConsentTypePurposesLoaderBaseURL = 'assets/consenttypepurposes';
         }
         else
         {
@@ -93,12 +95,10 @@ export class DatasourcesConfigService
             this.setConsentRendererDefLoaderBaseURL        = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
             this.getConsentRendererDefByTypesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
 
-//            this.consentServiceHostPort = '192.168.1.67:8080';
-            this.loadDetailsBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypedetailsdef/';
-//            this.loadDetailsBaseURL = 'assets/details.json';
-
-            this.loadPurposesBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypepurposesdef/';
-//            this.loadPurposesBaseURL = 'assets/purposes.json';
+            this.getConsentTypeDetailsLoaderBaseURL  = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypedetailsdef';
+            this.setConsentTypeDetailsLoaderBaseURL  = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypedetailsdef';
+            this.getConsentTypePurposesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypepurposesdef';
+            this.setConsentTypePurposesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypepurposesdef';
         }
     }
 }
