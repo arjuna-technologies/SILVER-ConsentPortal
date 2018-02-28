@@ -180,8 +180,8 @@ export class DeclarationComponent
     private loadConsentContextDef(consentContextId: string): void
     {
         this.consentContextDefLoaderService.getConsentContextDef(consentContextId)
-            .then((consentContextDef) => { this.processConsentContextDef(consentContextDef) })
-            .catch(() => { this.updateModel(null, null) } );
+            .then((consentContextDef) => this.processConsentContextDef(consentContextDef))
+            .catch(() => this.updateModel(null, null));
     }
 
     private loadConsentTypeNewConsentDef(consentTypeId: string): void
@@ -208,24 +208,24 @@ export class DeclarationComponent
                             consentDef.constraintDefs.push(constraintDef);
                         }
 
-                    this.updateModel(consentDef, consentRendererDef)
+                    this.updateModel(consentDef, consentRendererDef);
                 }
             )
-            .catch(() => { this.updateModel(null, null) } );
+            .catch(() => this.updateModel(null, null));
     }
 
     private processConsentContextDef(consentContextDef: ConsentContextDef): void
     {
         this.consentDefLoaderService.getConsentDef(consentContextDef.consentId)
-            .then((consentDef) => { this.processConsentRendererDef(consentDef) })
-            .catch(() => { this.updateModel(null, null) } );
+            .then((consentDef) => this.processConsentRendererDef(consentDef))
+            .catch(() => this.updateModel(null, null));
     }
 
     private processConsentRendererDef(consentDef: ConsentDef): void
     {
         this.consentRendererDefLoaderService.getConsentRendererDefByType(consentDef.typeId, 'StyleA')
-            .then((consentRendererDef) => { this.updateModel(consentDef, consentRendererDef) })
-            .catch(() => { this.updateModel(consentDef, null) });
+            .then((consentRendererDef) => this.updateModel(consentDef, consentRendererDef))
+            .catch(() => this.updateModel(consentDef, null));
     }
 
     private updateModel(consentDef: ConsentDef, consentRendererDef: ConsentRendererDef): void
@@ -298,14 +298,14 @@ export class DeclarationComponent
         this.detailsLoading = true;
         this.detailsText = '';
         this.detailsLoaderService.getDetailsText(this.consentTypeId)
-            .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
-            .catch(() => { this.detailsLoading = false } );
+            .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false; })
+            .catch(() => this.detailsLoading = false);
 
         this.purposesLoading = true;
         this.purposesText = '';
         this.purposesLoaderService.getPurposesText(this.consentTypeId)
-            .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
-            .catch(() => { this.purposesLoading = false } );
+            .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false; })
+            .catch(() => this.purposesLoading = false);
     }
 
     public componentEnter(component: ComponentModel): void

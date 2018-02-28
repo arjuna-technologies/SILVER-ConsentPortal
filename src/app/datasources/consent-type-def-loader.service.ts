@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentTypeDef } from './consent-type-def';
@@ -16,39 +16,39 @@ import { DatasourcesConfigService } from '../config/datasources-config.service';
 @Injectable()
 export class ConsentTypeDefLoaderService
 {
-    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
+    constructor(private httpClient: HttpClient, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getConsentTypeDefs(): Promise<ConsentTypeDef[]>
     {
-        return this.http.get(this.datasourcesConfigService.listConsentTypeDefLoaderBaseURL)
+        return this.httpClient.get(this.datasourcesConfigService.listConsentTypeDefLoaderBaseURL)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentTypeDefsSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentTypeDefsErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentTypeDefsSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentTypeDefsErrorHandler(response)));
     }
 
     public getConsentTypeDef(id: string): Promise<ConsentTypeDef>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentTypeDefLoaderBaseURL + '/' + id)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentTypeDefLoaderBaseURL + '/' + id)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentTypeDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentTypeDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentTypeDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentTypeDefErrorHandler(response)));
     }
 
     public setConsentTypeDef(id: string, consentTypeDef: ConsentTypeDef): Promise<boolean>
     {
-        return this.http.post(this.datasourcesConfigService.getConsentTypeDefLoaderBaseURL + '/' + id, consentTypeDef.toObject())
+        return this.httpClient.post(this.datasourcesConfigService.getConsentTypeDefLoaderBaseURL + '/' + id, consentTypeDef.toObject())
                    .toPromise()
-                   .then((response) => Promise.resolve(this.setConsentTypeDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.setConsentTypeDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.setConsentTypeDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.setConsentTypeDefErrorHandler(response)));
     }
 
-    private getConsentTypeDefsSuccessHandler(response: Response): ConsentTypeDef[]
+    private getConsentTypeDefsSuccessHandler(httpResponse: HttpResponse<any>): ConsentTypeDef[]
     {
         const consentTypeDefs: ConsentTypeDef[] = [];
 
-        for (const consentTypeDefObject of response.json())
+        for (const consentTypeDefObject of httpResponse.body())
         {
              const consentTypeDef = new ConsentTypeDef();
 
@@ -59,35 +59,35 @@ export class ConsentTypeDefLoaderService
         return consentTypeDefs;
     }
 
-    private getConsentTypeDefsErrorHandler(error: Response | any): ConsentTypeDef[]
+    private getConsentTypeDefsErrorHandler(error: HttpResponse<any> | any): ConsentTypeDef[]
     {
         console.log('Error while loading Consent Types: ' + (error.message || error));
 
         return [];
     }
 
-    private getConsentTypeDefSuccessHandler(response: Response): ConsentTypeDef
+    private getConsentTypeDefSuccessHandler(response: HttpResponse<any>): ConsentTypeDef
     {
         const consentTypeDef = new ConsentTypeDef();
 
-        consentTypeDef.fromObject(response.json());
+        consentTypeDef.fromObject(response.body());
 
         return consentTypeDef;
     }
 
-    private getConsentTypeDefErrorHandler(error: Response | any): ConsentTypeDef
+    private getConsentTypeDefErrorHandler(error: HttpResponse<any> | any): ConsentTypeDef
     {
         console.log('Error while loading Consent Type: ' + (error.message || error));
 
         return null;
     }
 
-    private setConsentTypeDefSuccessHandler(response: Response): boolean
+    private setConsentTypeDefSuccessHandler(response: HttpResponse<any>): boolean
     {
         return true;
     }
 
-    private setConsentTypeDefErrorHandler(error: Response | any): boolean
+    private setConsentTypeDefErrorHandler(error: HttpResponse<any> | any): boolean
     {
         console.log('Error while saving Consent Type: ' + (error.message || error));
 

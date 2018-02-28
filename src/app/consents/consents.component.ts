@@ -56,8 +56,8 @@ export class ConsentsComponent
     private loadConsentContextDefs(username: string): void
     {
         this.consentContextDefLoaderService.getConsentContextDefs(username)
-            .then((consentContextDefs) => { this.updateModel(consentContextDefs) })
-            .catch(() => { this.updateModel([]) } );
+            .then((consentContextDefs) => this.updateModel(consentContextDefs))
+            .catch(() => this.updateModel([]));
     }
 
     private loadConsentTemplates(): void
@@ -79,7 +79,7 @@ export class ConsentsComponent
                     }
                 }
             )
-            .catch(() => { this.consentTemplates = [] } );
+            .catch(() => this.consentTemplates = []);
     }
 
     private updateModel(consentContextDefs: ConsentContextDef[]): void

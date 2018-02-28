@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { DatasourcesConfigService } from '../config/datasources-config.service';
@@ -15,24 +15,24 @@ import { DatasourcesConfigService } from '../config/datasources-config.service';
 @Injectable()
 export class PurposesLoaderService
 {
-    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
+    constructor(private httpClient: HttpClient, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getPurposesText(consentTypeId: string): Promise<string>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentTypePurposesLoaderBaseURL + '/' + consentTypeId)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentTypePurposesLoaderBaseURL + '/' + consentTypeId)
                .toPromise()
-               .then((response) => Promise.resolve(this.getPurposesTextSuccessHandler(response)))
-               .catch((response) => Promise.resolve(this.getPurposesTextErrorHandler(response)));
+               .then((response: HttpResponse<any>) => Promise.resolve(this.getPurposesTextSuccessHandler(response)))
+               .catch((response: HttpResponse<any>) => Promise.resolve(this.getPurposesTextErrorHandler(response)));
     }
 
-    private getPurposesTextSuccessHandler(response: Response): string
+    private getPurposesTextSuccessHandler(httpResponse: HttpResponse<any>): string
     {
-        const purposes = response.json();
+        const purposes = httpResponse.body();
 
-        if (purposes && purposes.purposesJSON)
-            return purposes.purposesJSON.text;
+        if (purposes && httpResponse.body)
+            return purposes.body.text;
         else
             return '';
     }

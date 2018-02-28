@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentRendererDef } from './consent-renderer-def';
@@ -16,39 +16,39 @@ import { DatasourcesConfigService } from '../config/datasources-config.service';
 @Injectable()
 export class ConsentRendererDefLoaderService
 {
-    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
+    constructor(private httpClient: HttpClient, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getConsentRendererDefs(): Promise<ConsentRendererDef[]>
     {
-        return this.http.get(this.datasourcesConfigService.listConsentRendererDefLoaderBaseURL)
+        return this.httpClient.get(this.datasourcesConfigService.listConsentRendererDefLoaderBaseURL)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentRendererDefsSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentRendererDefsErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentRendererDefsSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentRendererDefsErrorHandler(response)));
     }
 
     public getConsentRendererDef(id: string): Promise<ConsentRendererDef>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentRendererDefLoaderBaseURL + '/' + id)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentRendererDefLoaderBaseURL + '/' + id)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));
     }
 
     public getConsentRendererDefByType(consentTypeId: string, consentRendererType: string): Promise<ConsentRendererDef>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentRendererDefByTypesLoaderBaseURL + '?consenttypeid=' + consentTypeId + '&consentrenderertype=' + consentRendererType)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentRendererDefByTypesLoaderBaseURL + '?consenttypeid=' + consentTypeId + '&consentrenderertype=' + consentRendererType)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));
     }
 
-    private getConsentRendererDefsSuccessHandler(response: Response): ConsentRendererDef[]
+    private getConsentRendererDefsSuccessHandler(response: HttpResponse<any>): ConsentRendererDef[]
     {
         const consentRendererDefs: ConsentRendererDef[] = [];
 
-        for (const consentRendererDefObject of response.json())
+        for (const consentRendererDefObject of response.body)
         {
             const consentRendererDef = new ConsentRendererDef();
 
@@ -59,18 +59,18 @@ export class ConsentRendererDefLoaderService
         return consentRendererDefs;
     }
 
-    private getConsentRendererDefsErrorHandler(error: Response | any): ConsentRendererDef[]
+    private getConsentRendererDefsErrorHandler(error: HttpResponse<any> | any): ConsentRendererDef[]
     {
         console.log('Error while loading Consent Renderers: ' + (error.message || error));
 
         return [];
     }
 
-    private getConsentRendererDefSuccessHandler(response: Response): ConsentRendererDef
+    private getConsentRendererDefSuccessHandler(response: HttpResponse<any>): ConsentRendererDef
     {
         const consentRendererDef = new ConsentRendererDef();
 
-        consentRendererDef.fromObject(response.json());
+        consentRendererDef.fromObject(response.body);
 
         return consentRendererDef;
     }

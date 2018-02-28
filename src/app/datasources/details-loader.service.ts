@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { DatasourcesConfigService } from '../config/datasources-config.service';
@@ -15,21 +15,21 @@ import { DatasourcesConfigService } from '../config/datasources-config.service';
 @Injectable()
 export class DetailsLoaderService
 {
-    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
+    constructor(private httpClient: HttpClient, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getDetailsText(consentTypeId: string): Promise<string>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentTypeDetailsLoaderBaseURL + '/' + consentTypeId)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentTypeDetailsLoaderBaseURL + '/' + consentTypeId)
                .toPromise()
-               .then((response) => Promise.resolve(this.getDetailsTextSuccessHandler(response)))
-               .catch((response) => Promise.resolve(this.getDetailsTextErrorHandler(response)));
+               .then((response: HttpResponse<any>) => Promise.resolve(this.getDetailsTextSuccessHandler(response)))
+               .catch((response: HttpResponse<any>) => Promise.resolve(this.getDetailsTextErrorHandler(response)));
     }
 
-    private getDetailsTextSuccessHandler(response: Response): string
+    private getDetailsTextSuccessHandler(response: HttpResponse<any>): string
     {
-        const details = response.json();
+        const details = response.body();
 
         if (details && details.detailsJSON)
             return details.detailsJSON.text;

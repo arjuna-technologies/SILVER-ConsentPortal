@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentContextDef } from './consent-context-def';
@@ -16,47 +16,47 @@ import { DatasourcesConfigService } from '../config/datasources-config.service';
 @Injectable()
 export class ConsentContextDefLoaderService
 {
-    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
+    constructor(private httpClient: HttpClient, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getConsentContextDefs(consenterId: string): Promise<ConsentContextDef[]>
     {
-        return this.http.get(this.datasourcesConfigService.listConsentContextDefLoaderBaseURL + '?consenterid=' + consenterId)
+        return this.httpClient.get(this.datasourcesConfigService.listConsentContextDefLoaderBaseURL + '?consenterid=' + consenterId)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentContextDefsSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentContextDefsErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentContextDefsSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentContextDefsErrorHandler(response)));
     }
 
     public getConsentContextDef(id: string): Promise<ConsentContextDef>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentContextDefLoaderBaseURL + '/' + id)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentContextDefLoaderBaseURL + '/' + id)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentContextDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentContextDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentContextDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentContextDefErrorHandler(response)));
     }
 
     public setConsentContextDef(id: string, consentContextDef: ConsentContextDef): Promise<boolean>
     {
-        return this.http.post(this.datasourcesConfigService.getConsentContextDefLoaderBaseURL + '/' + id, consentContextDef.toObject())
+        return this.httpClient.post(this.datasourcesConfigService.getConsentContextDefLoaderBaseURL + '/' + id, consentContextDef.toObject())
                    .toPromise()
-                   .then((response) => Promise.resolve(this.setConsentContextDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.setConsentContextDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.setConsentContextDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.setConsentContextDefErrorHandler(response)));
     }
 
     public removeConsentContextDef(id: string): Promise<boolean>
     {
-        return this.http.delete(this.datasourcesConfigService.deleteConsentContextDefLoaderBaseURL + '/' + id)
+        return this.httpClient.delete(this.datasourcesConfigService.deleteConsentContextDefLoaderBaseURL + '/' + id)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.deleteConsentContextDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.deleteConsentContextDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.deleteConsentContextDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.deleteConsentContextDefErrorHandler(response)));
     }
 
-    private getConsentContextDefsSuccessHandler(response: Response): ConsentContextDef[]
+    private getConsentContextDefsSuccessHandler(response: HttpResponse<any>): ConsentContextDef[]
     {
         const consentContextDefs: ConsentContextDef[] = [];
 
-        for (const consentContextDefObject of response.json())
+        for (const consentContextDefObject of response.body)
         {
             const consentContextDef = new ConsentContextDef();
 
@@ -67,47 +67,47 @@ export class ConsentContextDefLoaderService
         return consentContextDefs;
     }
 
-    private getConsentContextDefsErrorHandler(error: Response | any): ConsentContextDef[]
+    private getConsentContextDefsErrorHandler(error: HttpResponse<any> | any): ConsentContextDef[]
     {
         console.log('Error while loading Consent Contexts: ' + (error.message || error));
 
         return [];
     }
 
-    private getConsentContextDefSuccessHandler(response: Response): ConsentContextDef
+    private getConsentContextDefSuccessHandler(response: HttpResponse<any>): ConsentContextDef
     {
         const consentContextDef = new ConsentContextDef();
 
-        consentContextDef.fromObject(response.json());
+        consentContextDef.fromObject(response.body);
 
         return consentContextDef;
     }
 
-    private getConsentContextDefErrorHandler(error: Response | any): ConsentContextDef
+    private getConsentContextDefErrorHandler(error: HttpResponse<any> | any): ConsentContextDef
     {
         console.log('Error while loading Consent Context: ' + (error.message || error));
 
         return null;
     }
 
-    private setConsentContextDefSuccessHandler(response: Response): boolean
+    private setConsentContextDefSuccessHandler(response: HttpResponse<any>): boolean
     {
         return true;
     }
 
-    private setConsentContextDefErrorHandler(error: Response | any): boolean
+    private setConsentContextDefErrorHandler(error: HttpResponse<any> | any): boolean
     {
         console.log('Error while saving Consent Context: ' + (error.message || error));
 
         return false;
     }
 
-    private deleteConsentContextDefSuccessHandler(response: Response): boolean
+    private deleteConsentContextDefSuccessHandler(response: HttpResponse<any>): boolean
     {
         return true;
     }
 
-    private deleteConsentContextDefErrorHandler(error: Response | any): boolean
+    private deleteConsentContextDefErrorHandler(error: HttpResponse<any> | any): boolean
     {
         console.log('Error while deleting Consent Context: ' + (error.message || error));
 

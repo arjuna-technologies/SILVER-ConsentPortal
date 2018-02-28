@@ -48,8 +48,8 @@ export class ConsentHistoryComponent implements OnInit
     private loadConsentHistoryDef(consentId: string): void
     {
         this.consentHistoryDefLoaderService.getConsentHistoryDef(consentId)
-            .then((consentContextDef) => { this.processConsentHistoryDef(consentContextDef) })
-            .catch(() => { this.processConsentHistoryDef(null) } );
+            .then((consentContextDef) => this.processConsentHistoryDef(consentContextDef))
+            .catch(() => this.processConsentHistoryDef(null));
     }
 
     private processConsentHistoryDef(consentHistoryDef: ConsentHistoryDef): void

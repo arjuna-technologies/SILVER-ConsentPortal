@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ConsentHistoryDef } from './consent-history-def';
@@ -16,28 +16,28 @@ import { DatasourcesConfigService } from '../config/datasources-config.service';
 @Injectable()
 export class ConsentHistoryDefLoaderService
 {
-    constructor(private http: Http, private datasourcesConfigService: DatasourcesConfigService)
+    constructor(private httpClient: HttpClient, private datasourcesConfigService: DatasourcesConfigService)
     {
     }
 
     public getConsentHistoryDef(id: string): Promise<ConsentHistoryDef>
     {
-        return this.http.get(this.datasourcesConfigService.getConsentHistoryDefLoaderBaseURL + '/' + id)
+        return this.httpClient.get(this.datasourcesConfigService.getConsentHistoryDefLoaderBaseURL + '/' + id)
                    .toPromise()
-                   .then((response) => Promise.resolve(this.getConsentHistoryDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.getConsentHistoryDefErrorHandler(response)));
+                   .then((response: HttpResponse<any>) => Promise.resolve(this.getConsentHistoryDefSuccessHandler(response)))
+                   .catch((response: HttpResponse<any>) => Promise.resolve(this.getConsentHistoryDefErrorHandler(response)));
     }
 
-    private getConsentHistoryDefSuccessHandler(response: Response): ConsentHistoryDef
+    private getConsentHistoryDefSuccessHandler(response: HttpResponse<any>): ConsentHistoryDef
     {
         const consentHistoryDef = new ConsentHistoryDef();
 
-        consentHistoryDef.fromObject(response.json());
+        consentHistoryDef.fromObject(response.body);
 
         return consentHistoryDef;
     }
 
-    private getConsentHistoryDefErrorHandler(error: Response | any): ConsentHistoryDef
+    private getConsentHistoryDefErrorHandler(error: HttpResponse<any> | any): ConsentHistoryDef
     {
         console.log('Error while loading Consent History: ' + (error.message || error));
 
