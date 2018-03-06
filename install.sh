@@ -6,10 +6,10 @@ ng version
 
 ng build --dev
 
-if [ -d '../consentportal-website' ]; then
-    rm -rf ../consentportal-website/*
+if [ -d '../health_new_towns-website' ]; then
+    rm -rf ../health_new_towns-website/*
 fi
 
 if [ -d 'dist' ]; then
-    mv dist/* ../consentportal-website/.
+    mv dist/* ../health_new_towns-website/.
 fi

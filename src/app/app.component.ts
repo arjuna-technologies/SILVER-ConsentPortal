@@ -5,15 +5,11 @@
 //                     All rights reserved.
 //
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
-
-import { ConsentsComponent } from './consents/consents.component';
-import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
 import { DeclarationComponent } from './style-a/declaration/declaration.component';
 
 @Component
@@ -22,44 +18,9 @@ import { DeclarationComponent } from './style-a/declaration/declaration.componen
     templateUrl: './app.component.html',
     styleUrls:   ['./app.component.scss']
 })
-export class AppComponent implements OnInit
+export class AppComponent
 {
-    public username: string;
-
     public constructor(private dialog: MatDialog, private router: Router)
     {
-        this.username = '';
-    }
-
-    ngOnInit()
-    {
-    }
-
-    public openLoginDialog(): void
-    {
-        if (this.username === '')
-        {
-            const loginDialogRef = this.dialog.open(LoginDialogComponent);
-            loginDialogRef.afterClosed().subscribe((username) => this.processAfterClose(username));
-        }
-        else
-        {
-            this.username = '';
-            this.router.navigate(['/']);
-        }
-    }
-
-    private processAfterClose(username: string): void
-    {
-        if (username && (username !== ''))
-        {
-            this.username = username;
-            this.router.navigate(['/consents', username ]);
-        }
-        else
-        {
-            this.username = '';
-            this.router.navigate(['/']);
-        }
     }
 }

@@ -36,17 +36,8 @@
     </mat-card-content>
     <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
-            <button mat-raised-button *ngIf="! consentId" color="primary" (click)="doCreateConsent()">
-                <h2><mat-icon>add</mat-icon> Create Consent</h2>
-            </button>
-            <button mat-raised-button *ngIf="consentId" color="primary" (click)="doUpdateConsent()">
-                <h2><mat-icon>add</mat-icon> Update Consent</h2>
-            </button>
-            <button mat-raised-button *ngIf="consentId" color="primary" (click)="doRemoveConsent()">
-                <h2><mat-icon>remove</mat-icon> Remove Consent</h2>
-            </button>
-            <button mat-raised-button (click)="doCancelConsent()">
-                <h2><mat-icon>clear</mat-icon> Cancel</h2>
+            <button mat-raised-button color="primary" (click)="doSendInhealthcareMessage()">
+                <h2><mat-icon>add</mat-icon> I Give Consent</h2>
             </button>
         </div>
     </mat-card-actions>

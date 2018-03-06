@@ -44,6 +44,14 @@ export class ConsentRendererDefLoaderService
                    .catch((response) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));
     }
 
+    public getConsentRendererDefByCampaignId(campaignId: string, consentRendererType: string): Promise<ConsentRendererDef>
+    {
+        return this.http.get(this.datasourcesConfigService.getConsentRendererDefByCampaignIdLoaderBaseURL + '?campaignid=' + campaignId + '&consentrenderertype=' + consentRendererType)
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.getConsentRendererDefSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.getConsentRendererDefErrorHandler(response)));
+    }
+
     private getConsentRendererDefsSuccessHandler(response: Response): ConsentRendererDef[]
     {
         const consentRendererDefs: ConsentRendererDef[] = [];

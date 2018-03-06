@@ -29,11 +29,14 @@ export class DatasourcesConfigService
     public getConsentRendererDefLoaderBaseURL: string;
     public setConsentRendererDefLoaderBaseURL: string;
     public getConsentRendererDefByTypesLoaderBaseURL: string;
+    public getConsentRendererDefByCampaignIdLoaderBaseURL: string;
 
     public getConsentTypeDetailsLoaderBaseURL: string;
     public setConsentTypeDetailsLoaderBaseURL: string;
     public getConsentTypePurposesLoaderBaseURL: string;
     public setConsentTypePurposesLoaderBaseURL: string;
+
+    public postInhealthcareLoaderBaseURL: string;
 
     constructor()
     {
@@ -61,15 +64,18 @@ export class DatasourcesConfigService
 
             this.getConsentHistoryDefLoaderBaseURL = 'assets/consenthistory';
 
-            this.listConsentRendererDefLoaderBaseURL       = 'assets/consentrenderers';
-            this.getConsentRendererDefLoaderBaseURL        = 'assets/consentrenderer';
-            this.setConsentRendererDefLoaderBaseURL        = 'assets/consentrenderer';
-            this.getConsentRendererDefByTypesLoaderBaseURL = 'assets/consentrenderer';
+            this.listConsentRendererDefLoaderBaseURL            = 'assets/consentrenderers';
+            this.getConsentRendererDefLoaderBaseURL             = 'assets/consentrenderer';
+            this.setConsentRendererDefLoaderBaseURL             = 'assets/consentrenderer';
+            this.getConsentRendererDefByTypesLoaderBaseURL      = 'assets/consentrenderer';
+            this.getConsentRendererDefByCampaignIdLoaderBaseURL = 'assets/consentrenderer';
 
             this.getConsentTypeDetailsLoaderBaseURL  = 'assets/consenttypedetails';
             this.setConsentTypeDetailsLoaderBaseURL  = 'assets/consenttypedetails';
             this.getConsentTypePurposesLoaderBaseURL = 'assets/consenttypepurposes';
             this.setConsentTypePurposesLoaderBaseURL = 'assets/consenttypepurposes';
+
+            this.postInhealthcareLoaderBaseURL = 'assets/inhealthcareconsent';
         }
         else
         {
@@ -90,15 +96,18 @@ export class DatasourcesConfigService
 
             this.getConsentHistoryDefLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenthistorydef/consenthistory';
 
-            this.listConsentRendererDefLoaderBaseURL       = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderers';
-            this.getConsentRendererDefLoaderBaseURL        = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
-            this.setConsentRendererDefLoaderBaseURL        = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
-            this.getConsentRendererDefByTypesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
+            this.listConsentRendererDefLoaderBaseURL            = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderers';
+            this.getConsentRendererDefLoaderBaseURL             = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
+            this.setConsentRendererDefLoaderBaseURL             = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
+            this.getConsentRendererDefByTypesLoaderBaseURL      = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer';
+            this.getConsentRendererDefByCampaignIdLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consentrendererdef/consentrenderer_by_campaignid';
 
             this.getConsentTypeDetailsLoaderBaseURL  = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypedetailsdef';
             this.setConsentTypeDetailsLoaderBaseURL  = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypedetailsdef';
             this.getConsentTypePurposesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypepurposesdef';
             this.setConsentTypePurposesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/consenttypepurposesdef';
+
+            this.postInhealthcareLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/consentengine/ws/inhealthcareconsentdef/consent';
         }
     }
 }

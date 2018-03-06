@@ -30,38 +30,21 @@ import { MatDialogModule } from '@angular/material';
 import { MatRadioModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
-import { WelcomeComponent } from './welcome/welcome.component';
-import { ConsentsComponent } from './consents/consents.component';
 import { DeclarationComponent } from './style-a/declaration/declaration.component';
-import { ClauseListsComponent } from './style-b/clause-lists/clause-lists.component';
-import { ClauseListComponent } from './style-b/clause-list/clause-list.component';
-import { ClauseComponent } from './style-b/clause/clause.component';
-import { ConsentHistoryComponent } from './consent-history/consent-history.component';
-import { ConsentPagesComponent } from './style-c/consent-pages/consent-pages.component';
 
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 import { DatasourcesConfigService } from './config/datasources-config.service';
-import { ConsentContextDefLoaderService } from './datasources/consent-context-def-loader.service';
-import { ConsentDefLoaderService } from './datasources/consent-def-loader.service';
-import { ConsentTypeDefLoaderService } from './datasources/consent-type-def-loader.service';
-import { ConsentHistoryDefLoaderService } from './datasources/consent-history-def-loader.service';
+import { InhealthcareDefLoaderService } from './datasources/inhealthcare-def-loader.service';
 import { ConsentRendererDefLoaderService } from './datasources/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from './datasources/details-loader.service';
 import { PurposesLoaderService } from './datasources/purposes-loader.service';
 
 const appRoutes: Routes =
 [
-    { path: '',                                                                  component: WelcomeComponent },
-    { path: 'consents/:username',                                                component: ConsentsComponent },
-    { path: 'stylea/:consentcontextid',                                          component: DeclarationComponent },
-    { path: 'stylea_create/:newconsentname/:newconsentername/:newconsenttypeid', component: DeclarationComponent },
-    { path: 'styleb/:consentcontextid',                                          component: ClauseListsComponent },
-    { path: 'stylec/:consentcontextid',                                          component: ConsentPagesComponent },
-    { path: 'history/:consentid',                                                component: ConsentHistoryComponent },
-    { path: '**',                                                                component: PageNotFoundComponent }
+    { path: '',   component: DeclarationComponent },
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule
@@ -69,16 +52,8 @@ const appRoutes: Routes =
     declarations:
     [
         AppComponent,
-        LoginDialogComponent,
         DeclarationComponent,
-        ClauseListsComponent,
-        ClauseListComponent,
-        ClauseComponent,
-        ConsentPagesComponent,
-        ConsentsComponent,
-        PageNotFoundComponent,
-        WelcomeComponent,
-        ConsentHistoryComponent
+        PageNotFoundComponent
     ],
     imports:
     [
@@ -102,17 +77,10 @@ const appRoutes: Routes =
         MatProgressBarModule,
         MatDialogModule
     ],
-    entryComponents:
-    [
-        LoginDialogComponent
-    ],
     providers:
     [
         DatasourcesConfigService,
-        ConsentDefLoaderService,
-        ConsentTypeDefLoaderService,
-        ConsentHistoryDefLoaderService,
-        ConsentContextDefLoaderService,
+        InhealthcareDefLoaderService,
         ConsentRendererDefLoaderService,
         DetailsLoaderService,
         PurposesLoaderService

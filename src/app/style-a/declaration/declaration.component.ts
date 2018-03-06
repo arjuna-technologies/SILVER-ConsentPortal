@@ -20,16 +20,14 @@ import { ComponentModel } from '../model/component-model';
 import { ConstraintModel } from '../model/constraint-model';
 import { ConstraintOptionModel } from '../model/constraint-option-model';
 
-import { ConsentDef } from '../../datasources/consent-def';
-import { ConsentContextDef } from '../../datasources/consent-context-def';
 import { ConstraintDef } from '../../datasources/constraint-def';
 import { ConsentRendererDef } from '../../datasources/consent-renderer-def';
 import { ComponentRendererDef } from '../../datasources/component-renderer-def';
 import { TextComponentRendererDef } from '../../datasources/text-component-renderer-def';
 import { ConstraintComponentRendererDef } from '../../datasources/constraint-component-renderer-def';
+import { InhealthcareConsentDef } from '../../datasources/inhealthcare-consent-def';
 
-import { ConsentDefLoaderService } from '../../datasources/consent-def-loader.service';
-import { ConsentContextDefLoaderService } from '../../datasources/consent-context-def-loader.service';
+import { InhealthcareDefLoaderService } from '../../datasources/inhealthcare-def-loader.service';
 import { ConsentRendererDefLoaderService } from '../../datasources/consent-renderer-def-loader.service';
 import { DetailsLoaderService } from '../../datasources/details-loader.service';
 import { PurposesLoaderService } from '../../datasources/purposes-loader.service';
@@ -59,44 +57,34 @@ import { PurposesLoaderService } from '../../datasources/purposes-loader.service
 })
 export class DeclarationComponent
 {
-    public consentContextId: string;
-    public consentId:        string;
-    public consentTypeId:    string;
-    public newConsentName:   string;
-    public newConsentTypeId: string;
-    public newConsenterName: string;
-    public components:       ComponentModel[];
-    public constraints:      ConstraintModel[];
-    public detailsLoading:   boolean;
-    public detailsText:      string;
-    public purposesLoading:  boolean;
-    public purposesText:     string;
+    public campaignId:      string;
+    public userId:          string;
+    public password:        string;
+    public consentTypeId:   string;
+    public components:      ComponentModel[];
+    public constraints:     ConstraintModel[];
+    public detailsLoading:  boolean;
+    public detailsText:     string;
+    public purposesLoading: boolean;
+    public purposesText:    string;
 
-    public constructor(private router: Router, private route: ActivatedRoute, private location: Location, private consentContextDefLoaderService: ConsentContextDefLoaderService,
-                       private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
+    public constructor(private router: Router, private route: ActivatedRoute, private location: Location,
+                       private inhealthcareDefLoaderService: InhealthcareDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
                        private detailsLoaderService: DetailsLoaderService, private purposesLoaderService: PurposesLoaderService)
     {
-        if (route.snapshot.params.consentcontextid)
-            this.consentContextId = route.snapshot.params.consentcontextid;
+        if (route.snapshot.queryParams.campaignid)
+            this.campaignId = route.snapshot.queryParams.campaignid;
         else
-            this.consentContextId = '';
-        this.consentId = '';
-        if (route.snapshot.params.consenttypeid)
-            this.consentTypeId = route.snapshot.params.consenttypeid;
+            this.campaignId = '';
+        if (route.snapshot.queryParams.userid)
+            this.userId = route.snapshot.queryParams.userid;
         else
-            this.consentTypeId = '';
-        if (route.snapshot.params.newconsentname)
-            this.newConsentName = route.snapshot.params.newconsentname;
+            this.userId = '';
+        if (route.snapshot.queryParams.password)
+            this.password = route.snapshot.queryParams.password;
         else
-            this.newConsentName = '';
-        if (route.snapshot.params.newconsenttypeid)
-            this.newConsentTypeId = route.snapshot.params.newconsenttypeid;
-        else
-            this.newConsentTypeId = '';
-        if (route.snapshot.params.newconsentername)
-            this.newConsenterName = route.snapshot.params.newconsentername;
-        else
-            this.newConsenterName = '';
+            this.password = '';
+        this.consentTypeId   = '';
         this.components      = [];
         this.constraints     = [];
         this.detailsLoading  = false;
@@ -104,19 +92,19 @@ export class DeclarationComponent
         this.purposesLoading = false;
         this.purposesText    = '';
 
-        if (this.consentContextId !== '')
-            this.loadConsentContextDef(this.consentContextId);
-        else
-            this.loadConsentTypeNewConsentDef(this.newConsentTypeId);
+        if (this.campaignId !== '')
+            this.loadConsentRendererForCampaignId(this.campaignId);
     }
 
-    public doCreateConsent(): void
+    public doSendInhealthcareMessage(): void
     {
-        const consentDef: ConsentDef = new ConsentDef();
+        const inhealthcareConsentDef: InhealthcareConsentDef = new InhealthcareConsentDef();
 
-        consentDef.id             = (1000000000 *  Math.random()).toString(16);
-        consentDef.typeId         = this.consentTypeId;
-        consentDef.constraintDefs = [];
+        inhealthcareConsentDef.id             = (1000000000 *  Math.random()).toString(16);;
+        inhealthcareConsentDef.userId         = this.userId;
+        inhealthcareConsentDef.password       = this.password;
+        inhealthcareConsentDef.typeId         = this.consentTypeId;
+        inhealthcareConsentDef.constraintDefs = [];
         for (const constraint of this.constraints)
         {
             const constraintDef: ConstraintDef = new ConstraintDef();
@@ -124,117 +112,32 @@ export class DeclarationComponent
             constraintDef.id    = constraint.id;
             constraintDef.value = constraint.value;
 
-            consentDef.constraintDefs.push(constraintDef);
+            inhealthcareConsentDef.constraintDefs.push(constraintDef);
         }
 
-        const consentContextDef: ConsentContextDef = new ConsentContextDef();
-
-        consentContextDef.id               = (1000000000 *  Math.random()).toString(16);
-        consentContextDef.consentId        = consentDef.id;
-        consentContextDef.consenterId      = this.newConsenterName;
-        consentContextDef.name             = this.newConsentName;
-        consentContextDef.createdDate      = new Date();
-        consentContextDef.lastModifiedDate = consentContextDef.createdDate;
-
-        this.consentDefLoaderService.postConsentDef(consentDef.id, consentDef);
-        this.consentContextDefLoaderService.setConsentContextDef(consentContextDef.id, consentContextDef);
-
-        this.location.back();
+        this.inhealthcareDefLoaderService.postInhealthcareConsentDef(inhealthcareConsentDef);
     }
 
-    public doUpdateConsent(): void
+    private loadConsentRendererForCampaignId(campaignId: string): void
     {
-        const consentDef: ConsentDef = new ConsentDef();
-
-        consentDef.id             = this.consentId;
-        consentDef.typeId         = this.consentTypeId;
-        consentDef.constraintDefs = [];
-        for (const constraint of this.constraints)
-        {
-            const constraintDef: ConstraintDef = new ConstraintDef();
-
-            constraintDef.id    = constraint.id;
-            constraintDef.value = constraint.value;
-
-            consentDef.constraintDefs.push(constraintDef);
-        }
-
-        this.consentDefLoaderService.putConsentDef(consentDef.id, consentDef);
-
-        this.location.back();
-    }
-
-    public doRemoveConsent(): void
-    {
-        this.consentDefLoaderService.deleteConsentDef(this.consentId);
-        this.consentContextDefLoaderService.removeConsentContextDef(this.consentContextId);
-
-        this.location.back();
-    }
-
-    public doCancelConsent(): void
-    {
-        this.location.back();
-    }
-
-    private loadConsentContextDef(consentContextId: string): void
-    {
-        this.consentContextDefLoaderService.getConsentContextDef(consentContextId)
-            .then((consentContextDef) => { this.processConsentContextDef(consentContextDef) })
-            .catch(() => { this.updateModel(null, null) } );
-    }
-
-    private loadConsentTypeNewConsentDef(consentTypeId: string): void
-    {
-        this.consentRendererDefLoaderService.getConsentRendererDefByType(consentTypeId, 'StyleA')
+        this.consentRendererDefLoaderService.getConsentRendererDefByCampaignId(campaignId, 'StyleA')
             .then
             (
                 (consentRendererDef) =>
                 {
-                    const consentDef: ConsentDef = new ConsentDef();
+                    this.consentTypeId = consentRendererDef.consentTypeId;
 
-                    consentDef.typeId         = this.newConsentTypeId;
-                    consentDef.constraintDefs = [];
-
-                    for (const componentRendererDef of consentRendererDef.componentRendererDefs)
-                        if (componentRendererDef instanceof ConstraintComponentRendererDef)
-                        {
-                            const constraintComponentRendererDef = componentRendererDef as ConstraintComponentRendererDef;
-                            const constraintDef = new ConstraintDef();
-
-                            constraintDef.id    = constraintComponentRendererDef.id;
-                            constraintDef.value = constraintComponentRendererDef.valueConstraintComponentRendererDefs[0].id;
-
-                            consentDef.constraintDefs.push(constraintDef);
-                        }
-
-                    this.updateModel(consentDef, consentRendererDef)
+                    this.updateModel(consentRendererDef);
                 }
             )
-            .catch(() => { this.updateModel(null, null) } );
+            .catch(() => { this.updateModel(null) } );
     }
 
-    private processConsentContextDef(consentContextDef: ConsentContextDef): void
+    private updateModel(consentRendererDef: ConsentRendererDef): void
     {
-        this.consentDefLoaderService.getConsentDef(consentContextDef.consentId)
-            .then((consentDef) => { this.processConsentRendererDef(consentDef) })
-            .catch(() => { this.updateModel(null, null) } );
-    }
-
-    private processConsentRendererDef(consentDef: ConsentDef): void
-    {
-        this.consentRendererDefLoaderService.getConsentRendererDefByType(consentDef.typeId, 'StyleA')
-            .then((consentRendererDef) => { this.updateModel(consentDef, consentRendererDef) })
-            .catch(() => { this.updateModel(consentDef, null) });
-    }
-
-    private updateModel(consentDef: ConsentDef, consentRendererDef: ConsentRendererDef): void
-    {
-        this.consentId     = consentDef.id;
-        this.consentTypeId = consentDef.typeId;
         this.components    = [];
         this.constraints   = [];
-        if ((consentDef != null) && (consentRendererDef != null))
+        if (consentRendererDef != null)
         {
             for (const componentRendererDef of consentRendererDef.componentRendererDefs)
             {
@@ -260,12 +163,9 @@ export class DeclarationComponent
 
                     const constraint = new ConstraintModel();
 
-                    constraint.id      = constraintComponentRendererDef.id;
-                    constraint.text    = constraintComponentRendererDef.descriptionRendererDefs[0].text;
-
-                    for (const constraintDef of consentDef.constraintDefs)
-                        if (component.id === constraintDef.id)
-                            constraint.value = constraintDef.value;
+                    constraint.id    = constraintComponentRendererDef.id;
+                    constraint.text  = constraintComponentRendererDef.descriptionRendererDefs[0].text;
+                    constraint.value = constraintComponentRendererDef.valueConstraintComponentRendererDefs[0].id;
 
                     constraint.options = [];
                     for (const valueConstraintComponentRendererDef of constraintComponentRendererDef.valueConstraintComponentRendererDefs)
@@ -297,13 +197,13 @@ export class DeclarationComponent
 
         this.detailsLoading = true;
         this.detailsText = '';
-        this.detailsLoaderService.getDetailsText(this.consentTypeId)
+        this.detailsLoaderService.getDetailsText(consentRendererDef.consentTypeId)
             .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
             .catch(() => { this.detailsLoading = false } );
 
         this.purposesLoading = true;
         this.purposesText = '';
-        this.purposesLoaderService.getPurposesText(this.consentTypeId)
+        this.purposesLoaderService.getPurposesText(consentRendererDef.consentTypeId)
             .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
             .catch(() => { this.purposesLoading = false } );
     }
