@@ -130,7 +130,7 @@ export class DeclarationComponent
                     this.updateModel(consentRendererDef);
                 }
             )
-            .catch(() => { this.updateModel(null) } );
+            .catch(() => this.updateModel(null));
     }
 
     private updateModel(consentRendererDef: ConsentRendererDef): void
@@ -198,14 +198,14 @@ export class DeclarationComponent
         this.detailsLoading = true;
         this.detailsText = '';
         this.detailsLoaderService.getDetailsText(consentRendererDef.consentTypeId)
-            .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false })
-            .catch(() => { this.detailsLoading = false } );
+            .then((detailsText) => { this.detailsText = detailsText; this.detailsLoading = false; })
+            .catch(() => this.detailsLoading = false);
 
         this.purposesLoading = true;
         this.purposesText = '';
         this.purposesLoaderService.getPurposesText(consentRendererDef.consentTypeId)
-            .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false })
-            .catch(() => { this.purposesLoading = false } );
+            .then((purposesText) => { this.purposesText = purposesText; this.purposesLoading = false; })
+            .catch(() => this.purposesLoading = false);
     }
 
     public componentEnter(component: ComponentModel): void
