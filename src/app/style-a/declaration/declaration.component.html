@@ -22,12 +22,12 @@
             </div>
             <div fxFlex="auto" class="consent-outcome" fxLayout="row" fxLayoutAlign="space-around start">
                 <div fxFlex="50" class="consent-details">
-                    <h2 class="consent-details-title">Details</h2>
+                    <h2 class="consent-details-title">Why we are asking for your data ?</h2>
                     <p>{{detailsText}}</p>
                     <mat-progress-bar *ngIf="detailsLoading" mode="indeterminate"></mat-progress-bar>
                 </div>
                 <div fxFlex="50" class="consent-purposes">
-                    <h2 class="consent-purposes-title">Purposes</h2>
+                    <h2 class="consent-purposes-title">How will we use your data ?</h2>
                     <p>{{purposesText}}</p>
                     <mat-progress-bar *ngIf="purposesLoading" mode="indeterminate"></mat-progress-bar>
                 </div>
@@ -37,7 +37,7 @@
     <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap class="consent-actions">
             <button mat-raised-button color="primary" (click)="doSendInhealthcareMessage()">
-                <h2><mat-icon>add</mat-icon> I Give Consent</h2>
+                <h2><mat-icon>add</mat-icon> I Give Permission</h2>
             </button>
         </div>
     </mat-card-actions>
