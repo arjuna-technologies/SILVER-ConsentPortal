@@ -29,6 +29,6 @@ export class DatasourcesConfigService
         this.getConsentTypeDetailsLoaderBaseURL  = this.consentServiceProtocol + this.consentServiceHostPort + '/inhealthcare/ws/consenttypedetailsdef';
         this.getConsentTypePurposesLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/inhealthcare/ws/consenttypepurposesdef';
 
-        this.postInhealthcareLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/inhealthcare/ws/consentdef/consent';
+        this.postInhealthcareLoaderBaseURL = this.consentServiceProtocol + this.consentServiceHostPort + '/inhealthcare/ws/consentaccesstoken';
     }
 }
