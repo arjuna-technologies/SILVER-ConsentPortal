@@ -76,8 +76,8 @@ export class DeclarationComponent
             this.campaignId = route.snapshot.queryParams.campaignid;
         else
             this.campaignId = '';
-        if (route.snapshot.queryParams.userid)
-            this.userId = route.snapshot.queryParams.userid;
+        if (route.snapshot.queryParams.user)
+            this.userId = route.snapshot.queryParams.user;
         else
             this.userId = '';
         if (route.snapshot.queryParams.password)
