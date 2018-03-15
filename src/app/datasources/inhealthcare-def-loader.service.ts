@@ -20,9 +20,9 @@ export class InhealthcareDefLoaderService
     {
     }
 
-    public postInhealthcareConsentDef(inhealthcareConsentDef: InhealthcareConsentDef): Promise<boolean>
+    public postInhealthcareConsentDef(username: string, password: string): Promise<boolean>
     {
-        return this.http.post(this.datasourcesConfigService.postInhealthcareLoaderBaseURL, inhealthcareConsentDef.toObject())
+        return this.http.post(this.datasourcesConfigService.postInhealthcareLoaderBaseURL + "?username=" + username + "&password=" + password, {})
                    .toPromise()
                    .then((response) => Promise.resolve(this.postInhealthcareConsentDefSuccessHandler(response)))
                    .catch((response) => Promise.resolve(this.postInhealthcareConsentDefErrorHandler(response)));

@@ -115,7 +115,7 @@ export class DeclarationComponent
             inhealthcareConsentDef.constraintDefs.push(constraintDef);
         }
 
-        this.inhealthcareDefLoaderService.postInhealthcareConsentDef(inhealthcareConsentDef);
+        this.inhealthcareDefLoaderService.postInhealthcareConsentDef(this.userId, this.password);
     }
 
     private loadConsentRendererForCampaignId(campaignId: string): void
