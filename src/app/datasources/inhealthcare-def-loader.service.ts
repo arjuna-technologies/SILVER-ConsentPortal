@@ -20,24 +20,93 @@ export class InhealthcareDefLoaderService
     {
     }
 
-    public postInhealthcareConsentDef(username: string, password: string): Promise<boolean>
+    public getInhealthcareAccessToken(username: string, password: string): Promise<string>
     {
-        return this.http.post(this.datasourcesConfigService.postInhealthcareLoaderBaseURL + "?username=" + username + "&password=" + password, {})
+        return this.http.post(this.datasourcesConfigService.postInhealthcareConsentAccessTokenBaseURL + "?username=" + username + "&password=" + password, {})
                    .toPromise()
-                   .then((response) => Promise.resolve(this.postInhealthcareConsentDefSuccessHandler(response)))
-                   .catch((response) => Promise.resolve(this.postInhealthcareConsentDefErrorHandler(response)));
+                   .then((response) => Promise.resolve(this.getInhealthcareAccessTokenSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.getInhealthcareAccessTokenErrorHandler(response)));
     }
 
-    private postInhealthcareConsentDefSuccessHandler(response: Response): boolean
+    public getInhealthcarePatient(accessToken: string): Promise<string>
     {
-        console.log('postInhealthcareConsentDefSuccessHandler: ' + JSON.stringify(response));
+        const headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + accessToken);
+
+        return this.http.get(this.datasourcesConfigService.getInhealthcarePatientBaseURL, { headers: headers })
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.getInhealthcarePatientSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.getInhealthcarePatientErrorHandler(response)));
+    }
+
+    public getInhealthcareTask(accessToken: string): Promise<string>
+    {
+        return this.http.get(this.datasourcesConfigService.getInhealthcareTaskBaseURL, {})
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.getInhealthcareTaskSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.getInhealthcareTaskErrorHandler(response)));
+    }
+
+    public postInhealthcareConsent(accessToken: string): Promise<string>
+    {
+        return this.http.post(this.datasourcesConfigService.postInhealthcareConsentBaseURL, {})
+                   .toPromise()
+                   .then((response) => Promise.resolve(this.postInhealthcareConsentSuccessHandler(response)))
+                   .catch((response) => Promise.resolve(this.postInhealthcareConsentErrorHandler(response)));
+    }
+
+    private getInhealthcareAccessTokenSuccessHandler(response: Response): string
+    {
+        console.log('getInhealthcareAccessTokenSuccessHandler: ' + JSON.stringify(response));
+
+        return response.json().access_token;
+    }
+
+    private getInhealthcareAccessTokenErrorHandler(error: Response | any): string
+    {
+        console.log('Error while getting access token: ' + (error.message || error));
 
         return null;
     }
 
-    private postInhealthcareConsentDefErrorHandler(error: Response | any): boolean
+    private getInhealthcarePatientSuccessHandler(response: Response): string
     {
-        console.log('Error while saveing Consent: ' + (error.message || error));
+        console.log('getInhealthcarePatientSuccessHandler: ' + JSON.stringify(response));
+
+        return response.json().access_token;
+    }
+
+    private getInhealthcarePatientErrorHandler(error: Response | any): string
+    {
+        console.log('Error while getting patient: ' + (error.message || error));
+
+        return null;
+    }
+
+    private getInhealthcareTaskSuccessHandler(response: Response): string
+    {
+        console.log('getInhealthcareTaskSuccessHandler: ' + JSON.stringify(response));
+
+        return response.json().access_token;
+    }
+
+    private getInhealthcareTaskErrorHandler(error: Response | any): string
+    {
+        console.log('Error while getting task: ' + (error.message || error));
+
+        return null;
+    }
+
+    private postInhealthcareConsentSuccessHandler(response: Response): string
+    {
+        console.log('postInhealthcareConsentSuccessHandler: ' + JSON.stringify(response));
+
+        return response.json().access_token;
+    }
+
+    private postInhealthcareConsentErrorHandler(error: Response | any): string
+    {
+        console.log('Error while posting consent: ' + (error.message || error));
 
         return null;
     }
