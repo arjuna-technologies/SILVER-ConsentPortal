@@ -101,8 +101,6 @@ export class DeclarationComponent
         const inhealthcareConsentDef: InhealthcareConsentDef = new InhealthcareConsentDef();
 
         inhealthcareConsentDef.id             = (1000000000 *  Math.random()).toString(16);;
-        inhealthcareConsentDef.userId         = this.userId;
-        inhealthcareConsentDef.password       = this.password;
         inhealthcareConsentDef.typeId         = this.consentTypeId;
         inhealthcareConsentDef.constraintDefs = [];
         for (const constraint of this.constraints)
@@ -115,8 +113,8 @@ export class DeclarationComponent
             inhealthcareConsentDef.constraintDefs.push(constraintDef);
         }
 
-        this.inhealthcareDefLoaderService.getInhealthcareAccessToken(this.userId, this.password)
-            .then((accessToken) => this.inhealthcareDefLoaderService.getInhealthcarePatient(accessToken));
+        this.inhealthcareDefLoaderService.postInhealthcareConsent(this.userId, this.password, inhealthcareConsentDef.toObject())
+            .then((result) => console.log('postInhealthcareConsent: '+ JSON.stringify(result)));
     }
 
     private loadConsentRendererForCampaignId(campaignId: string): void
