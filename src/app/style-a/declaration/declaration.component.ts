@@ -1,4 +1,5 @@
 //
+
 // Copyright (c) 2017-2018, Arjuna Technologies Limited, Newcastle upon Tyne, England,
 //                          Open Lab, Newcastle University, Newcastle upon Tyne, England,
 //                          Institute of Health and Society, Newcastle University, Newcastle upon Tyne, England.
@@ -71,6 +72,7 @@ export class DeclarationComponent
     public detailsText:      string;
     public purposesLoading:  boolean;
     public purposesText:     string;
+    public revoked:          boolean;
 
     public constructor(private router: Router, private route: ActivatedRoute, private location: Location, private consentContextDefLoaderService: ConsentContextDefLoaderService,
                        private consentDefLoaderService: ConsentDefLoaderService, private consentRendererDefLoaderService: ConsentRendererDefLoaderService,
@@ -103,6 +105,7 @@ export class DeclarationComponent
         this.detailsText     = '';
         this.purposesLoading = false;
         this.purposesText    = '';
+        this.revoked         = true;
 
         if (this.consentContextId !== '')
             this.loadConsentContextDef(this.consentContextId);
@@ -126,6 +129,7 @@ export class DeclarationComponent
 
             consentDef.constraintDefs.push(constraintDef);
         }
+        consentDef.revoked = this.revoked;
 
         const consentContextDef: ConsentContextDef = new ConsentContextDef();
 
@@ -158,6 +162,7 @@ export class DeclarationComponent
 
             consentDef.constraintDefs.push(constraintDef);
         }
+        consentDef.revoked = this.revoked;
 
         this.consentDefLoaderService.putConsentDef(consentDef.id, consentDef);
 
@@ -207,6 +212,7 @@ export class DeclarationComponent
 
                             consentDef.constraintDefs.push(constraintDef);
                         }
+                    consentDef.revoke = false;
 
                     this.updateModel(consentDef, consentRendererDef)
                 }

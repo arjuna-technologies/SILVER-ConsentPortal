@@ -13,12 +13,14 @@ export class ConsentDef implements IOObject
     id:             string;
     typeId:         string;
     constraintDefs: ConstraintDef[];
+    revoked:        boolean;
 
     public constructor()
     {
         this.id             = null;
         this.typeId         = null;
         this.constraintDefs = [];
+        this.revoked        = false;
     }
 
     public changeConstraint(id: string, value: string): void
@@ -41,6 +43,7 @@ export class ConsentDef implements IOObject
             constraintDef.fromObject(constraintDefObject);
             this.constraintDefs.push(constraintDef);
         }
+        this.revoked = object.revoked;
 
         return true;
     }
@@ -55,6 +58,7 @@ export class ConsentDef implements IOObject
         consentDefObject.constraints = [];
         for (const constraintDef of this.constraintDefs)
             consentDefObject.constraints.push(constraintDef.toObject());
+        consentDefObject.revoked = this.revoked;
 
         return consentDefObject;
     }
